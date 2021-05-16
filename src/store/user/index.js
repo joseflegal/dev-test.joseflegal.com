@@ -16,7 +16,6 @@ const user = {
   actions: {
     [actions.get]({ commit }) {
       return api.fetchUser().then((res) => {
-        console.log(res);
         commit(mutations.SET, res.username);
         return res;
       });

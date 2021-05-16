@@ -25,7 +25,7 @@ app.use(routes(router));
 const PORT = process.env.PORT || 8080;
 
 process.on("SIGINT", function () {
-  server.close();
+  console.log("yo! need to exit gracefully");
 });
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT} 🚀!`));

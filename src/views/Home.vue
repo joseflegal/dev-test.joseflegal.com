@@ -1,16 +1,26 @@
 <template>
   <div class="home">
-    <h1>Josef Dashbaord</h1>
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
+    <h1>Josef Dashboard</h1>
+    <!-- Render the files data with a resuable component (a list or card up to you!) -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
+import api from "@/api";
 
 export default {
   name: "Home",
-  components: {},
+  data() {
+    return {
+      files: null,
+    };
+  },
+  created() {
+    api.files.get().then((res) => {
+      console.log(res);
+      this.files = res;
+    });
+  },
 };
 </script>

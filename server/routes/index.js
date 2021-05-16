@@ -11,7 +11,6 @@ function buildRoutes(router) {
 
   router.get("/api/files", async (req, res) => {
     const files = db.get("files").value();
-    console.log(files);
     return res.send(files);
   });
 
@@ -23,6 +22,7 @@ function buildRoutes(router) {
         description,
         filename: file.name,
         mimetype: file.mimetype,
+        // handle date
         src: file.base64,
       })
       .write();

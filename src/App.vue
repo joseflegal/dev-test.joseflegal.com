@@ -14,7 +14,6 @@
 <script>
 import Sidebar from "@/components/Sidebar.vue";
 import Loader from "@/components/Loader.vue";
-import api from "@/api";
 
 export default {
   components: {
@@ -31,12 +30,6 @@ export default {
       console.log(res);
       this.loaded = true;
     });
-
-    console.log(
-      api.files.get().then((res) => {
-        console.log(res);
-      })
-    );
   },
 };
 </script>
