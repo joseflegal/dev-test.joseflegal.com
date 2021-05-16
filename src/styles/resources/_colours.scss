@@ -1,0 +1,100 @@
+$josef-purple: #6339d8;
+$josef-dark-purple: #402088;
+$josef-purple-disabled: #825add;
+$josef-purple-pale: #e9e3f9;
+$josef-light-purple: $josef-purple-pale; // we should depreciate $josef-light-purple in favour of $josef-purple-pale
+$josef-purple-soft: #ccbcf8;
+$josef-purple-soft-dark: #d3c8f0;
+$josef-purple-tint: mix(#fff, $josef-purple, 96%);
+$josef-red: #d13e3e;
+$josef-red-dark: #b12626;
+$josef-light-red: #ffcdd2;
+$josef-crimson: darken($josef-red, 8%); // #DC0707;
+$josef-green: #00ff9e;
+$josef-green-dark: #12db8f;
+$josef-green-deep: #17b579;
+$josef-aqua: #0ae994;
+$josef-blue: #009ce9;
+$josef-sky: #65ccff;
+$josef-sky-dark: #3bb7f4;
+$josef-orange: #f9af6b;
+
+// These black -> white shades names are based on foundation color names
+
+$josef-white: #ffffff;
+$josef-ghost: #f8f8f8;
+$josef-lt-grey: #fafafa;
+$josef-vapor: #f2f2f2; // from design system
+$josef-silver: #efefef;
+$josef-wolf: #eaeaea;
+$josef-smoke: #e4e4e4; // from design system
+$josef-gainsboro: #d6d6d6;
+$josef-iron: #cccccc;
+$josef-grey: #9e9e9e;
+$josef-steel: #666666; // from design system
+$josef-charcoal: #555;
+$josef-oil: #282828;
+$josef-black: #000000;
+
+// Transparent color
+$josef-clear: transparent;
+
+// chart theme
+$josef-chart-green: $josef-green-deep;
+$josef-chart-orange: $josef-orange;
+$josef-chart-red: $josef-red;
+$josef-chart-purple: $josef-purple;
+$josef-chart-pink: #ff70d7;
+$josef-chart-blue: $josef-sky;
+$josef-chart-navy: #0049d8;
+$josef-chart-peach: #f3b0b0;
+
+// ui colors
+$base-font-color: $josef-oil;
+$disabled-color: $josef-smoke;
+$action-color: $josef-purple;
+$danger-color: $josef-red;
+$action-hover-color: $josef-dark-purple;
+$highlight-color: #6134c6;
+
+$dropdown-hover-bg-color: $josef-iron;
+$dropdown-bg-color: $josef-white;
+$button-disabled-color: $josef-grey;
+$placeholder-color: $josef-grey;
+
+// gradient
+$josef-gradient: linear-gradient(
+  9.5deg,
+  #00ff9e 10.54%,
+  #00faa2 13.79%,
+  #00c7c8 48.76%,
+  #00a8e0 75.23%,
+  #009ce9 89.92%
+);
+
+/* Forms
+   ========================================================================== */
+$label-color: $josef-oil;
+$form-border-color: $josef-smoke;
+
+$input-border-color: $josef-smoke;
+$input-border-color-hover: $josef-purple;
+$input-background-color: $josef-white;
+
+$switch-checked-lever-bg: $josef-light_purple;
+$switch-bg-color: $josef-dark-purple;
+$switch-unchecked-lever-bg: $josef-iron;
+$switch-unchecked-bg: $josef-white;
+
+$collection-border-color: $josef-smoke;
+
+$collapsible-header-color: $josef-white;
+$collapsible-border-color: $josef-smoke;
+
+// vuemultiselect colours
+$multiselectOptionHighlightColor: $josef-white;
+$multiselectOptionHighlightBgColor: $josef-dark-purple;
+$multiselectOptionSelectedBgColor: $josef-white;
+$multiselectOptionSelectedColor: $josef-purple;
+$multiselectOptionHighlightSelectedBgColor: $josef-purple; //$josef-red;
+$multiselectOptionHighlightSelectedColor: $josef-white;

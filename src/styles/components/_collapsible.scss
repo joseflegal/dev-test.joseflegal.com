@@ -1,0 +1,110 @@
+.collapsible {
+  border-radius: $base-border-radius;
+  box-shadow: $shadow-base;
+  margin: -1px; // considering this has a border but other frames on the site don't, this might fix it? Might break stuff...
+
+  &--last {
+    margin-bottom: $base-spacing !important;
+  }
+
+  > li {
+    &:first-child {
+      .collapsible-header {
+        border-top-left-radius: $base-border-radius;
+        border-top-right-radius: $base-border-radius;
+      }
+    }
+
+    &:last-child {
+      .collapsible-header {
+        border-bottom-left-radius: $base-border-radius;
+        border-bottom-right-radius: $base-border-radius;
+      }
+
+      .collapsible-body {
+        border-radius: 0 0 $base-border-radius $base-border-radius;
+      }
+    }
+  }
+}
+
+.collapsible-header {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1.5;
+  padding: 1.2rem 1rem 1rem 2rem;
+  background-color: $collapsible-header-color;
+  border-bottom: 1px solid $collapsible-border-color;
+
+  &.is-active,
+  &.active {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  &__actions-wrapper {
+    display: flex;
+  }
+
+  // smaller side padding if the collapsable is inside a sidebar, needs to be more compact
+  .offcanvas & {
+    padding-left: $base-spacing;
+    padding-right: $base-spacing * 0.75;
+  }
+}
+
+.collapsible-body {
+  border-bottom: 1px solid $collapsible-border-color;
+  box-sizing: border-box;
+  padding: $base-spacing * 2; //2rem;
+  background-color: $josef-white;
+  display: none;
+  font-size: 1rem;
+
+  &.active {
+    opacity: 1;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    transition: all 25ms ease;
+  }
+
+  .draggable-item:last-child & {
+    border-bottom-left-radius: $base-border-radius;
+    border-bottom-right-radius: $base-border-radius;
+  }
+}
+
+.collapsible-start,
+.collapsible-end {
+  width: auto;
+  flex-direction: row;
+  align-content: center;
+  display: flex;
+}
+
+.collapsible-start {
+  justify-content: flex-start;
+  float: left;
+  text-align: left;
+  flex: 1 0 auto;
+}
+
+.collapsible-end {
+  justify-content: flex-end;
+  float: right;
+  font-size: 0.875em;
+  text-align: right;
+}
+
+.collapsible-arrow {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+
+  .collapsible-header:hover & {
+    color: $josef-purple;
+  }
+}

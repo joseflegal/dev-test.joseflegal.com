@@ -1,0 +1,168 @@
+@mixin message-card() {
+  position: absolute;
+  z-index: 10;
+  width: 130px;
+  height: 130px;
+  border-radius: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem;
+  transform: translate(-50%, -50%) scale(1);
+  transition-property: transform;
+  transition-duration: $base-duration / 2;
+  transition-timing-function: $base-timing;
+  cursor: pointer;
+}
+
+@mixin card-default() {
+  background-color: $josef-white;
+  box-shadow: $shadow-base;
+  border: solid $card-border-width transparent;
+  color: $highlight-color;
+}
+
+$card-border-width: 2px;
+
+.message-card {
+  @include message-card();
+  @include card-default;
+  text-align: left;
+
+
+  &__desc {
+    font-weight: $weight-normal;
+    max-height: calc(#{$text-line-height} * 4);
+    overflow: hidden;
+    /* word-wrap: break-word !important; */
+    @include grid-media($grid--desktop-lg-up) {
+      max-height: calc(#{$text-line-height} * 4);
+    }
+  }
+
+  &__final-badge {
+    position: absolute;
+    right: $base-spacing / -2;
+    top: $base-spacing / -2;
+  }
+
+  // hover
+  &:hover {
+    // background-color: $highlight-color;
+    // color: $josef-white;
+    box-shadow: $shadow-hover;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+
+  // selected
+  &.is-highlighted {
+    background-color: $josef-purple;
+    color: $josef-white;
+    border: solid $card-border-width $highlight-color;
+  }
+
+  &.is-glow {
+    box-shadow: 2px 5px 40px rgba(97, 52, 198, 0.32);
+    &--selected {
+      box-shadow: 2px 5px 40px rgba(97, 52, 198, 0.52);
+    }
+  }
+
+  &.is-disconnected {
+    color: $josef-red;
+    background-color: $josef-white;
+
+    &.is-highlighted {
+      color: $josef-white;
+      background-color: $josef-red;
+      border: solid $card-border-width $josef-red;
+    }
+
+    &.is-glow {
+      box-shadow: 2px 5px 40px rgba(198, 52, 52, 0.32);
+      &--selected {
+        box-shadow: 2px 5px 40px rgba(198, 52, 52, 0.52);
+      }
+    }
+  }
+
+  &.is-disabled {
+    background-color: $josef-wolf;
+    color: $josef-steel;
+    border: solid $card-border-width $josef-gainsboro;
+    box-shadow: none;
+    &.is-disconnected {
+      color: $josef-red;
+    }
+    &:hover {
+      @include card-default;
+      &.is-disconnected {
+        color: $josef-red;
+        background-color: $josef-white;
+      }
+    }
+  }
+
+  &.is-connectable {
+    cursor: url("/img/cursor-link.svg"), pointer;
+  }
+
+  &.is-connect-disabled {
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+.add-message-card {
+  @include message-card();
+  background-color: $josef-white;
+  justify-content: center;
+  text-decoration: underline;
+  text-align: center;
+  color: $highlight-color;
+  box-shadow: none;
+
+  &.is-add-node {
+    border: dashed $card-border-width $josef-iron;
+  }
+
+  &.is-add-first {
+    border: solid $card-border-width transparent;
+    background: $josef-white;
+    box-shadow: $shadow-base;
+  }
+
+  &:hover {
+    border: solid $card-border-width transparent;
+    box-shadow: $shadow-hover;
+    transform: translate (-50%, 50%) scale(1.05);
+  }
+
+  // selected
+  &.is-highlighted {
+    background-color: $josef-purple;
+    color: $josef-white;
+    border: solid $card-border-width $highlight-color;
+  }
+
+  // is-disconnected
+  &.is-disconnected {
+    color: $josef-red;
+    background-color: $josef-white;
+
+    &.is-highlighted {
+      color: $josef-white;
+      background-color: $josef-red;
+      border: solid $card-border-width $josef-red;
+    }
+  }
+
+  // These will need to be fleshed out if/when bulk editing added to new flowchart
+  &.is-cut,
+  &.is-clipboard {
+    background-color: transparentize($josef-white, 0.4);
+  }
+
+  &.is-connect-disabled {
+    pointer-events: none;
+  }
+}

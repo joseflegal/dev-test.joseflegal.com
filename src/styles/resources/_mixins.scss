@@ -1,0 +1,157 @@
+@mixin logo($orientation) {
+  cursor: default;
+  user-select: none;
+
+  color: rgba(255, 255, 255, 0);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  margin: 0 0 0 2rem;
+
+  @media #{$medium-and-down} {
+    margin-bottom: 1em;
+    margin-top: 1em;
+  }
+  @if $orientation == portrait {
+    font-size: 12em;
+
+    background-image: url(~@/assets/images/logo_portrait.svg);
+  } @else {
+    font-size: 8em;
+
+    background-image: url(~@/assets/images/logo_landscape.svg);
+  }
+}
+
+@mixin hexagons() {
+  position: relative;
+  z-index: 3;
+  background-color: $josef-purple;
+  background-image: url(~@/assets/images/hexagon_large.png);
+  background-position: -5% 25%;
+  background-size: 59px auto;
+  background-repeat: no-repeat;
+
+  @include grid-media($grid--tablet-up) {
+    background-position: 5% 30%;
+  }
+  @include grid-media($grid--desktop-up) {
+    background-position: 10% 35%;
+  }
+
+  &:before,
+  &:after {
+    content: " ";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url(~@/assets/images/hexagon_small.png);
+    background-size: cover;
+  }
+
+  &:before {
+    left: 90%;
+    top: 80%;
+
+    @include grid-media($grid--tablet-up) {
+      top: 90%;
+    }
+
+    @include grid-media($grid--desktop-up) {
+      left: 75%;
+      top: 80%;
+    }
+  }
+
+  &:after {
+    background-size: 30px auto;
+    background-repeat: no-repeat;
+    left: 65%;
+    top: 10%;
+
+    @include grid-media($grid--tablet-up) {
+      top: 10%;
+    }
+  }
+}
+
+@mixin list-item {
+  width: 100%;
+  background: $josef-white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin truncate() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin grid-media($media) {
+  @media #{$media} {
+    @content;
+  }
+}
+
+@mixin set-content-width {
+  @include grid-media($grid--tablet-up) {
+    max-width: 675 / $rootsize-base * 1rem;
+    margin-right: 12rem;
+  }
+
+  @include grid-media($grid--desktop-lg-up) {
+    max-width: 960 / $rootsize-lg * 1rem;
+  }
+}
+
+@mixin circle($size: $base-spacing / 2) {
+  content: "";
+  display: inline-block;
+  border-radius: 50%;
+  width: $size;
+  height: $size;
+}
+
+@mixin reset-button {
+  appearance: none;
+  user-select: none;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+}
+
+@mixin base-button {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $base-font-family;
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+  transition-property: opacity, background-color, color;
+  transition-duration: $base-duration;
+  transition-timing-function: $base-timing;
+}
+
+@mixin tooltip-hint {
+  position: relative;
+  margin-left: 0.75rem;
+
+  &__icon {
+    cursor: pointer;
+  }
+
+  // adding styles to focusable elements inside the popover component, which need /deep/ nested css
+  /deep/ [tabindex]:hover,
+  /deep/ [tabindex]:focus {
+    outline: 0 none;
+
+    &,
+    * {
+      color: $josef-purple;
+    }
+  }
+}

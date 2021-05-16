@@ -1,0 +1,43 @@
+//TODO: remove important;
+@mixin toast() {
+  border-radius: $btn-border-radius !important;
+  padding: 0 1.5rem !important;
+  min-width: 100px !important;
+  display: flex !important;
+  justify-content: center !important;
+  height: 43px !important;
+  font-weight: $weight-bold;
+  box-shadow: none;
+}
+
+.toasted {
+  .josef-toast {
+    &.primary {
+      background: $josef-purple !important;
+    }
+  }
+
+  &.default {
+    @include toast;
+    background: $josef-aqua !important; //red; //$danger-color;
+    color: $josef-black !important;
+  }
+
+  &.error {
+    @include toast;
+    background: $danger-color !important;
+    color: $josef-white !important;
+  }
+}
+
+.toasted-container .toasted .action {
+  display: flex;
+  font-size: inherit !important;
+  color: $josef-white !important;
+  text-transform: none !important;
+  text-decoration: underline !important;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

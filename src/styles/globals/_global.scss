@@ -1,0 +1,232 @@
+// global styles
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: inherit;
+}
+
+.page-wrapper__overflow {
+  *:focus {
+    box-shadow: $shadow-focus;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  color: $josef-oil;
+}
+
+figure {
+  margin: 0;
+}
+
+img,
+picture {
+  margin: 0;
+  max-width: 100%;
+}
+
+// Z-levels
+.z-depth-0 {
+  box-shadow: none !important;
+}
+.z-depth-1 {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+.z-depth-1-half {
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}
+.z-depth-2 {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
+    0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+.z-depth-3 {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12),
+    0 3px 5px -1px rgba(0, 0, 0, 0.3);
+}
+.z-depth-4 {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+.z-depth-5 {
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+i {
+  line-height: inherit;
+
+  &.left {
+    margin-right: $base-spacing;
+  }
+  &.right {
+    margin-left: $base-spacing;
+  }
+  &.tiny {
+    font-size: 1rem;
+  }
+  &.small {
+    font-size: 2rem;
+  }
+  &.medium {
+    font-size: 4rem;
+  }
+  &.large {
+    font-size: 6rem;
+  }
+}
+
+// Used to set the width of content in pages like listview, details. If content needs a floating paper/card like styles --floating modifer provides this
+
+.page_spacer {
+  padding: $page-padding $page-padding 4rem;
+}
+.page-container {
+  @include set-content-width;
+
+  &--floating {
+    box-shadow: $shadow-base;
+    border-radius: $base-border-radius;
+    background: $josef-white;
+    padding: 2rem 2rem;
+  }
+
+  &--full {
+    margin: 0;
+  }
+}
+
+/*******************
+  Utility Classes
+*******************/
+
+.underline-link {
+  text-decoration: underline;
+  color: $base-font-color;
+}
+
+.truncate {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.left {
+  float: left !important;
+}
+.right {
+  float: right !important;
+}
+
+.base-padding {
+  padding: $base-spacing;
+}
+
+.small-margin-top {
+  margin-top: $small-spacing;
+}
+
+.small-margin-bottom {
+  margin-bottom: $small-spacing;
+}
+
+.small-margin-left {
+  margin-left: $small-spacing;
+}
+
+.small-margin-right {
+  margin-right: $small-spacing;
+}
+
+.base-margin-top {
+  margin-top: $base-spacing;
+}
+
+.base-margin-bottom {
+  margin-bottom: $base-spacing;
+}
+
+.base-margin-left {
+  margin-left: $base-spacing;
+}
+
+.base-margin-right {
+  margin-right: $base-spacing;
+}
+
+.large-margin-top {
+  margin-top: $large-spacing;
+}
+
+.large-margin-bottom {
+  margin-bottom: $large-spacing;
+}
+
+.large-margin-left {
+  margin-left: $large-spacing;
+}
+
+.large-margin-right {
+  margin-right: $large-spacing;
+}
+
+// Restrict contenteditable to one line
+
+[contenteditable="true"].single-line {
+  white-space: nowrap;
+  overflow: hidden;
+}
+[contenteditable="true"].single-line br {
+  display: none;
+}
+[contenteditable="true"].single-line * {
+  display: inline;
+  white-space: nowrap;
+}
+
+// hide text for accessibility
+.is-accessibly-hidden {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+
+// use on spans wrapping buttons to fix IE11 alignment issues
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.is-dark {
+  background-color: $josef-purple;
+}
+
+// an override of the defaultstyles for the vue content loading skeletons
+.vue-content-placeholders-text__line {
+  height: 0.625rem;
+  margin-bottom: 0.625rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

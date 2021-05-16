@@ -1,0 +1,128 @@
+// Breakpoints
+// best practice breakpoints should be in em units
+// function to convert media px statements to em.
+// Will only work for media statements due to the way em inherits its values elsewhere in the document
+@function media-px-to-em($px) {
+  @return $px / ($px * 0 + 1) / 16 * 1em;
+}
+
+$small-screen: media-px-to-em(600px) !default;
+$medium-screen: media-px-to-em(992px) !default;
+$large-screen: media-px-to-em(1200px) !default;
+$small-screen-up: media-px-to-em(601px) !default;
+$medium-screen-up: media-px-to-em(993px) !default;
+$large-screen-up: media-px-to-em(1201px) !default;
+
+$root-font-breakpoints: 75.0625em;
+
+// Media Queries retained from Materialicss
+// $medium-and-up: "only screen and (min-width : #{$small-screen-up})" !default;
+// $large-and-up: "only screen and (min-width : #{$medium-screen-up})" !default;  //$grid--desktop-up
+// $extra-large-and-up: "only screen and (min-width : #{$large-screen-up})" !default;
+$small-and-down: "only screen and (max-width : #{$small-screen})" !default;
+$medium-and-down: "only screen and (max-width : #{$medium-screen})" !default;
+$medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})" !default;
+
+// base font size of html element
+$rootsize-base: 12;
+$rootsize-lg: 14;
+
+// Grids
+$grid--tablet-up: "(min-width: #{$small-screen-up})";
+$grid--desktop-up: "(min-width: #{$medium-screen-up})";
+$grid--desktop-lg-up: "(min-width: #{$large-screen-up})";
+
+// Typography
+$base-font-family: "Chivo", sans-serif; //$font-stack-system;
+$heading-font-family: $base-font-family;
+
+$weight-light: 300;
+$weight-normal: 400;
+$weight-bold: 700;
+
+// Line height
+$base-line-height: 1.5;
+$heading-line-height: 1.2;
+
+// Used for form label, input and Links
+$text-line-height: 1.666rem; //20px;
+
+// common page padding
+// This is the padding on the content area, beside the side menu
+$page-padding: 1rem * 50/12; // 50px on small screens (where base font size = 12)
+
+// Spacing
+$base-spacing: 1rem; //$base-line-height * 1em;
+$small-spacing: $base-spacing / 2;
+$large-spacing: $base-spacing * 2;
+$big-spacing: $base-spacing * 1.42;
+$icon-size: $base-spacing * 1.5;
+
+// Other sizes
+$menu-width: 18rem;
+$status-bar-width: calc(100% - 18rem);
+$sidebar-width: 350px;
+$wide-sidebar-width: 560px;
+$sidebar-tab-width: 47px;
+
+// Radi
+$base-border-radius: 4px;
+$sidebar-tab-border-radius: 16px;
+$modal-border-radius: 24px;
+$btn-border-radius: 78px;
+$search-field-border-radius: 48px; // needs a better name
+$switch-radius: 15px !default;
+$large-chip-radius: 22px;
+
+// Border
+$base-border-color: $josef-smoke; //$light-gray;
+$base-border: 1px solid $base-border-color;
+$base-form-border: solid 1px $josef-smoke;
+
+// Background Colors
+$base-background-color: #fff;
+$secondary-background-color: tint($base-border-color, 75%);
+
+// Focus
+$focus-outline-color: transparentize($josef-blue, 0.4);
+$focus-outline-width: 3px;
+$focus-outline: $focus-outline-width solid $focus-outline-color;
+$focus-outline-offset: 2px;
+
+// Animations
+$base-duration: 250ms;
+$base-timing: ease;
+
+$navbar-height: px-to-rem(48px);
+$navbar-height-lg: px-to-rem(52px, $rootsize-lg * 1px);
+$navbar-line-height-mobile: 1rem;
+
+$header-height: 138px; //px-to-rem(140px);
+
+$button-floating-size: 24px !default;
+$button-floating-large-size: 44px !default;
+
+// z-index
+$base-z-index: 0;
+$z-index: (
+  full-modal: 9999,
+  // 75,
+    modal: 5000,
+  sidebar-dark: 100,
+  sidebar: 300,
+  navbar: 1000,
+);
+
+// shadows for redesign
+$shadow-base: 2px 8px 24px rgba(0, 0, 0, 0.1);
+$shadow-hover: 8px 16px 32px rgba(0, 0, 0, 0.15);
+$shadow-round: 0px 2px 8px rgba(0, 0, 0, 0.12);
+$shadow-zoom: 3px 9px 24px rgba(0, 0, 0, 0.06);
+$shadow-grabbed: $shadow-zoom;
+$shadow-nav: 0px 4px 11px rgba(0, 0, 0, 0.16);
+$shadow-white: 0 3px 10px rgba(255, 255, 255, 0.125);
+
+$shadow-focus: 0 0 0 1px $josef-grey, 0 0 0 3px $josef-iron;
+
+// animation easing
+$easeOutCirc: cubic-bezier(0.075, 0.82, 0.165, 1);

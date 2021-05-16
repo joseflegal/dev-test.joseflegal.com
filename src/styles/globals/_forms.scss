@@ -1,0 +1,485 @@
+fieldset {
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  font-weight: $weight-normal;
+  margin-bottom: $small-spacing / 2;
+  padding: 0;
+}
+
+label {
+  display: block;
+  font-weight: $weight-normal;
+  color: $josef-oil;
+  font-size: 1rem;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  font-family: $base-font-family;
+  font-size: 1rem;
+  color: $josef-steel;
+  border: $base-form-border;
+  -webkit-font-smoothing: antialiased;
+}
+
+$all-text-inputs: "[type='color'], [type='date'], [type='datetime'], [type='datetime-local'], [type='email'], [type='month'], [type='number'], [type='password'], [type='search'], [type='tel'], [type='text'], [type='time'], [type='url'], [type='week'], input:not([type]), textarea";
+
+#{$all-text-inputs} {
+  // note textarea has a wrapper that handles hover/focus
+  appearance: none;
+  background-color: $base-background-color;
+  border: $base-border;
+  border-radius: $base-border-radius;
+  box-sizing: border-box;
+  margin-bottom: 0;
+  padding: 0 1rem;
+  transition: border-color $base-duration $base-timing;
+  width: 100%;
+
+  &::-ms-clear {
+    display: none;
+  }
+
+  &:not(:disabled):hover {
+    border-color: $input-border-color-hover;
+    color: $base-font-color;
+  }
+
+  &:focus {
+    border-color: $action-color;
+    color: $base-font-color;
+    outline: none;
+  }
+
+  &:disabled,
+  &.input[readonly] {
+    cursor: not-allowed;
+    background: $josef-vapor;
+    border-color: $josef-smoke;
+
+    label {
+      cursor: not-allowed;
+    }
+  }
+
+  &::placeholder {
+    color: $josef-steel;
+  }
+
+  &.has-icon {
+    padding-left: $base-spacing * 2.5;
+  }
+}
+
+textarea {
+  overflow-y: hidden; /* prevents scroll bar flash */
+  resize: none;
+}
+
+[type="checkbox"],
+[type="radio"] {
+  display: inline;
+  margin-right: $small-spacing / 2;
+}
+
+[type="color"] {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+[type="file"] {
+  margin-bottom: $small-spacing;
+  width: 100%;
+}
+
+select {
+  margin-bottom: $small-spacing;
+  width: 100%;
+}
+
+[type="checkbox"],
+[type="radio"],
+[type="file"],
+select {
+  &:focus {
+    outline: $focus-outline;
+    outline-offset: $focus-outline-offset;
+  }
+}
+
+.input-field {
+  font-family: "Chivo", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  margin-bottom: 2rem;
+  width: 100%;
+
+  @include grid-media($grid--desktop-lg-up) {
+    margin-bottom: 2.285rem;
+  }
+
+  &--3qtr {
+    flex: 0 1 75%;
+    max-width: 75%;
+  }
+
+  &--half {
+    flex: 0 1 47.5%;
+    max-width: 50%;
+  }
+
+  &--qtr {
+    flex: 0 1 25%;
+    max-width: 25%;
+  }
+
+  &.is-flush {
+    margin-bottom: 0.25rem;
+  }
+
+  &--disabled {
+    label.input-field__label {
+      color: $base-font-color;
+    }
+  }
+
+  &--invert {
+    label.input-field__label {
+      color: $josef-white;
+    }
+  }
+
+  &__label-wrapper {
+    display: flex;
+    padding-bottom: 0.7rem;
+
+    &:hover + .textarea__wrapper {
+      border-color: $action-hover-color;
+    }
+  }
+
+  &__right-icon-wrapper {
+    display: flex;
+    position: absolute !important;
+    top: 39px;
+    right: $base-spacing;
+    cursor: pointer;
+    line-height: 150%;
+    color: $highlight-color;
+    @include grid-media($grid--desktop-lg-up) {
+      top: 42px;
+    }
+  }
+
+  label,
+  .input-field__label {
+    color: $label-color;
+    font-weight: $weight-normal;
+    line-height: 1.5;
+    padding-bottom: 0;
+    margin-bottom: 0;
+
+    &--invert {
+      color: $josef-white;
+    }
+  }
+
+  &__error {
+    color: $danger-color;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1rem;
+    margin-top: 0.575rem; //1rem;
+    display: inline-block;
+  }
+
+  &.invalid {
+    input,
+    input[type="text"],
+    input[type="url"],
+    textarea {
+      border: solid 1px $danger-color !important;
+      color: $danger-color;
+      box-shadow: none;
+    }
+  }
+
+  // Input
+  input {
+    min-height: 43px; //! need to get rid of this!
+  }
+
+  // Textarea
+
+  .textarea__wrapper {
+    border: $base-form-border;
+    border-radius: $base-border-radius;
+    padding-top: $base-spacing;
+    padding-bottom: $base-spacing;
+    padding-right: 1rem;
+    overflow: hidden;
+
+    &:hover {
+      border-color: $action-hover-color;
+    }
+
+    &:focus-within {
+      border-color: $action-color;
+    }
+
+    @include grid-media($grid--desktop-lg-up) {
+      padding-right: 2rem;
+    }
+
+    &--error {
+      border: solid 1px $danger-color !important;
+    }
+  }
+
+  textarea {
+    // hover states are handled by wrapper ^
+    padding: 0 1rem;
+    overflow-y: auto;
+    margin-bottom: 0;
+    padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+    box-sizing: content-box;
+  }
+}
+
+/* Switch  (based on materializecss)
+   ========================================================================== */
+
+.switch,
+.switch * {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.switch label {
+  cursor: pointer;
+}
+
+.switch--invert {
+  .switch__label {
+    color: $josef-white;
+  }
+}
+
+.switch label input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+
+  &:checked + .lever {
+    background-color: $switch-checked-lever-bg;
+
+    &:before,
+    &:after {
+      left: 18px;
+    }
+
+    &:after {
+      background-color: $switch-bg-color;
+    }
+  }
+}
+
+.switch label .lever {
+  > label {
+    margin-bottom: 0;
+    font-family: "Chivo", sans-serif;
+  }
+
+  content: "";
+  display: inline-block;
+  position: relative;
+  width: 36px;
+  height: 1rem; //14px;
+  background-color: $switch-unchecked-lever-bg;
+  border-radius: $switch-radius;
+  margin-right: 10px;
+  transition: background 0.3s ease;
+  vertical-align: middle;
+  margin: 0 $base-spacing / 2 0 0; //16px;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 1.5rem; //20px;
+    height: 1.5rem; //20px;
+    border-radius: 50%;
+    left: 0;
+    top: -3px;
+    transition: left 0.3s ease, background 0.3s ease, box-shadow 0.1s ease, transform 0.1s ease;
+  }
+
+  &:before {
+    background-color: transparentize($switch-bg-color, 0.85);
+  }
+
+  &:after {
+    background-color: $switch-unchecked-bg;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+      0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  }
+}
+
+// Switch active style
+input[type="checkbox"]:checked:not(:disabled) ~ .lever:active::before,
+input[type="checkbox"]:checked:not(:disabled).tabbed:focus ~ .lever::before {
+  transform: scale(2.4);
+  background-color: transparentize($switch-bg-color, 0.85);
+}
+
+input[type="checkbox"]:not(:disabled) ~ .lever:active:before,
+input[type="checkbox"]:not(:disabled).tabbed:focus ~ .lever::before {
+  transform: scale(2.4);
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+// Disabled Styles
+.switch input[type="checkbox"][disabled] + .lever {
+  cursor: default;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.switch label input[type="checkbox"][disabled] + .lever:after,
+.switch label input[type="checkbox"][disabled]:checked + .lever:after {
+  background-color: $disabled-color; //$input-disabled-solid-color;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+// Validations
+.validation-error {
+  color: color("red", "base");
+  font-size: 80%;
+
+  &.auth-error {
+    margin-left: 3rem;
+  }
+}
+
+/* vue-multiselect custom styles
+    ===============================================================================================
+    Get all the libraries scss variables here https://github.com/shentao/vue-multiselect/issues/420
+*/
+
+.multiselect {
+  border-radius: $base-border-radius;
+  margin-bottom: $base-spacing;
+
+  &:focus-within {
+    box-shadow: $shadow-focus;
+  }
+}
+
+.multiselect,
+.multiselect__input,
+.multiselect__single {
+  font-size: inherit;
+}
+
+.multiselect__select {
+  display: none;
+}
+
+.multiselect__input,
+.multiselect__single {
+  border: none !important;
+  &:hover {
+    border: none !important;
+  }
+
+  &:focus {
+    border: none !important;
+    outline: none;
+  }
+}
+
+.multiselect__single,
+.multiselect__input[type="text"] {
+  color: #adadad;
+  display: inline-block;
+  margin: 0;
+  vertical-align: middle;
+  line-height: inherit;
+}
+
+.multiselect__single {
+  color: $josef-steel;
+}
+
+.multiselect__tags {
+  display: flex;
+  align-items: center;
+  padding: 0.64rem 40px 0.64rem 8px;
+  @include grid-media($grid--desktop-lg-up) {
+    padding: 0.64rem 40px 0.64rem 8px;
+  }
+}
+
+.multiselect__placeholder {
+  margin-bottom: 0;
+  padding-top: 0;
+}
+
+.multiselect__option {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+
+  &--highlight {
+    background: $multiselectOptionHighlightBgColor;
+    outline: none;
+    color: $multiselectOptionHighlightColor;
+
+    &:after {
+      content: attr(data-select);
+      background: $multiselectOptionHighlightBgColor;
+      color: $multiselectOptionHighlightColor;
+    }
+  }
+
+  &--selected {
+    background: $multiselectOptionSelectedBgColor;
+    color: $multiselectOptionSelectedColor;
+    font-weight: bold;
+
+    &:after {
+      content: attr(data-selected);
+      font-weight: 300;
+      color: $multiselectOptionSelectedColor;
+      background: $multiselectOptionSelectedBgColor;
+    }
+  }
+
+  &--nested {
+    padding-left: $large-spacing;
+  }
+}
+
+.multiselect__option--selected.multiselect__option--highlight {
+  background: $multiselectOptionHighlightSelectedBgColor;
+  color: $multiselectOptionHighlightSelectedColor;
+  font-weight: lighter;
+
+  &:after {
+    content: attr(data-deselect);
+    background: $multiselectOptionHighlightSelectedBgColor;
+    color: $multiselectOptionHighlightSelectedColor;
+  }
+}

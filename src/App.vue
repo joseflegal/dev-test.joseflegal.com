@@ -1,32 +1,64 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div id="app" class="app">
+    <div class="sidebar-container">
+      <Sidebar></Sidebar>
     </div>
-    <router-view />
+    <main class="main-container">
+      <div v-if="!loaded" class="loader-wrapper">
+        <Loader />
+      </div>
+      <router-view v-else />
+    </main>
   </div>
 </template>
+<script>
+import Sidebar from "@/components/Sidebar.vue";
+import Loader from "@/components/Loader.vue";
+import api from "@/api";
 
+export default {
+  components: {
+    Sidebar,
+    Loader,
+  },
+  data() {
+    return {
+      loaded: false,
+    };
+  },
+  created() {
+    this.$store.dispatch("user/get").then((res) => {
+      console.log(res);
+      this.loaded = true;
+    });
+
+    console.log(
+      api.files.get().then((res) => {
+        console.log(res);
+      })
+    );
+  },
+};
+</script>
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.app {
+  display: flex;
 }
 
-#nav {
-  padding: 30px;
+.sidebar-container {
+  flex: 0 0 350px;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.main-container {
+  flex: 1 1 auto;
+  height: 100vh;
+  padding: $base-spacing;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.loader-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

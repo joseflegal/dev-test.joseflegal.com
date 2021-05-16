@@ -1,0 +1,48 @@
+.password {
+  &__para {
+    margin-bottom: 2rem;
+  }
+  &__container {
+    display: flex;
+    position: relative;
+
+    &--small {
+      width: 75%;
+    }
+  }
+
+  &__criteria {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 7px;
+    &-column {
+      width: 50%;
+    }
+    &--inactive {
+      color: $josef-gainsboro !important;
+    }
+    &-tick {
+      color: #1b801f !important;
+    }
+    &-label {
+      color: $josef-steel;
+    }
+    &--small {
+      width: 50%;
+    }
+  }
+  &__button {
+    margin-top: 37px;
+  }
+}
+
+.auth {
+  &__error {
+    color: $danger-color;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1rem;
+    margin-bottom: 2rem;
+    display: inline-block;
+  }
+}

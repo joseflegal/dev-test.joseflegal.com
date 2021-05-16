@@ -1,0 +1,32 @@
+/// https://css-tricks.com/snippets/sass/strip-unit-function/
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+// Converts a px value to rems. Should only work in absolute em document context (root level), unless $context is specified
+@function px-to-rem($value, $context: $rootsize-base) {
+  @if unit($context) == "rem" {
+    $context: rem-to-px($context);
+  }
+  @if unit($value) == "px" {
+    $value: strip-unit($value) / strip-unit($context);
+    $value: $value * 1rem;
+  }
+  @return $value;
+}
+
+// Converts an rem value to px. Should only work in absolute em document context (root level)
+@function rem-to-px($value, $context: $rootsize-base) {
+  @if unit($value) == "rem" {
+    $value: strip-unit($value) * strip-unit($rootsize-base);
+    $value: $value * 1px;
+  }
+  @return $value;
+}
