@@ -6,10 +6,12 @@ const db = require("../../db");
 
 function buildRoutes(router) {
   router.get("/api/username", async (req, res) => {
+    console.log("GET /api/username", req.url);
     return res.send({ username: os.userInfo().username });
   });
 
   router.get("/api/files", async (req, res) => {
+    console.log("GET /api/files", req.url);
     const files = db.get("files").value();
     return res.send(files);
   });
