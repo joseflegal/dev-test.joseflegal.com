@@ -22,7 +22,7 @@ npm run dev
 
 ## Npm scripts
 
-### Starts server on 8080 and Compiles and hot-reloads for development on 8888
+### Starts server on 8485 and Compiles and hot-reloads for development on 9001
 
 ```
 npm run dev

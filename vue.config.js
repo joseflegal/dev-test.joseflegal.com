@@ -3,15 +3,16 @@ const path = require("path");
 module.exports = {
   // options...
   devServer: {
-    port: 8888,
+    port: 9001,
     open: true,
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
     },
+    changeOrigin: true,
     proxy: {
       "/api": {
-        target: "http://localhost:8080",
+        target: "http://localhost:8485",
       },
     },
   },
