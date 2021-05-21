@@ -5,15 +5,6 @@ module.exports = {
   devServer: {
     port: 9001,
     open: true,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-    },
-    proxy: {
-      "/api": {
-        target: "http://localhost:3000",
-      },
-    },
   },
   publicPath: "/",
   chainWebpack: (config) => {
