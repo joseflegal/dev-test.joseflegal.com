@@ -4,7 +4,7 @@ const api = {};
 
 const handleResponse = (res) => res.data;
 
-api.fetchUser = () => http.get("/username").then(handleResponse);
+api.fetchUser = () => http.get("/user").then(handleResponse);
 
 // bulk connection endpoints
 function generateApiFrom(name) {

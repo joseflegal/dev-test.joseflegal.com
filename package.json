@@ -5,7 +5,7 @@
   "scripts": {
     "client": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "server": "node server/index.js",
+    "server": "json-server --watch db/dev.json",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
@@ -16,6 +16,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "express": "^4.17.1",
+    "json-server": "^0.16.3",
     "lodash": "^4.17.21",
     "lodash-id": "^0.14.0",
     "lowdb": "^1.0.0",

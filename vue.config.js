@@ -9,10 +9,9 @@ module.exports = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
     },
-    changeOrigin: true,
     proxy: {
       "/api": {
-        target: "http://localhost:8485",
+        target: "http://localhost:3000",
       },
     },
   },

@@ -1,4 +1,9 @@
 {
+  "user": {
+    "id": 12345678,
+    "name": "Bilbo Baggins",
+    "loaction": "Middle Earth"
+  },
   "files": [
     {
       "id": "6eb00541-1fd5-4779-a155-ba0e53e0fabc",
