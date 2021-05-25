@@ -66,6 +66,66 @@
     <JoButton variant="outline" iconLeft="fa-file-export" disabled
       >Outline</JoButton
     >
+
+    <h2>Circle Buttons</h2>
+    <p>
+      Using
+      <code>icon</code> and <code>title</code> props.
+    </p>
+    <JoCircleButton icon="fa-edit" title="Edit" />
+    <JoCircleButton icon="fa-user" title="User" />
+    <JoCircleButton icon="fa-trash" title="Trash" />
+    <JoCircleButton icon="fa-cut" title="Cut" />
+
+    <h3>Variants</h3>
+    <p>
+      Style variants are defined with the
+      <code>variant</code> prop. Must be one of: <code>light</code> or
+      <code>white</code>.
+    </p>
+    <JoCircleButton icon="fa-edit" title="Edit" variant="white" />
+    <JoCircleButton icon="fa-user" title="User" variant="light" />
+    <JoCircleButton icon="fa-trash" title="Trash" variant="white" />
+    <JoCircleButton icon="fa-cut" title="Cut" variant="light" />
+
+    <p>
+      Size variants are defined with the
+      <code>size</code> prop. Must be one of: <code>small</code> or
+      <code>large</code>.
+    </p>
+
+    <JoCircleButton icon="fa-edit" title="Edit" size="small" />
+    <JoCircleButton icon="fa-user" title="User" size="small" />
+    <JoCircleButton icon="fa-trash" title="Trash" size="small" />
+    <JoCircleButton icon="fa-cut" title="Cut" size="small" />
+
+    <br />
+    <JoCircleButton icon="fa-edit" title="Edit" variant="white" size="large" />
+    <JoCircleButton icon="fa-user" title="User" variant="white" size="large" />
+    <JoCircleButton
+      icon="fa-trash"
+      title="Trash"
+      variant="white"
+      size="large"
+    />
+    <JoCircleButton icon="fa-cut" title="Cut" variant="white" size="large" />
+
+    <p>
+      Margins can be reset on sides to make them flush with siblings and/or the
+      parent container using the
+      <code>flush</code> prop. Must be one of: <code>all</code>,
+      <code>right</code>, or <code>bottom</code>.
+    </p>
+    <JoCircleButton icon="fa-trash" title="Trash" flush="all" />
+    <JoCircleButton icon="fa-edit" title="Edit" flush="right" />
+    <JoCircleButton icon="fa-user" title="User" flush="bottom" />
+    <br />
+
+    <h3>Disabled button</h3>
+    <JoCircleButton disabled icon="fa-edit" title="Edit" variant="white" />
+    <JoCircleButton disabled icon="fa-user" title="User" variant="light" />
+    <JoCircleButton disabled icon="fa-trash" title="Trash" variant="white" />
+    <JoCircleButton disabled icon="fa-cut" title="Cut" variant="light" />
   </div>
 </template>
 <style lang="scss" scoped>

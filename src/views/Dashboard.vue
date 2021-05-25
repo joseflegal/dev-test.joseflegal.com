@@ -10,7 +10,7 @@
 import api from "@/api";
 
 export default {
-  name: "Home",
+  name: "Dashboard",
   data() {
     return {
       files: null,

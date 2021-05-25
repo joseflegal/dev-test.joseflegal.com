@@ -16,14 +16,12 @@
     }"
     :style="styles"
   >
-    <!-- <JoIcon v-if="iconLeft" :id="iconLeft" spacing="right" /> -->
     <span :class="'small-margin-right fas ' + iconLeft"></span>
     <slot />
     <span
       v-if="iconRight && !iconLeft"
       :class="'small-margin-left fas ' + iconRight"
     ></span>
-    <!-- <JoIcon v-if="iconRight && !iconLeft" :id="iconRight" spacing="left" /> -->
   </component>
 </template>
 
