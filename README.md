@@ -30,7 +30,7 @@ In `src/views/Dashboard.vue` you'll find a component that is loading data from a
 - Fork this repo into your own account
 - Make a new branch
 - When you are finished, make a PR on your fork, and invite the person specified in the email to your fork
-- We will take a look at your solution, then talk through your solution during your interview
+- We will take a look at your solution, and we might ask you several questions after
 
 ## Getting the project running
 
