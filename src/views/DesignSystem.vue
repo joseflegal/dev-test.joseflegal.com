@@ -1,6 +1,6 @@
 <template>
   <div class="design-system">
-    <h1>Josef Design System</h1>
+    <h1>Josef design system</h1>
 
     <h2>Buttons</h2>
 
@@ -130,9 +130,6 @@
 </template>
 <style lang="scss" scoped>
 .design-system {
-  padding: 3rem 3rem 6rem;
-  min-height: 100%;
-
   h2,
   h3,
   p {

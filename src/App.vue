@@ -36,6 +36,8 @@ export default {
 <style lang="scss">
 .app {
   display: flex;
+  max-width: 100%;
+  width: 100%;
 }
 
 .sidebar-container {
@@ -44,7 +46,6 @@ export default {
 
 .main-container {
   flex: 1 1 auto;
-  height: 100vh;
   padding: $base-spacing;
 }
 

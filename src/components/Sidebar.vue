@@ -18,12 +18,12 @@ export default {
         },
         {
           href: "/",
-          title: "Dashboard",
+          title: "Coding task",
           icon: "fa fa-user",
         },
         {
           href: "/design-system",
-          title: "Design System",
+          title: "Design system",
           icon: "fa fa-chart-area",
           //   child: [
           //     {
