@@ -3,8 +3,7 @@
     <h1>Josef coding task</h1>
     <!-- Render the files data with a resuable component (a list or card up to you!) -->
     <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array 
-      <code>files:
-      {{files}}</code>
+      <Gallery>My Gallery</Gallery>
     </pre>
   </div>
 </template>
@@ -14,26 +13,21 @@
  pre,code{
   overflow-x: auto;
   white-space: pre-wrap;
-  white-space: pre-wrap;
   line-break: anywhere;
 }
 </style>
 
 <script>
 // @ is an alias to /src
-import api from "@/api";
-
+import Gallery from "@/components/Gallery.vue"
 export default {
   name: "Dashboard",
-  data() {
-    return {
-      files: [],
-    };
+  components: {
+    Gallery
   },
   created() {
-    api.files.get().then((res) => {
+    this.$store.dispatch("gallery/get").then((res) => {
       console.log(res);
-      this.files = res;
     });
   },
 };
