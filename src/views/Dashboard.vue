@@ -80,7 +80,6 @@
 
 <script>
 // @ is an alias to /src
-import api from "@/api";
 import ImageCard from "@/components/ImageCard";
 
 export default {
@@ -92,7 +91,8 @@ export default {
     };
   },
   created() {
-    api.files.get().then((res) => {
+    // Get dashboard data.
+    this.$store.dispatch("dashboard/get").then((res) => {
       console.log(res);
       this.files = res;
     });
