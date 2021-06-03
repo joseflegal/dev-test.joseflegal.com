@@ -165,13 +165,13 @@
   // media
   @media screen and (max-width: $medium-screen) {
     .card{
-      width: calc(33.333% - 2rem)
+      width: calc(50% - 2rem) !important
     }
   }
 
-    @media screen and (max-width: $small-screen) {
+  @media screen and (max-width: $small-screen) {
     .card{
-      width: calc(50% - 2rem)
+      width: calc(100% - 2rem) !important
     }
   }
 </style>
