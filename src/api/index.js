@@ -17,10 +17,8 @@ function generateApiFrom(name) {
   };
 }
 
-["files"].forEach((name) => {
+["files", "answers", "rules", "rule_groups"].forEach((name) => {
   api[name] = generateApiFrom(name);
 });
-
-console.log(api);
 
 export default api;
