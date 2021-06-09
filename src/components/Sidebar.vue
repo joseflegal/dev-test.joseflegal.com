@@ -1,7 +1,6 @@
 <template>
   <sidebar-menu :menu="menu" />
 </template>
-
 <script>
 import { SidebarMenu } from "vue-sidebar-menu";
 export default {
@@ -10,10 +9,9 @@ export default {
   },
   data() {
     return {
-      menu: [
-        {
+      menu: [{
           header: true,
-          title: "Josef coding task",
+          title: "Josef coding challenge",
           hiddenOnCollapse: true,
         },
         {

@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="container">
     <h1>Vue.js layout</h1>
     <!-- Render the files data with a resuable component (a list or card up to you!) -->
     <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array 
@@ -9,6 +9,11 @@
   </div>
 </template>
 <style lang="scss" scoped>
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
 pre,
 code {
   overflow-x: auto;

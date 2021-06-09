@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Rules engine</h1>
     <h2>Problem</h2>
     <p>
@@ -58,11 +58,12 @@
     </p>
     <pre><code>rule_groups:{{rule_groups}}
 rules:{{rules}}</code></pre>
-    <h2>Exercise</h2>
+    <h2>Task</h2>
     <p>
       Please, finish the <em>checkGroup</em> function in the
-      <u>src/views/Rules.vue</u> file, that checks if all rules and groups
-      apply. Feel free to use already implemented function <em>checkRule</em> to
+      <u>src/views/Rules.vue</u> file, so it returns <em>true</em> if all
+      rules and groups apply, otherwise <em>false</em>. Feel free to use
+      already implemented function <em>checkRule</em> to
       check individual rules.
     </p>
     <h2>Result</h2>
@@ -77,6 +78,11 @@ rules:{{rules}}</code></pre>
   </div>
 </template>
 <style lang="scss" scoped>
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
 code {
   width: 100%;
 }
