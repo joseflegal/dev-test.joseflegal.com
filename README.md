@@ -1,6 +1,6 @@
 # Josef coding challenge
 
-Hello 👋 & welcome to the anvil coding challenge. We appreciate you taking the time to complete the assignment and we're excited about the prospect of you joining the team!
+Hello 👋 & welcome to the Josef coding challenge. We appreciate you taking the time to complete the assignment and we're excited about the prospect of you joining the team!
 
 The goal of this assignment is to get a sense for how you think and solve problems. If you're having build issues 🔧 with the project, please don't hesitate to contact us.
 
