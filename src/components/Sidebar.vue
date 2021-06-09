@@ -1,7 +1,6 @@
 <template>
   <sidebar-menu :menu="menu" />
 </template>
-
 <script>
 import { SidebarMenu } from "vue-sidebar-menu";
 export default {
@@ -13,18 +12,23 @@ export default {
       menu: [
         {
           header: true,
-          title: "Main Navigation",
+          title: "Josef coding challenge",
           hiddenOnCollapse: true,
         },
         {
           href: "/",
-          title: "Coding task",
-          icon: "fa fa-user",
+          title: "Vue.js layout",
+          icon: "fa fa-th",
+        },
+        {
+          href: "/rules",
+          title: "Rules engine",
+          icon: "fa fa-cog",
         },
         {
           href: "/design-system",
           title: "Design system",
-          icon: "fa fa-chart-area",
+          icon: "fa fa-palette",
           //   child: [
           //     {
           //       href: "/charts/sublink",
@@ -39,9 +43,4 @@ export default {
 </script>
 <style lang="scss">
 @import "vue-sidebar-menu/src/scss/vue-sidebar-menu.scss";
-
-.v-sidebar-menu {
-  background: $josef-charcoal;
-  width: 100%;
-}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="design-system">
-    <h1>Josef design system</h1>
+    <h1>Design system</h1>
 
     <h2>Buttons</h2>
 

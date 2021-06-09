@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <h1>Josef coding task</h1>
+  <div class="container">
+    <h1>Vue.js layout</h1>
     <!-- Render the files data with a resuable component (a list or card up to you!) -->
     <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array 
       <code>files:
@@ -9,22 +9,25 @@
   </div>
 </template>
 <style lang="scss" scoped>
-.home {
- }
- pre,code{
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+pre,
+code {
   overflow-x: auto;
   white-space: pre-wrap;
   white-space: pre-wrap;
   line-break: anywhere;
 }
 </style>
-
 <script>
 // @ is an alias to /src
 import api from "@/api";
 
 export default {
-  name: "Dashboard",
+  name: "Layout",
   data() {
     return {
       files: [],
@@ -32,7 +35,6 @@ export default {
   },
   created() {
     api.files.get().then((res) => {
-      console.log(res);
       this.files = res;
     });
   },
