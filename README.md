@@ -35,7 +35,7 @@ In `src/views/Rules.vue` you'll find a Vue.js view with deatiled instructions ab
 
 1. Modify the `checkGroup` function in the file, so it returns `true` if all rules and groups apply, otherwise `false`.
 
-2. Try your best implement the task in an eficient and elegant way.
+2. Try your best to implement the task in an eficient and elegant way.
 
 ### Extra credit
 
