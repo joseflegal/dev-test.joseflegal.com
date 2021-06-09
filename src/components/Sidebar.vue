@@ -9,7 +9,8 @@ export default {
   },
   data() {
     return {
-      menu: [{
+      menu: [
+        {
           header: true,
           title: "Josef coding challenge",
           hiddenOnCollapse: true,

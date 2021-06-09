@@ -61,10 +61,9 @@ rules:{{rules}}</code></pre>
     <h2>Task</h2>
     <p>
       Please, finish the <em>checkGroup</em> function in the
-      <u>src/views/Rules.vue</u> file, so it returns <em>true</em> if all
-      rules and groups apply, otherwise <em>false</em>. Feel free to use
-      already implemented function <em>checkRule</em> to
-      check individual rules.
+      <u>src/views/Rules.vue</u> file, so it returns <em>true</em> if all rules
+      and groups apply, otherwise <em>false</em>. Feel free to use already
+      implemented function <em>checkRule</em> to check individual rules.
     </p>
     <h2>Result</h2>
     <p>With given user answers:</p>

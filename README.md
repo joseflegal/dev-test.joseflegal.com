@@ -17,7 +17,7 @@ You may want to install [Vue Dev Tools](https://chrome.google.com/webstore/detai
 
 ## Coding task
 
-### Frontend 
+### Frontend
 
 In `src/views/Layout.vue` you'll find a component that is loading data from an API.
 
@@ -29,17 +29,17 @@ In `src/views/Layout.vue` you'll find a component that is loading data from an A
 
 4. Create a [computed property](https://vuejs.org/v2/guide/computed.html) that takes the files data and filters it for tags that include `kitten` then sorts it by date.
 
-### Backend 
+### Backend
 
 In `src/views/Rules.vue` you'll find a Vue.js view with deatiled instructions about the problem.
 
 1. Modify the `checkGroup` function in the file, so it returns `true` if all rules and groups apply, otherwise `false`.
 
-2. Try your best implement the task in an eficient and elegant way. 
+2. Try your best implement the task in an eficient and elegant way.
 
 ### Extra credit
 
-1. The data is currently being managed locally in `src/views/Layout.vue` and `src/views/Rules.vue`, migrate it to a [vuex module](https://vuex.vuejs.org/guide/modules.html) in `src/store`. *See example in `src/store/user`.*
+1. The data is currently being managed locally in `src/views/Layout.vue` and `src/views/Rules.vue`, migrate it to a [vuex module](https://vuex.vuejs.org/guide/modules.html) in `src/store`. _See example in `src/store/user`._
 2. Write some unit tests for your challenge in `/tests/unit`.
 
 ## Getting the project running
@@ -59,9 +59,10 @@ npm run dev
 
 # Visit http://localhost:9001
 ```
+
 ## Scripts
 
-|       Script        |                                   Description                                   |
+| Script              | Description                                                                     |
 | ------------------- | ------------------------------------------------------------------------------- |
 | `npm run dev`       | Starts json server on 3000 and Compiles and hot-reloads for development on 9001 |
 | `npm run test:unit` | Run your unit tests                                                             |
