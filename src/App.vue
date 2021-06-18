@@ -27,10 +27,10 @@ export default {
   },
   created() {
     this.loaded = true;
-    // this.$store.dispatch('/get').then((res) => {
-    //   console.log(res)
-    //   this.loaded = true
-    // })
+    this.$store.dispatch("/get").then((res) => {
+      console.log(res);
+      this.loaded = true;
+    });
   },
 };
 </script>
