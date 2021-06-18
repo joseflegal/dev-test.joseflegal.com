@@ -9,9 +9,7 @@ const user = {
     username: null,
   },
   getters: {
-    getUser: (state) => {
-      return state.username;
-    },
+    getUser: (state) => state.username,
   },
   actions: {
     [actions.get]({ commit }) {

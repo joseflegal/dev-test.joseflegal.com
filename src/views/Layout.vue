@@ -2,9 +2,21 @@
   <div class="container">
     <h1>Vue.js layout</h1>
     <!-- Render the files data with a resuable component (a list or card up to you!) -->
-    <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array 
-      <code>files:
-      {{files}}</code>
+    <pre>
+        <file-item
+          v-for="file in files"
+          v-bind:key="file.id"
+          v-bind:fileId="file.id"
+          v-bind:fileName="file.filename"
+          v-bind:fileMimeType="file.mimetype"
+          v-bind:fileTags="file.tags"
+          v-bind:fileDate="file.date"
+          v-bind:fileSource="file.src"
+        >
+          <template #fileDescription>
+            {{file.description}}
+          </template>
+        </file-item>
     </pre>
   </div>
 </template>
@@ -25,8 +37,10 @@ code {
 <script>
 // @ is an alias to /src
 import api from "@/api";
+import fileItem from "../components/File.vue";
 
 export default {
+  components: { fileItem },
   name: "Layout",
   data() {
     return {
@@ -35,6 +49,7 @@ export default {
   },
   created() {
     api.files.get().then((res) => {
+      console.log(res);
       this.files = res;
     });
   },

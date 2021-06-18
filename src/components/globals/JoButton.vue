@@ -18,10 +18,7 @@
   >
     <span :class="'small-margin-right fas ' + iconLeft"></span>
     <slot />
-    <span
-      v-if="iconRight && !iconLeft"
-      :class="'small-margin-left fas ' + iconRight"
-    ></span>
+    <span v-if="iconRight && !iconLeft" :class="'small-margin-left fas ' + iconRight"></span>
   </component>
 </template>
 
@@ -47,23 +44,17 @@ export default {
     variant: {
       type: String,
       default: "",
-      validator: (value) => {
-        return ["", "blue", "gradient", "outline"].indexOf(value) !== -1;
-      },
+      validator: (value) => ["", "blue", "gradient", "outline"].indexOf(value) !== -1,
     },
     flush: {
       type: String,
       default: "",
-      validator: (value) => {
-        return ["", "all", "bottom", "right"].indexOf(value) !== -1;
-      },
+      validator: (value) => ["", "all", "bottom", "right"].indexOf(value) !== -1,
     },
     element: {
       type: String,
       default: "button",
-      validator: (value) => {
-        return ["button", "a", "router-link"].indexOf(value) !== -1;
-      },
+      validator: (value) => ["button", "a", "router-link"].indexOf(value) !== -1,
     },
     loading: {
       type: Boolean,
@@ -71,9 +62,7 @@ export default {
     },
     styles: {
       type: Object,
-      default: () => {
-        return {};
-      },
+      default: () => ({}),
     },
   },
   methods: {

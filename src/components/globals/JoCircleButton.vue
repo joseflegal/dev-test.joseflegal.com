@@ -44,32 +44,24 @@ export default {
     variant: {
       type: String,
       default: "",
-      validator: (value) => {
-        return (
-          ["", "light", "white", "red", "transparent"].indexOf(value) !== -1
-        );
-      },
+      validator: (value) => ["", "light", "white", "red", "transparent"].indexOf(value) !== -1,
     },
     flush: {
       type: String,
       default: "",
-      validator: (value) => {
-        return ["", "all", "bottom", "right"].indexOf(value) !== -1;
-      },
+      validator: (value) => ["", "all", "bottom", "right"].indexOf(value) !== -1,
     },
     size: {
       type: String,
       default: "",
-      validator: (value) => {
-        return ["", "small", "large"].indexOf(value) !== -1;
-      },
+      validator: (value) => ["", "small", "large"].indexOf(value) !== -1,
     },
   },
   methods: {
     handleClick(e) {
       this.$ga_event({
         eventCategory: "Interaction",
-        eventAction: this.title + " icon button clicked",
+        eventAction: `${this.title} icon button clicked`,
       });
       this.$listeners.click(e);
     },

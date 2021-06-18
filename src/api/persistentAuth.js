@@ -1,19 +1,17 @@
 import router from "../router";
 import store from "../store";
 
+/* eslint no-param-reassign: ["error", { "ignorePropertyModificationsFor": ["config"] }] */
 const requestInterceptor = (config) => {
   if (store.state.user.isLoggedIn) {
     config.headers[
       store.state.config.jwtHeader
     ] = `${store.state.config.jwtPrefix} ${store.state.user.token}`;
   }
-
   return config;
 };
 
-const responseInterceptor = (response) => {
-  return response;
-};
+const responseInterceptor = (response) => response;
 
 const authErrorInterceptor = (error) => {
   // If no response then likely network error return Promise.reject

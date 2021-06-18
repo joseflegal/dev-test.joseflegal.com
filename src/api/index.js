@@ -17,7 +17,7 @@ function generateApiFrom(name) {
   };
 }
 
-["files", "answers", "rules", "rule_groups"].forEach((name) => {
+["files", "answers", "rules", "ruleGroups"].forEach((name) => {
   api[name] = generateApiFrom(name);
 });
 

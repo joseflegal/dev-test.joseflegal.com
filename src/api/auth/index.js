@@ -5,9 +5,14 @@ export default {
     return http.post("auth", { email, password }).then((res) => res.data);
   },
 
-  signup({ name, email, password, organisation_id }) {
+  signup({ name, email, password, organisationId }) {
     return http
-      .post("accounts/signup", { name, email, password, organisation_id })
+      .post("accounts/signup", {
+        name,
+        email,
+        password,
+        organisationId,
+      })
       .then((res) => res.data);
   },
 
@@ -16,7 +21,7 @@ export default {
   },
 
   resetPassword({ email }) {
-    return http.post(`accounts/reset`, { email }).then((res) => res.data);
+    return http.post("accounts/reset", { email }).then((res) => res.data);
   },
 
   updatePassword({ password, passwordToken }) {
@@ -26,8 +31,8 @@ export default {
   },
 
   updateManagerPassword(email, oldPassword, newPassword) {
-    return http.post(`accounts/update_password`, {
-      email: email,
+    return http.post("accounts/update_password", {
+      email,
       old_password: oldPassword,
       new_password: newPassword,
     });

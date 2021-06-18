@@ -69,21 +69,47 @@
       "question_id": "A"
     },
     "3": {
-      "expected_answer": "y",
+      "expected_answer": "Y",
       "operation": "is not",
       "question_id": "B"
     }
   },
-  "rule_groups": {
+  "ruleGroups": {
     "1": {
       "logic": "all",
-      "rule_ids": [1],
-      "rule_group_ids": [2]
+      "ruleIds": [
+        1
+      ],
+      "ruleGroup_ids": [
+        2
+      ]
     },
     "2": {
+      "logic": "all",
+      "ruleIds": [
+        2,
+        3
+      ],
+      "ruleGroup_ids": []
+    },
+    "3": {
+      "logic": "all",
+      "ruleIds": [
+        2
+      ],
+      "ruleGroup_ids": [
+        1,
+        2
+      ]
+    },
+    "4": {
       "logic": "any",
-      "rule_ids": [2, 3],
-      "rule_group_ids": []
+      "ruleIds": [
+        1
+      ],
+      "ruleGroup_ids": [
+        3
+      ]
     }
   }
 }
