@@ -4,6 +4,16 @@
     "name": "Bilbo Baggins",
     "loaction": "Middle Earth"
   },
+  "entities": [
+    {
+      "id": 1,
+      "property": "foo"
+    },
+    {
+      "id": 2,
+      "property": "bar"
+    }
+  ],
   "files": [
     {
       "id": "6eb00541-1fd5-4779-a155-ba0e53e0fabc",
@@ -77,12 +87,19 @@
   "rule_groups": {
     "1": {
       "logic": "all",
-      "rule_ids": [1],
-      "rule_group_ids": [2]
+      "rule_ids": [
+        1
+      ],
+      "rule_group_ids": [
+        2
+      ]
     },
     "2": {
       "logic": "any",
-      "rule_ids": [2, 3],
+      "rule_ids": [
+        2,
+        3
+      ],
       "rule_group_ids": []
     }
   }

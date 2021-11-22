@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Layout from "../views/Layout.vue";
 import Rules from "../views/Rules.vue";
+import QA from "../views/QA.vue";
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes = [
     path: "/rules",
     name: "Rules",
     component: Rules,
+  },
+  {
+    path: "/qa",
+    name: "QA",
+    component: QA,
   },
   {
     path: "/design-system",

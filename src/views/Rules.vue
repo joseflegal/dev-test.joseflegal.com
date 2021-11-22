@@ -96,7 +96,7 @@ img {
 import api from "@/api";
 
 export default {
-  name: "Layout",
+  name: "Rules",
   data() {
     return {
       rule_groups: false,

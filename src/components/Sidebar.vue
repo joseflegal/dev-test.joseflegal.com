@@ -26,6 +26,11 @@ export default {
           icon: "fa fa-cog",
         },
         {
+          href: "/qa",
+          title: "QA",
+          icon: "fa fa-search",
+        },
+        {
           href: "/design-system",
           title: "Design system",
           icon: "fa fa-palette",
