@@ -63,14 +63,16 @@
       run an audit of this page and document your performance and acesebility
       findings.
     </p>
+    <form class="user-data">
+      <h2 class="base-margin-bottom">User Data</h2>
+      <JoInputField name="name" v-model="name" label="Name" />
+      <JoInputField name="email" v-model="email" label="Email" />
+      <JoInputField name="age" type="number" v-model="age" label="Age" />
+      <JoInputField name="phone" type="tel" v-model="phone" label="Phone" />
+      <JoButton iconLeft="fa-check" @click="handleSubmit"> Submit </JoButton>
+    </form>
   </div>
 </template>
-<style lang="scss" scoped>
-.container {
-  max-width: 1024px;
-  margin: 0 auto;
-}
-</style>
 <script>
 import api from "@/api";
 
@@ -78,12 +80,20 @@ export default {
   name: "QA",
   data() {
     return {
+      name: "",
+      email: "",
+      age: "",
+      phone: "",
       entities: [],
     };
   },
   methods: {
     clickEvent: function (id) {
       alert(id);
+    },
+    handleSubmit() {
+      // TODO
+      console.log("handle submit");
     },
   },
   created() {
@@ -93,3 +103,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.user-data {
+  margin-top: $base-spacing * 2;
+  padding: $base-spacing;
+  background: $josef-purple-pale;
+  border-radius: $base-border-radius;
+}
+</style>
