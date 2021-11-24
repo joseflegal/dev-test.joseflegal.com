@@ -18,7 +18,6 @@
   >
     <span class="is-accessibly-hidden">{{ title }}</span>
     <span :class="'fas ' + icon"></span>
-    <!-- <JoIcon :id="icon" :title="title" spacing="none" /> -->
   </button>
 </template>
 
