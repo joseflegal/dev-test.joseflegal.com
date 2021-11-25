@@ -1,4 +1,4 @@
-# Josef coding challenge
+``# Josef coding challenge
 
 Hello 👋 & welcome to the Josef coding challenge. We appreciate you taking the time to complete the assignment and we're excited about the prospect of you joining the team!
 
@@ -44,7 +44,7 @@ In `src/views/Rules.vue` you'll find a Vue.js view with deatiled instructions ab
 
 ### QA
 
-In `src/views/QA.vue` you'll find a Vue.js view that we want to you to test.
+In `src/views/QA.vue` you'll find a Vue.js view that we want to you to test 🧐.
 
 1. **API testing:** Using [Postman](https://www.postman.com/)(or a tool of your preference) test functionality of the REST API for the `entity` object. Validate listing, creating, editing and deleting objects.
 Additionlly, test a unuiqness requirenmnet for `entity.id` property. Objects can be accessed and modified using requests:
@@ -60,7 +60,7 @@ Additionlly, test a unuiqness requirenmnet for `entity.id` property. Objects can
 2. **e2e frontend testing:** Using [Cypress](https://www.cypress.io/)(or a tool of your preference) test form submission on the QA page.
 3. **Extra credit:** Using [Lighthouse](https://developers.google.com/web/tools/lighthouse) run an audit of the QA page and document your performance and acesebility findings.
 
-When done, save required files in the _tests/_ forlder and add intructions to the _README.md_.
+When done, save required files in the _tests/_ forlder and add intructions to the _README.md_ 📝.
 
 ## Getting the project running
 
