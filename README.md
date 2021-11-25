@@ -47,9 +47,7 @@ In `src/views/Rules.vue` you'll find a Vue.js view with deatiled instructions ab
 In `src/views/QA.vue` you'll find a Vue.js view that we want to you to test.
 
 1. **API testing:** Using [Postman](https://www.postman.com/)(or a tool of your preference) test functionality of the REST API for the `entity` object. Validate listing, creating, editing and deleting objects.
-Additionlly, test a unuiqness requirenmnet for `entity.id` property.
-
-Objects can be accessed and modified using requests:
+Additionlly, test a unuiqness requirenmnet for `entity.id` property. Objects can be accessed and modified using requests:
 
 ```
   GET    http://localhost:3000/entities  
@@ -60,12 +58,9 @@ Objects can be accessed and modified using requests:
 ```
 
 2. **e2e frontend testing:** Using [Cypress](https://www.cypress.io/)(or a tool of your preference) test form submission on the QA page.
+3. **Extra credit:** Using [Lighthouse](https://developers.google.com/web/tools/lighthouse) run an audit of the QA page and document your performance and acesebility findings.
 
 When done, save required files in the _tests/_ forlder and add intructions to the _README.md_.
-
-#### Extra credit
-
-1. Using [Lighthouse](https://developers.google.com/web/tools/lighthouse) run an audit of the QA page and document your performance and acesebility findings.
 
 ## Getting the project running
 
