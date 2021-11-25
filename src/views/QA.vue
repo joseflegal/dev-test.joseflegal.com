@@ -3,7 +3,7 @@
     <h1>QA</h1>
 
     <p>
-      Josef provides most of our services via the web. To run web applications,
+      Josef provides most of its services via the web. To run web applications,
       we use backend and frontend services. With scale, quality assurance and automated
       testing become key strategies to keep all the critical functionality
       running without regressions.
