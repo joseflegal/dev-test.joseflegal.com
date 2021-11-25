@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>QA</h1>
-    <h2>Problem</h2>
+  
     <p>
       Josef provides most of the services via web. To run web applications we
       use backend and frontend services. With scale, quality assurance and
@@ -16,61 +16,30 @@
       to emulate REST API and
       <a href="https://vuejs.org/" title="Vue.js">Vue.js</a> for frontend.
     </p>
+    <h3>API example</h3>
     <p>
-      For example
-      <strong><em>GET http://localhost:3000/entites</em></strong> returns:
+      <em>GET http://localhost:3000/entites</em> returns:
     </p>
     <ul class="entities">
+    <code>[
       <li v-for="entity in entities" v-bind:key="entity.id">
         { "id" : {{ entity.id }}, "property" : "{{ entity.property }}"}
       </li>
+      ]</code>
     </ul>
-    <h2>Task</h2>
-    <h3>API testing</h3>
-    <p>
-      Using <a href="https://www.postman.com/">Postman</a>(or a tool of your
-      preference) test functionality of the REST API for the
-      <code>entity</code> object. Validate listing, creating, editing and
-      deleting objects.
-      <br />
-      Additionlly, test a unuiqness requirenmnet for
-      <code>entity.id</code> property.
-      <br />
-      Objects can be accessed and modified using requests:
+  
+    <h3>Form example</h3>
+    <p v-if="submited">
+      Form submited: 
+      <strong>{{name}}</strong>({{email}}), age of {{age}}, tel: {{phone}} ✅
     </p>
-    <pre><code>
-  GET    http://localhost:3000/entities  
-  GET    http://localhost:3000/entities/[id] 
-  POST   http://localhost:3000/entities  
-  PUT    http://localhost:3000/entities/[id] 
-  DELETE http://localhost:3000/entities/[id] 
-
-</code></pre>
-
-    <h3>e2e frontend testing</h3>
-    <p>
-      Using <a href="https://www.cypress.io/">Cypress</a>(or a tool of your
-      preference) navigate to this page and validate that all entities are
-      listed inside <code>.entities</code>container
-    </p>
-
-    <h3>Bonus: Manual performance and accesisbility testing</h3>
-    <p>
-      Using
-      <a href="https://developers.google.com/web/tools/lighthouse"
-        >Lighthouse</a
-      >
-      run an audit of this page and document your performance and acesebility
-      findings.
-    </p>
-    <form class="user-data">
-      <h2 class="base-margin-bottom">User Data</h2>
-      <JoInputField name="name" v-model="name" label="Name" />
-      <JoInputField name="email" v-model="email" label="Email" />
-      <JoInputField name="age" type="number" v-model="age" label="Age" />
-      <JoInputField name="phone" type="tel" v-model="phone" label="Phone" />
-      <JoButton iconLeft="fa-check" @click="handleSubmit"> Submit </JoButton>
-    </form>
+    <form v-else class="user-data" @submit.prevent="handleSubmit">
+      <JoInputField required name="name" v-model="name" label="Name" />
+      <JoInputField required name="email" type="email" v-model="email" label="Email" />
+      <JoInputField required name="age" type="number" v-model="age" label="Age" />
+      <JoInputField required name="phone" type="tel" v-model="phone" label="Phone" />
+      <JoButton type="submit" iconLeft="fa-check" > Submit </JoButton>
+    </form>    
   </div>
 </template>
 <script>
@@ -84,15 +53,15 @@ export default {
       email: "",
       age: "",
       phone: "",
+      submited: false,
       entities: [],
     };
   },
   methods: {
-    clickEvent: function (id) {
-      alert(id);
-    },
+   
     handleSubmit() {
-      // TODO
+      console.log(this.submited);
+      this.submited = true;
       console.log("handle submit");
     },
   },
@@ -109,7 +78,9 @@ export default {
   max-width: 1024px;
   margin: 0 auto;
 }
-
+h3{
+  margin-top: 3rem;
+}
 .user-data {
   margin-top: $base-spacing * 2;
   padding: $base-spacing;

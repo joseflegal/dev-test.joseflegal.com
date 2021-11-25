@@ -66,10 +66,6 @@ export default {
   },
   methods: {
     handleClick(e) {
-      this.$ga_event({
-        eventCategory: "Interaction",
-        eventAction: this.title + " icon button clicked",
-      });
       this.$listeners.click(e);
     },
   },

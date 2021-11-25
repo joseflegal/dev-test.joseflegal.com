@@ -35,6 +35,7 @@
         :name="name"
         :autocomplete="autocomplete"
         :readonly="readonly"
+        :required="required"
         v-model="model"
         @input="handleUpdate"
         @focus="handleFocus"
@@ -74,6 +75,11 @@ export default {
     },
     value: {
       type: [String, Number, Date],
+    },
+    required: {
+      type: String,
+      default: "",
+      required: false,
     },
     label: {
       type: String,

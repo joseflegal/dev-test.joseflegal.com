@@ -37,10 +37,35 @@ In `src/views/Rules.vue` you'll find a Vue.js view with deatiled instructions ab
 
 2. Try your best to implement the task in an eficient and elegant way.
 
-### Extra credit
+#### Extra credit
 
 1. The data is currently being managed locally in `src/views/Layout.vue` and `src/views/Rules.vue`, migrate it to a [vuex module](https://vuex.vuejs.org/guide/modules.html) in `src/store`. _See example in `src/store/user`._
 2. Write some unit tests for your challenge in `/tests/unit`.
+
+### QA
+
+In `src/views/QA.vue` you'll find a Vue.js view that we want to you to test.
+
+1. **API testing:** Using [Postman](https://www.postman.com/)(or a tool of your preference) test functionality of the REST API for the `entity` object. Validate listing, creating, editing and deleting objects.
+Additionlly, test a unuiqness requirenmnet for `entity.id` property.
+
+Objects can be accessed and modified using requests:
+
+```
+  GET    http://localhost:3000/entities  
+  GET    http://localhost:3000/entities/[id] 
+  POST   http://localhost:3000/entities  
+  PUT    http://localhost:3000/entities/[id] 
+  DELETE http://localhost:3000/entities/[id] 
+```
+
+2. **e2e frontend testing:** Using [Cypress](https://www.cypress.io/)(or a tool of your preference) test form submission on the QA page.
+
+When done, save required files in the _tests/_ forlder and add intructions to the _README.md_.
+
+#### Extra credit
+
+1. Using [Lighthouse](https://developers.google.com/web/tools/lighthouse) run an audit of the QA page and document your performance and acesebility findings.
 
 ## Getting the project running
 
@@ -52,6 +77,7 @@ git clone https://github.com/...
 cd dev-test.joseflegal.com
 
 # Install dependencies
+nvm install
 npm install
 
 # Start development server
