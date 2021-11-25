@@ -3,18 +3,18 @@
     <h1>QA</h1>
   
     <p>
-      Josef provides most of the services via web. To run web applications we
+      Josef provides most of the services via the web. To run web applications, we
       use backend and frontend services. With scale, quality assurance and
-      testing become key strategies to keep all the critical functinality
+      testing become key strategies to keep all the critical functionality
       running without regressions.
     </p>
     <p>
-      For this task we use
+      For this task, we use
       <a href="https://github.com/typicode/json-server" title="json-server"
         >json-server</a
       >
       to emulate REST API and
-      <a href="https://vuejs.org/" title="Vue.js">Vue.js</a> for frontend.
+      <a href="https://vuejs.org/" title="Vue.js">Vue.js</a> for the frontend.
     </p>
     <h3>API example</h3>
     <p>
