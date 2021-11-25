@@ -60,7 +60,8 @@ Additionally, test a uniqueness requirement for `entity.id` property. Objects ca
 2. **e2e frontend testing:** Using [Cypress](https://www.cypress.io/)(or a tool of your preference) test form submission on the QA page.
 3. **Extra credit:** Using [Lighthouse](https://developers.google.com/web/tools/lighthouse) run an audit of the QA page and document your performance and acesebility findings.
 
-When done, save required files in the `tests/` folder and add instructions to the `README.md` 📝.
+When done, save required files in the `tests/` folder and add instructions to the `README.md` 📝. 
+ - Be sure and include as much information as you can about how you are testing and what future tools improvements you might add going forward.
 
 ## Getting the project running
 
