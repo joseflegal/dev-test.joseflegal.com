@@ -18,7 +18,6 @@
   >
     <span class="is-accessibly-hidden">{{ title }}</span>
     <span :class="'fas ' + icon"></span>
-    <!-- <JoIcon :id="icon" :title="title" spacing="none" /> -->
   </button>
 </template>
 
@@ -67,10 +66,6 @@ export default {
   },
   methods: {
     handleClick(e) {
-      this.$ga_event({
-        eventCategory: "Interaction",
-        eventAction: this.title + " icon button clicked",
-      });
       this.$listeners.click(e);
     },
   },

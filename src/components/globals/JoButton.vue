@@ -78,11 +78,6 @@ export default {
   },
   methods: {
     handleClick(e) {
-      const eventAction = this.$slots.default[0] && this.$slots.default[0].text;
-      this.$ga_event({
-        eventCategory: "Interaction",
-        eventAction: eventAction ? `${eventAction} clicked` : "Button clicked",
-      });
       if (this.$listeners.click) {
         this.$listeners.click(e);
       }

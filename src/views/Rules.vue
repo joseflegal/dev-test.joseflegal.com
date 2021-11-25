@@ -17,7 +17,7 @@
       <strong>A</strong>, there is no need to ask them question
       <strong>B</strong> and question <strong>C</strong> is asked straight away.
     </p>
-    <h2>Implmentation</h2>
+    <h2>Implementation</h2>
     <img src="https://www.dropbox.com/s/efw0tf9ymnrk7ii/graph.png?dl=1" />
     <p>
       To implement this logic, we use a
@@ -96,7 +96,7 @@ img {
 import api from "@/api";
 
 export default {
-  name: "Layout",
+  name: "Rules",
   data() {
     return {
       rule_groups: false,

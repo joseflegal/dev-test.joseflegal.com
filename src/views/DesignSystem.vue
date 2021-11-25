@@ -126,8 +126,57 @@
     <JoCircleButton disabled icon="fa-user" title="User" variant="light" />
     <JoCircleButton disabled icon="fa-trash" title="Trash" variant="white" />
     <JoCircleButton disabled icon="fa-cut" title="Cut" variant="light" />
+
+    <h2>Inputs</h2>
+
+    <JoInputField
+      name="name"
+      label="Name"
+      v-model="name"
+      placeholder="Enter your name"
+      width="50%"
+    />
+    <JoInputField
+      name="number"
+      label="Number"
+      type="number"
+      v-model="number"
+      placeholder="Enter a number"
+      width="50%"
+    />
+
+    <JoInputField
+      name="username"
+      label="Username"
+      v-model="username"
+      icon="fa-user"
+      placeholder="Enter your username"
+      width="50%"
+    />
+
+    <JoInputField
+      name="disabled"
+      label="Disabled"
+      v-model="disabled"
+      disabled
+      placeholder="Enter a number"
+      width="50%"
+    />
   </div>
 </template>
+<script>
+export default {
+  name: "DesignSystem",
+  data() {
+    return {
+      name: "",
+      number: "",
+      username: "",
+      disabled: "this input is disbled",
+    };
+  },
+};
+</script>
 <style lang="scss" scoped>
 .design-system {
   h2,
