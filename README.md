@@ -1,4 +1,4 @@
-``# Josef coding challenge
+# Josef coding challenge
 
 Hello 👋 & welcome to the Josef coding challenge. We appreciate you taking the time to complete the assignment and we're excited about the prospect of you joining the team!
 
@@ -44,7 +44,7 @@ In `src/views/Rules.vue` you'll find a Vue.js view with deatiled instructions ab
 
 ### QA
 
-In `src/views/QA.vue` you'll find a Vue.js view that we want to you to test 🧐.
+In `src/views/QA.vue` you'll find a Vue.js view that we want you to test 🧐.
 
 1. **API testing:** Using [Postman](https://www.postman.com/)(or a tool of your preference) test functionality of the REST API for the `entity` object. Validate listing, creating, editing and deleting objects.
 Additionlly, test a unuiqness requirenmnet for `entity.id` property. Objects can be accessed and modified using requests:
