@@ -16,10 +16,14 @@
 
           <hr class="my-4" />
 
-          <b-button @click="previous" variant="primary" href="#"
-            >Previous</b-button
-          >
-          <b-button @click="next" variant="success" href="#">Next</b-button>
+          <div class="label-align">
+            <b-button @click="previous" variant="outline-primary" href="#"
+              >Previous</b-button
+            >
+            <b-button @click="next" variant="outline-primary" href="#"
+              >Next</b-button
+            >
+          </div>
         </b-jumbotron>
       </div>
     </b-jumbotron>

@@ -1,14 +1,18 @@
 <template>
   <div class="container">
-    <h1>A collection of Animals</h1>
-    <div>
-      <Kitten
-        v-if="files.length"
-        :nameOfFile="files[index]"
-        :next="next"
-        :previous="previous"
-      />
-    </div>
+    <b-container class="bv-example-row">
+      <b-row>
+        <b-col sm="6" offset="3">
+          <h1>A collection of Animals</h1>
+          <Kitten
+            v-if="files.length"
+            :nameOfFile="files[index]"
+            :next="next"
+            :previous="previous"
+          />
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
