@@ -1,17 +1,14 @@
 <template>
   <div class="container">
-    <h1>Vue.js layout</h1>
-    <!-- Render the files data with a resuable component (a list or card up to you!) -->
-    <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array 
-      <code>
-        <Kitten 
-        :nameOfFile="files[index]" 
+    <h1>A collection of Animals</h1>
+    <div>
+      <Kitten
+        v-if="files.length"
+        :nameOfFile="files[index]"
         :next="next"
         :previous="previous"
-        />
-  
-      </code>
-    </pre>
+      />
+    </div>
   </div>
 </template>
 

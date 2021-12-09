@@ -1,6 +1,6 @@
 <template>
   <div class="kitten-box-container">
-    <b-jumbotron header="A collection of Animals">
+    <b-jumbotron>
       <div>
         <b-jumbotron>
           <template #lead>
