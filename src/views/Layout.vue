@@ -1,32 +1,22 @@
 <template>
-  <div class="container">
-    <b-container class="bv-example-row">
-      <b-row>
-        <b-col sm="6" offset="3">
-          <h1>A collection of Animals</h1>
-          <Kitten
-            v-if="files.length"
-            :nameOfFile="files[index]"
-            :next="next"
-            :previous="previous"
-          />
-        </b-col>
-      </b-row>
-    </b-container>
+  <div class="main-container">
+    <h1>Pictures of things I like...</h1>
+    <Kitten
+      v-if="files.length"
+      :nameOfFile="files[index]"
+      :next="next"
+      :previous="previous"
+    />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.container {
-  max-width: 1024px;
-  margin: 0 auto;
+h1 {
+  font-family: $heading-font-family;
+  text-align: center;
 }
-pre,
-code {
-  overflow-x: auto;
-  white-space: pre-wrap;
-  white-space: pre-wrap;
-  line-break: anywhere;
+.main-container {
+  margin: 0 auto;
 }
 </style>
 
