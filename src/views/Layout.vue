@@ -7,6 +7,20 @@
       :next="next"
       :previous="previous"
     />
+    <div>
+      <p>
+        Search for a picture with a tag.
+        <br />
+        <em> eg. Kitten </em>
+      </p>
+      <div>
+        <!-- <div v-if="state === 'edit'"> -->
+        <input v-model="newTag" placeholder="Search" />
+        <p>{{ tagsCount }}</p>
+        <input type="Submit" />
+      </div>
+      <TagsFilter />
+    </div>
   </div>
 </template>
 
@@ -24,17 +38,20 @@ h1 {
 // @ is an alias to /src
 import api from "@/api";
 import Kitten from "./Kitten.vue";
+import TagsFilter from "./TagsFilter.vue";
 
 export default {
   name: "Layout",
   components: {
     Kitten,
+    TagsFilter,
   },
 
   data() {
     return {
       files: [],
       index: 0,
+      newTag: "",
     };
   },
   methods: {
@@ -43,6 +60,17 @@ export default {
     },
     previous() {
       this.index--;
+    },
+    // saveTag: function () {
+    //   this.tag.push({
+    //     label: this.newTag,
+    //   });
+    //   this.newTag = "";
+    // },
+  },
+  computed: {
+    tagsCount() {
+      return this.newTag.length;
     },
   },
   created() {
