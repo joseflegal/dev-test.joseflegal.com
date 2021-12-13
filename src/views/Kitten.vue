@@ -28,6 +28,7 @@
       >
         Next
       </button>
+      <p>{{ nameOfFile.tags }}</p>
     </div>
   </div>
 </template>

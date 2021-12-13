@@ -18,6 +18,7 @@
         <input v-model="newTag" placeholder="Search" />
         <p>{{ tagsCount }}</p>
         <input type="Submit" />
+        <p>Are you searching for {{ newTag }} ?</p>
       </div>
       <TagsFilter />
     </div>
@@ -52,8 +53,14 @@ export default {
       files: [],
       index: 0,
       newTag: "",
+      tags: [
+        {
+          tag: "Kitten",
+        },
+      ],
     };
   },
+
   methods: {
     next() {
       this.index++;
@@ -61,6 +68,7 @@ export default {
     previous() {
       this.index--;
     },
+    
     // saveTag: function () {
     //   this.tag.push({
     //     label: this.newTag,
@@ -68,10 +76,14 @@ export default {
     //   this.newTag = "";
     // },
   },
+
   computed: {
     tagsCount() {
       return this.newTag.length;
     },
+    // reversedItems() {
+    //   return this.slice(0).reverse();
+    // },
   },
   created() {
     api.files.get().then((res) => {
