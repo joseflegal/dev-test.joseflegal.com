@@ -1,0 +1,1341 @@
+{
+	"info": {
+		"_postman_id": "9321926e-30fb-4047-adc7-ecb11ae05295",
+		"name": "JosefLegal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create an Entity",
+			"item": [
+				{
+					"name": "Create entity -  empty body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response and object properties\", () => {\r",
+									"  pm.expect(responseJson).to.be.an(\"object\").that.has.all.keys('id');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test id\", () => {\r",
+									"  pm.expect(responseJson.id).to.be.a(\"number\");\r",
+									"});\r",
+									"\r",
+									"pm.globals.set(\"entity_1\", responseJson.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/entities/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create entity - one key - no id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response and object keys\", () => {\r",
+									"  pm.expect(responseJson).to.be.an(\"object\").that.has.all.keys('id', 'parameter');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test id data type\", () => {\r",
+									"  pm.expect(responseJson.id).to.be.a(\"number\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test property value\", () => {\r",
+									"  pm.expect(responseJson.parameter).to.be.equal(\"param\")\r",
+									"});\r",
+									"\r",
+									"pm.globals.set(\"entity_2\", responseJson.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"parameter\": \"param\" \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/entities/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create entity - multiple keys including id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response and object properties\", () => {\r",
+									"  pm.expect(responseJson).to.be.an(\"object\").that.has.all.keys('id', 'string', 'float', 'int', 'boolean', 'array', 'object', 'null');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test id value\", () => {\r",
+									"  pm.expect(responseJson.id).to.be.equal(100);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test string value\", () => {\r",
+									"  pm.expect(responseJson.string).to.be.equal(\"Ana\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test float value\", () => {\r",
+									"  pm.expect(responseJson.float).to.be.equal(2.3)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test int value\", () => {\r",
+									"  pm.expect(responseJson.int).to.be.equal(10)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test boolean value\", () => {\r",
+									"  pm.expect(responseJson.boolean).to.be.equal(true)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test array value\", () => {\r",
+									"  pm.expect(responseJson.array).to.have.members([1, \"Ana\", false]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test object value\", () => {\r",
+									"  pm.expect(responseJson.object).to.deep.include({\r",
+									"        \"1\": \"one\", \r",
+									"        \"2\": \"two\"\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test null value\", () => {\r",
+									"  pm.expect(responseJson.null).to.be.null;\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 100,\r\n    \"string\": \"Ana\" ,\r\n    \"float\": 2.3,\r\n    \"int\":10,\r\n    \"boolean\": true,\r\n    \"array\": [1, \"Ana\", false],\r\n    \"object\": {\"1\": \"one\", \"2\": \"two\"},\r\n    \"null\": null\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/entities/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ids should be unique",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"  pm.response.to.have.status(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/entities/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cannot create multiple entities at once - inconsistent behavior",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// wrong behavior - cannot create multiple entities at once. it sees it as a single object with no id attached in the response received => inconsistency\r",
+									"\r",
+									"const responseArray = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"  pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"  pm.expect(responseArray).to.be.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Returned Entities list not to be empty\", function (){\r",
+									"  pm.expect(responseArray).not.to.be.empty;\r",
+									"});\r",
+									"\r",
+									"// SUGGESTED BEHAVIOR\r",
+									"// pm.test(\"Returned Entities list include Entity 1\", function (){\r",
+									"//   pm.expect(responseArray).to.deep.include({\r",
+									"//         \"id\": 10,\r",
+									"//         \"string\": \"2.3\" \r",
+									"//     });\r",
+									"// });\r",
+									"\r",
+									"// pm.test(\"Returned Entities list include Entity 2\", function (){\r",
+									"//   pm.expect(responseArray).to.deep.include( {\r",
+									"//         \"id\": 11,\r",
+									"//         \"float\": 2.3,\r",
+									"//         \"boolean\": true,\r",
+									"//         \"array\": [\r",
+									"//             1,\r",
+									"//             \"Ana\",\r",
+									"//             false\r",
+									"//         ],\r",
+									"//         \"json\": {\r",
+									"//             \"1\": \"one\",\r",
+									"//             \"2\": \"two\"\r",
+									"//         }\r",
+									"//     });\r",
+									"// });\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\": 10,\r\n        \"string\": \"2.3\" \r\n    },\r\n    {\r\n        \"float\": 2.3,\r\n        \"boolean\": true,\r\n        \"array\": [1, \"Ana\", false],\r\n        \"json\": {\"1\": \"one\", \"2\": \"two\"}\r\n    }\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/entities/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get One Entity",
+			"item": [
+				{
+					"name": "Get Existing Entity - entity_1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response and object properties\", () => {\r",
+									"  pm.expect(responseJson).to.be.an(\"object\").that.has.all.keys('id');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test id\", () => {\r",
+									"  pm.expect(responseJson.id).to.be.a(\"number\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/entities/{{entity_1}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"{{entity_1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Existing Entity - entity_2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response and object keys\", () => {\r",
+									"  pm.expect(responseJson).to.be.an(\"object\").that.has.all.keys('id', 'parameter');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test id data type\", () => {\r",
+									"  pm.expect(responseJson.id).to.be.a(\"number\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test property value\", () => {\r",
+									"  pm.expect(responseJson.parameter).to.be.equal(\"param\")\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/entities/{{entity_2}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"{{entity_2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Existing Entity - entity_3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response and object properties\", () => {\r",
+									"  pm.expect(responseJson).to.be.an(\"object\").that.has.all.keys('id', 'string', 'float', 'int', 'boolean', 'array', 'object', 'null');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test id value\", () => {\r",
+									"  pm.expect(responseJson.id).to.be.equal(100);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test string value\", () => {\r",
+									"  pm.expect(responseJson.string).to.be.equal(\"Ana\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test float value\", () => {\r",
+									"  pm.expect(responseJson.float).to.be.equal(2.3)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test int value\", () => {\r",
+									"  pm.expect(responseJson.int).to.be.equal(10)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test boolean value\", () => {\r",
+									"  pm.expect(responseJson.boolean).to.be.equal(true)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test array value\", () => {\r",
+									"  pm.expect(responseJson.array).to.have.members([1, \"Ana\", false]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test object value\", () => {\r",
+									"  pm.expect(responseJson.object).to.deep.include({\r",
+									"        \"1\": \"one\", \r",
+									"        \"2\": \"two\"\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test null value\", () => {\r",
+									"  pm.expect(responseJson.null).to.be.null;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/entities/{{entity_3}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"{{entity_3}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Non-Existing Entity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Returned response is object with no properties\", function (){\r",
+									"  pm.expect(responseJson).to.deep.include({});\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/entities/10000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"10000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "id - String",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Returned response is object with no properties\", function (){\r",
+									"  pm.expect(responseJson).to.deep.include({});\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/entities/abc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"abc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get All Entities",
+			"item": [
+				{
+					"name": "Get All Entities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseArray = pm.response.json();\r",
+									"\r",
+									"let entities_ids = [];\r",
+									"for (let i = 0; i < responseArray.length; i++) {\r",
+									"  entities_ids[i] = responseArray[i].id;\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"  pm.expect(responseArray).to.be.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Returned Entities list not to be empty\", function (){\r",
+									"  pm.expect(responseArray).not.to.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Returned Entities list include Entity 1\", function (){\r",
+									"  pm.expect(responseArray).to.deep.include({\r",
+									"        \"id\": 1,\r",
+									"        \"property\": \"foo\"\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Returned Entities list include Entity 2\", function (){\r",
+									"  pm.expect(responseArray).to.deep.include( {\r",
+									"        \"id\": 2,\r",
+									"        \"property\": \"bar\"\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Returned ids should contain newly created entities from the test suite\", function (){\r",
+									"  pm.expect(entities_ids).to.include(1)\r",
+									"  pm.expect(entities_ids).to.include(2)\r",
+									"  pm.expect(entities_ids).to.include(pm.globals.get(\"entity_1\"))\r",
+									"  pm.expect(entities_ids).to.include(pm.globals.get(\"entity_2\"))\r",
+									"  pm.expect(entities_ids).to.include(pm.globals.get(\"entity_3\"))\r",
+									"  // pm.expect(entities_ids).to.include(pm.globals.get(\"10\")) expected but failing\r",
+									"  // pm.expect(entities_ids).to.include(pm.globals.get(\"11\")) expected but failing\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/entities/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Edit an Entity",
+			"item": [
+				{
+					"name": "Edit an Entity - no parameters modified",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response and object properties\", () => {\r",
+									"  pm.expect(responseJson).to.be.an(\"object\").that.has.all.keys('id', 'string', 'float', 'int', 'boolean', 'array', 'object', 'null');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test id value\", () => {\r",
+									"  pm.expect(responseJson.id).to.be.equal(pm.globals.get(\"entity_3\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test string value\", () => {\r",
+									"  pm.expect(responseJson.string).to.be.equal(\"Ana\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test float value\", () => {\r",
+									"  pm.expect(responseJson.float).to.be.equal(2.3)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test int value\", () => {\r",
+									"  pm.expect(responseJson.int).to.be.equal(10)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test boolean value\", () => {\r",
+									"  pm.expect(responseJson.boolean).to.be.equal(true)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test array value\", () => {\r",
+									"  pm.expect(responseJson.array).to.have.members([1, \"Ana\", false]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test object value\", () => {\r",
+									"  pm.expect(responseJson.object).to.deep.include({\r",
+									"        \"1\": \"one\", \r",
+									"        \"2\": \"two\"\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test null value\", () => {\r",
+									"  pm.expect(responseJson.null).to.be.null;\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/entities/{{entity_3}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"{{entity_3}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit an Entity - some parameters modified Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response and object properties\", () => {\r",
+									"  pm.expect(responseJson).to.be.an(\"object\").that.has.all.keys('id', 'string', 'float', 'int', 'boolean', 'array', 'object', 'null', 'new_parameter');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test id value\", () => {\r",
+									"    pm.expect(responseJson.id).to.be.equal(pm.globals.get(\"entity_3\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test string value\", () => {\r",
+									"  pm.expect(responseJson.string).to.be.equal(\"Ana Maria\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test float value\", () => {\r",
+									"  pm.expect(responseJson.float).to.be.equal(5.2)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test int value\", () => {\r",
+									"  pm.expect(responseJson.int).to.be.equal(10)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test boolean value\", () => {\r",
+									"  pm.expect(responseJson.boolean).to.be.equal(true)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test array value\", () => {\r",
+									"  pm.expect(responseJson.array).to.have.members([1, \"Ana\", false]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test object value\", () => {\r",
+									"  pm.expect(responseJson.object).to.deep.include({\r",
+									"        \"1\": \"one\", \r",
+									"        \"2\": \"two\"\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test null value\", () => {\r",
+									"  pm.expect(responseJson.null).to.be.null;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test new_parameter value\", () => {\r",
+									"  pm.expect(responseJson.new_parameter).to.be.equal(\"NEW PARAM\")\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"string\": \"Ana Maria\" ,\r\n    \"float\": 5.2,\r\n    \"new_parameter\": \"NEW PARAM\"\r\n}\r\n\r\n\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/entities/{{entity_3}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"{{entity_3}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit an Entity - all parameters modified",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response and object properties\", () => {\r",
+									"  pm.expect(responseJson).to.be.an(\"object\").that.has.all.keys('id', 'string', 'float', 'int', 'boolean', 'array', 'object', 'null', 'new_parameter');\r",
+									"});\r",
+									"\r",
+									"// you cannot modify id value\r",
+									"pm.test(\"Test id value\", () => {\r",
+									"    pm.expect(responseJson.id).to.be.equal(pm.globals.get(\"entity_3\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test string value\", () => {\r",
+									"  pm.expect(responseJson.string).to.be.equal(\"Maria\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test float value\", () => {\r",
+									"  pm.expect(responseJson.float).to.be.equal(10.5)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test int value\", () => {\r",
+									"  pm.expect(responseJson.int).to.be.equal(20)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test boolean value\", () => {\r",
+									"  pm.expect(responseJson.boolean).to.be.equal(false)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test array value\", () => {\r",
+									"  pm.expect(responseJson.array).to.have.members([2, \"Ana\", true]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test object value\", () => {\r",
+									"  pm.expect(responseJson.object).to.deep.include({\r",
+									"        \"3\": \"three\", \r",
+									"        \"2\": \"two\"\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test null value\", () => {\r",
+									"  pm.expect(responseJson.null).to.be.equal(\"not null\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test new_parameter value\", () => {\r",
+									"  pm.expect(responseJson.new_parameter).to.be.equal(\"NEW PARAM\")\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 30,\r\n    \"string\": \"Maria\" ,\r\n    \"float\": 10.5,\r\n    \"int\":20,\r\n    \"boolean\": false,\r\n    \"array\": [2, \"Ana\", true],\r\n    \"object\": {\"3\": \"three\", \"2\": \"two\"},\r\n    \"null\": \"not null\",\r\n    \"new_parameter\": \"NEW PARAM\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/entities/{{entity_3}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"{{entity_3}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete an Entity",
+			"item": [
+				{
+					"name": "Delete entity_1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"  pm.expect(responseJson).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Returned Response => {}\", function (){\r",
+									"  pm.expect(responseJson).to.deep.include( {});\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/entities/{{entity_1}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"{{entity_1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete entity_2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"  pm.expect(responseJson).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Returned Response => {}\", function (){\r",
+									"  pm.expect(responseJson).to.deep.include( {});\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/entities/{{entity_2}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"{{entity_2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete entity_3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"  pm.expect(responseJson).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Returned Response => {}\", function (){\r",
+									"  pm.expect(responseJson).to.deep.include( {});\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/entities/{{entity_3}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"{{entity_3}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Object created from multiple entities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test data type of the response\", () => {\r",
+									"  pm.expect(responseJson).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Returned Response => {}\", function (){\r",
+									"  pm.expect(responseJson).to.deep.include( {});\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"entity_4\", pm.globals.get(\"entity_3\") + 1);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/entities/{{entity_4}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"{{entity_4}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Non-Existing Entity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Returned response is object with no properties\", function (){\r",
+									"  pm.expect(responseJson).to.deep.include({});\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/entities/10000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"10000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "id - String Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response time is less than 600ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"  pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Returned response is object with no properties\", function (){\r",
+									"  pm.expect(responseJson).to.deep.include({});\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/entities/abc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"entities",
+								"abc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
