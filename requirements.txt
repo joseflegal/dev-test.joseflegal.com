@@ -1,2 +1,5 @@
 pytest
 playwright
+yapf
+flake8
+isort
