@@ -1,26 +1,22 @@
 # Tests folder structure
-e2e - folder containing End To End Tests for the frontend task, a Postman Collection for the backend task and a Lighthouse audit
-pom - Page Object Model Folder
-    locators - folder containg Web Elements Locators from different pages
-    pages - folder containg classes for each page e.g - QAForm, RulesEngine, VueLayout, DesignSystem. Each page has methods 
-            that interact with specific elements of the page
+```
+    e2e - folder containing End-To-End Tests for the frontend task, a Postman Collection for the backend task and a Lighthouse audit
+    pom - Page Object Model Folder
+            locators - folder containing Web Elements Locators from different pages
+            pages - folder containing classes for each page e.g - QAForm, RulesEngine, VueLayout, DesignSystem. Each page has methods that interact with specific elements of the page
+```
 
 ## Framework documentation
-Design Pattern - Page Object Model
-Programming Language - python
-Browser automation - playwright
-Formatting - yapf (default style - pep8)
-Sorting imports - isort
-Future improvements 
-  - use a library for reporting
-  - use a library to manage test data
-  - Dockerfile - containerization
-  - Jenkins
+- Design Pattern - Page Object Model
+- Programming Language - python
+- Browser automation - playwright
+- Formatting - yapf (default style - pep8)
+- Sorting imports - isort
+- Future improvements: use a library for reporting, use a library to manage test data, Dockerfile - containerization, Jenkins
 
 ## Getting the project running
-1. Backend Task: get the API collection from tests/e2e/JosefLegal.postman_collection.json and import it in Postman.
-    After the collection is successfully imported, open a New Runner Tab, select the collection and run it. 
-2. FrontEnd Task: Pre-Requisite - python installed
+- Backend Task: get the API collection from tests/e2e/JosefLegal.postman_collection.json and import it in Postman. After the collection is successfully imported, open a New Runner Tab, select the collection and run it. 
+- FrontEnd Task: Pre-Requisite - python installed
 
 ```bash
 
@@ -35,9 +31,10 @@ playwright install
 pytest tests
 
 ```
-3. Lighthouse audit: tests/e2e/Lighthouse
+- Lighthouse audit: tests/e2e/Lighthouse
 
 ## Bugs and improvements suggestions:
+```
 Backend: User should be able to send multiple entities at once
     POST http://localhost:3000/entities/
             [
@@ -97,4 +94,4 @@ Backend: User should be able to send multiple entities at once
                 ]
     FrontEnd: User should not be able to introduce ages like -10, 200 - an error message should appear. User should mot 
     be able to introduce phone number like "alosihxoa", "0" - an error message should appear.
-        
+``` 
