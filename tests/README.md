@@ -1,9 +1,10 @@
-# Tests folder structure
+## Tests folder structure
 ```
     e2e - folder containing End-To-End Tests for the frontend task, a Postman Collection for the backend task and a Lighthouse audit
     pom - Page Object Model Folder
             locators - folder containing Web Elements Locators from different pages
             pages - folder containing classes for each page e.g - QAForm, RulesEngine, VueLayout, DesignSystem. Each page has methods that interact with specific elements of the page
+    conftest.py - file containing test fixtures
 ```
 
 ## Framework documentation
@@ -32,6 +33,16 @@ pytest tests
 
 ```
 - Lighthouse audit: tests/e2e/Lighthouse
+
+## Scripts
+
+| Script                              | Description                                 |
+|-------------------------------------|---------------------------------------------|
+| `pytest tests`                      | Run your end-to-end tests                   |
+| `yapf --in-place --recursive tests` | Formats your code, default style pep8       |
+| `isort tests`                       | Sorts your imports alphabetically           |
+| `flake8 tests`                      | Shows errors and warnings that violate pep8 | 
+
 
 ## Bugs and improvements suggestions:
 ```
@@ -92,6 +103,6 @@ Backend: User should be able to send multiple entities at once
                         "json": {"1": "one", "2": "two"}
                     }
                 ]
-    FrontEnd: User should not be able to introduce ages like -10, 200 - an error message should appear. User should mot 
+    FrontEnd: User should not be able to introduce ages like -10, 200 - an error message should appear. User should not 
     be able to introduce phone number like "alosihxoa", "0" - an error message should appear.
 ``` 
