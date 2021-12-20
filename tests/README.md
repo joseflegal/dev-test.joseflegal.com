@@ -8,8 +8,9 @@
 ```
 
 ## Framework documentation
-- Design Pattern - Page Object Model
 - Programming Language - python
+- Design Pattern - Page Object Model
+- Test Runner - pytest
 - Browser automation - playwright
 - Formatting - yapf (default style - pep8)
 - Sorting imports - isort
