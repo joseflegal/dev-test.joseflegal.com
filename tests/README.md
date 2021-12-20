@@ -33,7 +33,7 @@ playwright install
 pytest tests
 
 ```
-- Lighthouse audit: tests/e2e/Lighthouse
+- Lighthouse audit: tests/e2e/Lighthouse Audit.docx
 
 ## Scripts
 
