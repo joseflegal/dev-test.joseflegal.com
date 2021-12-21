@@ -5,7 +5,7 @@ from playwright.sync_api import ElementHandle, Page
 from tests.pom.locators.qa_form_locators import QAFormLocators
 
 
-class QAForm:
+class QAPage:
     """
     Class for QA page containing methods to fill fields, submit the form and get the success message
     of the form submission

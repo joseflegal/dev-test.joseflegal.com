@@ -3,3 +3,4 @@ playwright
 yapf
 flake8
 isort
+faker
