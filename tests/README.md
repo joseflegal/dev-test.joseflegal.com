@@ -5,6 +5,7 @@
             locators - folder containing Web Elements Locators from different pages
             pages - folder containing classes for each page e.g - QAForm, RulesEngine, VueLayout, DesignSystem. Each page has methods that interact with specific elements of the page
     conftest.py - file containing test fixtures
+    config,py - file containig the configuration of the project
 ```
 
 ## Framework documentation
@@ -14,7 +15,7 @@
 - Browser automation - playwright
 - Formatting - yapf (default style - pep8)
 - Sorting imports - isort
-- Future improvements: use a library for reporting, use a library to manage test data, Dockerfile - containerization, Jenkins
+- Future improvements: use a library for reporting, Docker, Jenkins
 
 ## Getting the project running
 - Backend Task: get the API collection from tests/e2e/JosefLegal.postman_collection.json and import it in Postman. After the collection is successfully imported, open a New Runner Tab, select the collection and run it. 
