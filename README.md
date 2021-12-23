@@ -43,7 +43,6 @@ In `src/views/Rules.vue` you'll find a Vue.js view with detailed instructions ab
 2. Write some unit tests for your challenge in `/tests/unit`.
 
 ### QA
-
 In `src/views/QA.vue` you'll find a Vue.js view that we want you to test 🧐.
 
 1. **API testing:** Using [Postman](https://www.postman.com/)(or a tool of your preference), test functionality of the REST API for the `entity` object. Validate listing, creating, editing and deleting objects.
@@ -62,6 +61,18 @@ Additionally, test a uniqueness requirement for `entity.id` property. Objects ca
 
 When done, save required files in the `tests/` folder and add instructions to the `README.md` 📝. 
  - Be sure and include as much information as you can about how you are testing and what future tools improvements you might add going forward.
+
+ ### Mark Sionzon QA Instructions ###
+ Light house results can be found in `test\lighthouse_results.txt`
+
+ In order to run the test, please run them through the Cypress webapp. I'm not quiet sure why when `npm run test:e2e` is executed, it opens a blank Josef coding challenge page that continously load. Ideally, it should just open the test.js and uses the the instance that is being deployed by `npm run dev`.
+
+ For API testing
+ 1. Open a new workspace in POSTMan
+ 2. On Environments, please import `Josef_QA_env.postman_environment` found on `test\api`
+ 3. On Collections, please import `Josef Get Entities.postman_collection` found on `test\api`
+ 4. Once all are imported, please set Josef_QA_env as active environment
+ 5. You can run the test all at once or individually
 
 ## Getting the project running
 

@@ -1,0 +1,816 @@
+{
+	"info": {
+		"_postman_id": "a60a4868-9255-42b7-96b2-5c2157fa0ba2",
+		"name": "Josef Get Entities",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all entities",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Entity is successfully retrieved\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    var responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson[0]).to.have.property('id');\r",
+							"    pm.expect(responseJson[0]).to.have.property('property');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response property values are correct\", () => {\r",
+							"    var responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson[0].id).to.eql(1);\r",
+							"    pm.expect(responseJson[0].property).to.eql('foo');\r",
+							"    pm.expect(responseJson[1].id).to.eql(2);\r",
+							"    pm.expect(responseJson[1].property).to.eql('bar');\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{main_host}}/{{page}}/",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"{{page}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get entities with entity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Entity is successfully retrieved\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{main_host}}/entity/",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"entity",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get entity with valid ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Entity is successfully retrieved\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    var responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson[0]).to.have.property('id');\r",
+							"    pm.expect(responseJson[0]).to.have.property('property');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response property values are correct\", () => {\r",
+							"    var responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson[0].id).to.eql(1);\r",
+							"    pm.expect(responseJson[0].property).to.eql('foo');\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{main_host}}/{{page}}/?id={{valid_id}}",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"{{page}}",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{valid_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get entity with no ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is empty\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.lenght).to.eql(undefined);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "valid_id",
+						"value": "1",
+						"description": "Valid entity ID",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{main_host}}/{{page}}/?id=",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"{{page}}",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "",
+							"description": "Entity variable"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get entity with 2 valid ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Entity is successfully retrieved\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    var responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson[0]).to.have.property('id');\r",
+							"    pm.expect(responseJson[0]).to.have.property('property');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response property values are correct for both provided Ids\", () => {\r",
+							"    var responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson[0].id).to.eql(1);\r",
+							"    pm.expect(responseJson[0].property).to.eql('foo');\r",
+							"    pm.expect(responseJson[1].id).to.eql(2);\r",
+							"    pm.expect(responseJson[1].property).to.eql('bar');\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "valid_id",
+						"value": "1",
+						"description": "Valid entity ID",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{main_host}}/{{page}}/?id={{valid_id}}&id={{valid2_id}}",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"{{page}}",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{valid_id}}",
+							"description": "Valid entity ID"
+						},
+						{
+							"key": "id",
+							"value": "{{valid2_id}}",
+							"description": "Second valid entity ID"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get entity with invalid ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is empty\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.lenght).to.eql(undefined);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "valid_id",
+						"value": "1",
+						"description": "Valid entity ID",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{main_host}}/{{page}}/?id={{invalid_id}}",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"{{page}}",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{invalid_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get entity with non-existent ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is empty\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.lenght).to.eql(undefined);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "valid_id",
+						"value": "1",
+						"description": "Valid entity ID",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{main_host}}/{{page}}/?id={{non_existing_id}}",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"{{page}}",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{non_existing_id}}",
+							"description": "Entity variable"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new entity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Entity is successfully retrieved\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    var responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.have.property('id');\r",
+							"    pm.expect(responseJson).to.have.property('property');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response property values are correct\", () => {\r",
+							"    var responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.id).to.eql(3);\r",
+							"    pm.expect(responseJson.property).to.eql('hoge');\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"property\": \"hoge\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{main_host}}/{{page}}/",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"{{page}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new entity without body",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Entity is successfully retrieved\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    var responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.have.property('id');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{main_host}}/{{page}}/",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"{{page}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post entities with entity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Page does not exist\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{main_host}}/entity/",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"entity",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit entity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Entity is successfully retrieved\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    var responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.have.property('id');\r",
+							"    pm.expect(responseJson).to.have.property('property');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response property values are correct\", () => {\r",
+							"    var responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.id).to.eql(3);\r",
+							"    pm.expect(responseJson.property).to.eql('hogee');\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//remove or comment out timeout or sleep if you want to run this individually\r",
+							"setTimeout(function(){}, 3000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"property\": \"hogee\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{main_host}}/{{page}}/{{new_id}}",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"{{page}}",
+						"{{new_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit entity without body",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Entity is successfully retrieved\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response has all properties\", () => {\r",
+							"    var responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson).to.have.property('id');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The response property values are correct\", () => {\r",
+							"    var responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.id).to.eql(3);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//remove or comment out timeout or sleep if you want to run this individually\r",
+							"setTimeout(function(){}, 5000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{main_host}}/{{page}}/{{new_id}}",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"{{page}}",
+						"{{new_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit entity without ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"No ID specified during delete\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//remove or comment out timeout or sleep if you want to run this individually\r",
+							"setTimeout(function(){}, 7000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"property\": \"hogee\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{main_host}}/{{page}}/",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"{{page}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put entities with entity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Page does not exist\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//remove or comment out timeout or sleep if you want to run this individually\r",
+							"setTimeout(function(){}, 9000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{main_host}}/entity/",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"entity",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove entity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Ideally status code for delete should be 204 if there are still left over data, otherwise, 200 is fine\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is empty\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.lenght).to.eql(undefined);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//remove or comment out timeout or sleep if you want to run this individually\r",
+							"setTimeout(function(){}, 11000);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{main_host}}/{{page}}/{{new_id}}",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"{{page}}",
+						"{{new_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove entity without ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"No ID specified during delete\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{main_host}}/{{page}}/",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"{{page}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove entities with entity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Page does not exist\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{main_host}}/entity/",
+					"host": [
+						"{{main_host}}"
+					],
+					"path": [
+						"entity",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

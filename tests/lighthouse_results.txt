@@ -1,0 +1,32 @@
+http://localhost:9001/#/qa accessibility score is at 69 with lighthouse
+High Priority Issues:
+1. Side-bar expand and collapse button doesn't have accessible name
+* Severity: Major
+* Usage: Screen readers won't be able to regard it as a button
+2. All input fields on the Form example don't have associated lables
+* Severity: Major
+* Usage: Screen readers won't be able to properly identify it as input fields
+3. Heading elements are not in sequential order
+* Severity: Major
+* Usage: Tabbing will work but the order in which it will work will be broken
+4. The whole HTML lacks lang attribute
+* Severity: Major (if no plans to expand to non-English speaking countries, otherwise, blocker)
+* Usage: Without the lang attribute, Screen readers will use default language and will not be able to annouce the elements of the page correctly if default language is not choosen
+5. Example list contains other tags aside from <li>
+* Severity: Minor
+* Usage: This will allow screen readers to properly annouce the structure of the list
+6. Example list items are not contained with either a <ul> or <ol> tag
+* Severity: Minor
+* Usage: This will allow screen readers to properly read the list items
+
+
+http://localhost:9001/#/qa performance score is at 44 with lighthouse
+1. First Contentful Paint should be under 1.8 seconds (current score is at 19.7 seconds)
+2. Speed Index should be below 4.3 seconds (current score is at 19.7 seconds )
+3. Largest Contentful Paint should be below 2.5 seconds (current score is at 21.2 seconds)
+4. Time to Interactive should be below 3.8 seconds (current score is at 20.9 seconds)
+
+http://localhost:9001/#/qa other issues
+1. Does not use HTTPS
+2. Unload listner is registered
+3. Missing sourcemaps for large first-party JS
