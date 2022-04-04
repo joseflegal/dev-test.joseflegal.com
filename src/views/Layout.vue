@@ -1,12 +1,11 @@
 <template>
   <div class="layout">
     <h1>Vue.js layout</h1>
-    <Table :files="files" :tag="tag" />
-    <!-- Render the files data with a resuable component (a list or card up to you!) -->
-    <!-- <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array 
-      <code>files:
-      {{files}}</code>
-    </pre> -->
+    <JoGallery v-bind:files="files" v-bind:tag="tag" variant="blue">
+      <!-- <template v-slot:file="{ file }">
+        {{ file.id }}
+      </template> -->
+    </JoGallery>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -24,11 +23,11 @@ code {
 </style>
 <script>
 // @ is an alias to /src
-import Table from "@/components/Table";
+import JoGallery from "@/components/globals/JoGallery";
 export default {
   name: "Layout",
   components: {
-    Table,
+    JoGallery,
   },
   data() {
     return {
