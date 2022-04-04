@@ -94,7 +94,7 @@ export default {
     },
     tag: {
       type: String,
-      default: "kitten",
+      default: "",
     },
     variant: {
       type: String,
@@ -107,14 +107,14 @@ export default {
   computed: {
     filesByTag() {
       return this.files
-        .filter((file) => file.tags.includes(this.tag))
         .map((file) => {
           return {
             ...file,
-            tags: file.tags.split("|").join(", "),
+            tags: file.tags.split("|"),
             date: new Date(file.date),
           };
         })
+        .filter((file) => file.tags.indexOf(this.tag) !== -1)
         .sort((a, b) => b.date - a.date);
     },
   },
