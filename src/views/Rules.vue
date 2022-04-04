@@ -91,16 +91,8 @@ img {
 </style>
 <script>
 // @ is an alias to /src
-import api from "@/api";
 export default {
   name: "Rules",
-  data() {
-    return {
-      rule_groups: false,
-      answers: false,
-      rules: false,
-    };
-  },
   methods: {
     checkGroup(rule_group) {
       // cheking that rules and groups apply
@@ -148,17 +140,21 @@ export default {
       return false;
     },
   },
+  computed: {
+    answers() {
+      return this.$store.state.answer.answers;
+    },
+    rules() {
+      return this.$store.state.rule.rules;
+    },
+    rule_groups() {
+      return this.$store.state.ruleGroup.rule_groups;
+    },
+  },
   created() {
-    // loading data from the API
-    api.answers.get().then((res) => {
-      this.answers = res;
-    });
-    api.rules.get().then((res) => {
-      this.rules = res;
-    });
-    api.rule_groups.get().then((res) => {
-      this.rule_groups = res;
-    });
+    this.$store.dispatch("answer/getAll");
+    this.$store.dispatch("rule/getAll");
+    this.$store.dispatch("ruleGroup/getAll");
   },
 };
 </script>

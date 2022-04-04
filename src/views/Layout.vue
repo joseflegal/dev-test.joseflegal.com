@@ -24,7 +24,6 @@ code {
 </style>
 <script>
 // @ is an alias to /src
-// import api from "@/api";
 import Table from "@/components/Table";
 export default {
   name: "Layout",
