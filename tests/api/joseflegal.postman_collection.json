@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "770d2dac-e1d0-4fe7-85c3-38ec26d99dd2",
+		"name": "joseflegal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get all entities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/entities"
+			},
+			"response": []
+		},
+		{
+			"name": "get an entity by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/entities/{{valid_entity_id}}"
+			},
+			"response": []
+		},
+		{
+			"name": "create an entity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"property\": \"{{new_entity_property}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/entities"
+			},
+			"response": []
+		},
+		{
+			"name": "update an entity",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"property\": \"{{update_entity_property}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/entities/{{new_entity_id}}"
+			},
+			"response": []
+		},
+		{
+			"name": "delete an entity",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/entities/{{new_entity_id}}"
+			},
+			"response": []
+		}
+	]
+}

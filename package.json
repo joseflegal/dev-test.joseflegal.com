@@ -11,7 +11,7 @@
     "server": "json-server --watch db/dev.json",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
+    "test:e2e": "cypress run",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -52,6 +52,6 @@
     "sass-loader": "^10",
     "sass-resources-loader": "^2.2.1",
     "vue-template-compiler": "^2.6.11",
-    "webpack": "^4.46.0"   
+    "webpack": "^4.46.0"
   }
 }

@@ -81,11 +81,9 @@ rules:{{rules}}</code></pre>
   max-width: 1024px;
   margin: 0 auto;
 }
-
 code {
   width: 100%;
 }
-
 img {
   max-width: 50%;
   float: right;
@@ -93,42 +91,36 @@ img {
 </style>
 <script>
 // @ is an alias to /src
-import api from "@/api";
-
 export default {
   name: "Rules",
-  data() {
-    return {
-      rule_groups: false,
-      answers: false,
-      rules: false,
-    };
-  },
   methods: {
     checkGroup(rule_group) {
       // cheking that rules and groups apply
       // returns true if all/any rules apply, depending on logic property
-
       console.log("Group:");
       console.log(rule_group.logic);
-
       //////////////////////////////////////////////////////
       // TODO: check that all rules and groups apply
       // ~10 - 15 lines of code
-
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
+      const { logic, rule_ids, rule_group_ids } = rule_group;
+      rule_ids.forEach((id) => {
+        const rule = this.rules[id];
+        const isApplied = this.checkRule(rule);
+        if (logic === "all" && !isApplied) {
+          return false;
+        } else if (logic === "any" && isApplied) {
+          return true;
+        }
       });
-
-      return false;
-
+      rule_group_ids.forEach((id) => {
+        if (!this.checkGroup(this.rule_groups[id])) return false;
+      });
+      return true;
       //////////////////////////////////////////////////////
     },
-
     checkRule(rule) {
       // cheking that a rule applies
       // returns if combination of expected answer, operation and user answer is true
-
       console.log("Rule:");
       console.log(this.answers[rule.question_id]);
       console.log(rule.operation);
@@ -148,18 +140,21 @@ export default {
       return false;
     },
   },
+  computed: {
+    answers() {
+      return this.$store.state.answer.answers;
+    },
+    rules() {
+      return this.$store.state.rule.rules;
+    },
+    rule_groups() {
+      return this.$store.state.ruleGroup.rule_groups;
+    },
+  },
   created() {
-    // loading data from the API
-
-    api.answers.get().then((res) => {
-      this.answers = res;
-    });
-    api.rules.get().then((res) => {
-      this.rules = res;
-    });
-    api.rule_groups.get().then((res) => {
-      this.rule_groups = res;
-    });
+    this.$store.dispatch("answer/getAll");
+    this.$store.dispatch("rule/getAll");
+    this.$store.dispatch("ruleGroup/getAll");
   },
 };
 </script>

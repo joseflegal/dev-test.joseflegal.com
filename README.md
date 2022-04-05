@@ -47,21 +47,22 @@ In `src/views/Rules.vue` you'll find a Vue.js view with detailed instructions ab
 In `src/views/QA.vue` you'll find a Vue.js view that we want you to test 🧐.
 
 1. **API testing:** Using [Postman](https://www.postman.com/)(or a tool of your preference), test functionality of the REST API for the `entity` object. Validate listing, creating, editing and deleting objects.
-Additionally, test a uniqueness requirement for `entity.id` property. Objects can be accessed and modified using requests:
+   Additionally, test a uniqueness requirement for `entity.id` property. Objects can be accessed and modified using requests:
 
 ```
-  GET    http://localhost:3000/entities  
-  GET    http://localhost:3000/entities/[id] 
-  POST   http://localhost:3000/entities  
-  PUT    http://localhost:3000/entities/[id] 
-  DELETE http://localhost:3000/entities/[id] 
+  GET    http://localhost:3000/entities
+  GET    http://localhost:3000/entities/[id]
+  POST   http://localhost:3000/entities
+  PUT    http://localhost:3000/entities/[id]
+  DELETE http://localhost:3000/entities/[id]
 ```
 
 2. **e2e frontend testing:** Using [Cypress](https://www.cypress.io/)(or a tool of your preference) test form submission on the QA page.
 3. **Extra credit:** Using [Lighthouse](https://developers.google.com/web/tools/lighthouse) run an audit of the QA page and document your performance and acesebility findings.
 
-When done, save required files in the `tests/` folder and add instructions to the `README.md` 📝. 
- - Be sure and include as much information as you can about how you are testing and what future tools improvements you might add going forward.
+When done, save required files in the `tests/` folder and add instructions to the `README.md` 📝.
+
+- Be sure and include as much information as you can about how you are testing and what future tools improvements you might add going forward.
 
 ## Getting the project running
 
@@ -95,3 +96,9 @@ npm run dev
 ## Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Run QA
+
+1. **API testing** through **Postman**: import two json files in `tests/api` directory.
+2. **e2e testing** by **Cypress**: run `npm run test:e2e` after running `npm run dev`.
+3. **Lighthouse** audit report: check json file in `tests/lighthouse` directory.

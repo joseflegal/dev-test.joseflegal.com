@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <h1>Vue.js layout</h1>
-    <!-- Render the files data with a resuable component (a list or card up to you!) -->
-    <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array 
-      <code>files:
-      {{files}}</code>
-    </pre>
+    <JoGallery v-bind:files="files" v-bind:tag="tag" variant="blue">
+      <!-- <template v-slot:file="{ file }">
+        {{ file.id }}
+      </template> -->
+    </JoGallery>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -13,7 +13,6 @@
   max-width: 1024px;
   margin: 0 auto;
 }
-
 pre,
 code {
   overflow-x: auto;
@@ -24,19 +23,24 @@ code {
 </style>
 <script>
 // @ is an alias to /src
-import api from "@/api";
-
+import JoGallery from "@/components/globals/JoGallery";
 export default {
   name: "Layout",
+  components: {
+    JoGallery,
+  },
   data() {
     return {
-      files: [],
+      tag: "kitten",
     };
   },
+  computed: {
+    files() {
+      return this.$store.state.file.files;
+    },
+  },
   created() {
-    api.files.get().then((res) => {
-      this.files = res;
-    });
+    this.$store.dispatch("file/getAll");
   },
 };
 </script>
