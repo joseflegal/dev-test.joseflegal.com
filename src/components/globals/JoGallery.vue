@@ -24,16 +24,16 @@
 .jo-gallary {
   width: 100%;
   .responsive {
-    padding: 0 6px;
+    padding: 0 $small-spacing;
     width: 25%;
     float: left;
-    @media only screen and (max-width: 1024px) {
+    @media #{$medium-and-down} {
       width: 50%;
-      margin: 6px 0;
+      margin: $small-spacing 0;
     }
-    @media only screen and (max-width: 768px) {
+    @media #{$small-and-down} {
       width: 100%;
-      margin: 6px 0;
+      margin: $small-spacing 0;
     }
     .card {
       width: 100%;
@@ -44,8 +44,8 @@
         border-style: none;
         object-fit: cover;
         aspect-ratio: 4 / 3;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+        border-top-left-radius: $card-border-radius;
+        border-top-right-radius: $card-border-radius;
       }
       .name {
         padding: 10px;
@@ -56,8 +56,8 @@
         font-weight: $weight-bold;
         line-height: 1;
         font-size: 1rem;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: $card-border-radius;
+        border-bottom-right-radius: $card-border-radius;
         border-left: 1px solid transparent;
         border-right: 1px solid transparent;
         border-bottom: 1px solid transparent;

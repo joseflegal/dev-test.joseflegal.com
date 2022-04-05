@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div class="container">
     <h1>Vue.js layout</h1>
     <JoGallery v-bind:files="files" v-bind:tag="tag" variant="blue">
       <!-- <template v-slot:file="{ file }">
@@ -9,7 +9,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-.layout {
+.container {
   max-width: 1024px;
   margin: 0 auto;
 }
