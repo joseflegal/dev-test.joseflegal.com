@@ -3,8 +3,9 @@
     <h1>Vue.js layout</h1>
     <!-- Render the files data with a resuable component (a list or card up to you!) -->
     <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array 
-      <code>files:
-      {{files}}</code>
+      <div :key="file.id" v-for="file in files">
+        <BarSection  :record="file"/>
+      </div>
     </pre>
   </div>
 </template>
@@ -25,6 +26,7 @@ code {
 <script>
 // @ is an alias to /src
 import api from "@/api";
+import BarSection from "../components/BarSection";
 
 export default {
   name: "Layout",
@@ -32,6 +34,9 @@ export default {
     return {
       files: [],
     };
+  },
+  components: {
+    BarSection,
   },
   created() {
     api.files.get().then((res) => {
