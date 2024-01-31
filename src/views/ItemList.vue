@@ -2,7 +2,7 @@
 <template>
     <div>
       <div v-for="item in items" :key="item.id">
-        <!--slot to render items -->
+        <!--slot to render items-->
         <slot :item="item">
           <div>
             <h3>{{ item.name }}</h3>
