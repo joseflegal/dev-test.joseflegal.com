@@ -116,11 +116,41 @@ export default {
       // TODO: check that all rules and groups apply
       // ~10 - 15 lines of code
 
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
+      const logic = rule_group.logic
+      
+      const rule_group_ids = rule_group.rule_group_ids
+      
+      const rule_ids = rule_group.rule_ids
+
+      // check if rules apply 
+      rule_ids.forEach((rule_id) => {
+
+        const isRuleApplied = this.checkRule(this.rules[rule_id])
+        
+        if (logic === "any" & isRuleApplied) {
+
+          return true;
+
+        }
+        else if (logic === "all" && !isRuleApplied) {
+
+          return false;
+
+        }
+
       });
 
-      return false;
+      // check if groups apply
+      rule_group_ids.forEach((rule_id) => {
+
+        const id = this.rule_groups[rule_id]
+
+        if (!this.checkGroup(id)) {
+          return false;
+        }
+      });
+
+      return true;
 
       //////////////////////////////////////////////////////
     },
@@ -130,7 +160,7 @@ export default {
       // returns if combination of expected answer, operation and user answer is true
 
       console.log("Rule:");
-      console.log(this.answers[rule.question_id]);
+      console.log("Answer ", this.answers[rule.question_id]);
       console.log(rule.operation);
       console.log(rule.expected_answer);
       try {
@@ -160,6 +190,8 @@ export default {
     api.rule_groups.get().then((res) => {
       this.rule_groups = res;
     });
+
+    console.log("rule groups: ", this.rule_groups)
   },
 };
 </script>
