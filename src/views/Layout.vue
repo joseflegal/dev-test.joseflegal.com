@@ -31,7 +31,7 @@ export default {
     sortedKittenFiles() {
       const kittenFilesCopy = [...this.kittenFiles];
       return kittenFilesCopy.sort(
-        (a, b) => new Date(b.date) - new Date(a.date)
+        (a, b) => new Date(a.date) - new Date(b.date)
       );
     },
   },
