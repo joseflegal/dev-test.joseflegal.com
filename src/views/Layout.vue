@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Vue.js layout</h1>
-    <JoList :items="sortedKittensFiles" />
+    <JoList :items="sortedKittenFiles" />
   </div>
 </template>
 
@@ -23,14 +23,14 @@ export default {
     };
   },
   computed: {
-    kittensFiles() {
+    kittenFiles() {
       return this.files.filter(
         (file) => file.tags && file.tags.includes("kitten")
       );
     },
-    sortedKittensFiles() {
-      const kittensFilesCopy = [...this.kittensFiles];
-      return kittensFilesCopy.sort(
+    sortedKittenFiles() {
+      const kittenFilesCopy = [...this.kittenFiles];
+      return kittenFilesCopy.sort(
         (a, b) => new Date(b.date) - new Date(a.date)
       );
     },
