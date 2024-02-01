@@ -1,10 +1,7 @@
 <template>
   <div class="container">
     <h1>Vue.js layout</h1>
-    <JoList :title="listTitle" :items="files">
-      <!-- eslint-disable-next-line vue/no-unused-vars -->
-      <template v-slot:content="{ item }"></template>
-    </JoList>
+    <JoList :title="listTitle" :items="files" />
   </div>
 </template>
 <style lang="scss" scoped>
