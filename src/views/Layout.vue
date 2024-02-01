@@ -1,14 +1,10 @@
 <template>
   <div class="container">
     <h1>Vue.js layout</h1>
-    <div v-for="file in files" v-bind:key="file.id">
-      <div v-bind:title="file.description">
-        <img v-bind:src="file.src" />
-        <div>
-          {{ file.filename }}
-        </div>
-      </div>
-    </div>
+    <JoList :title="listTitle" :items="files">
+      <!-- eslint-disable-next-line vue/no-unused-vars -->
+      <template v-slot:content="{ item }"></template>
+    </JoList>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -16,23 +12,15 @@
   max-width: 1024px;
   margin: 0 auto;
 }
-
-pre,
-code {
-  overflow-x: auto;
-  white-space: pre-wrap;
-  white-space: pre-wrap;
-  line-break: anywhere;
-}
 </style>
 <script>
-// @ is an alias to /src
 import api from "@/api";
 
 export default {
   name: "Layout",
   data() {
     return {
+      listTitle: "Vue.js Layout",
       files: [],
     };
   },
