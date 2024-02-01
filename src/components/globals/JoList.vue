@@ -3,7 +3,7 @@
     <div v-for="item in items" :key="item.id" class="list-item">
       <div class="list-item__image">
         <slot name="content" :item="item">
-          <img :src="item.src" alt="Image" />
+          <img :src="item.src" :alt="item.description" />
         </slot>
       </div>
       <div class="list-item__text">
