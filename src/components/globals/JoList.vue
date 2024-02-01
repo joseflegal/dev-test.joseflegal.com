@@ -40,7 +40,6 @@ export default {
     border: $base-border;
 
     &__image {
-      width: 100px;
       margin-right: $base-spacing;
       border-radius: $base-border-radius;
       box-shadow: $shadow-base;
