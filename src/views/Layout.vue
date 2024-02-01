@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Vue.js layout</h1>
-    <JoList :title="listTitle" :items="files" />
+    <JoList :items="files" />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -17,7 +17,6 @@ export default {
   name: "Layout",
   data() {
     return {
-      listTitle: "Vue.js Layout",
       files: [],
     };
   },
