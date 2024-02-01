@@ -114,13 +114,13 @@ export default {
 
       // all rule check
       if (rule_group.logic === "all" || rule_group.logic === "any") {
-        const allRulesApply = rule_group.rule_ids.every((rule_id) => this.checkRule(this.rules[rule_id]));
+        const rulesApply = rule_group.rule_ids.every((rule_id) => this.checkRule(this.rules[rule_id]));
 
         // all rule group check
-        const allGroupsApply = rule_group.rule_group_ids.every((group_id) => this.checkGroup(this.rule_groups[group_id]));
+        const groupsApply = rule_group.rule_group_ids.every((group_id) => this.checkGroup(this.rule_groups[group_id]));
 
         // rerurn true if above statments return true
-        return allRulesApply && allGroupsApply;
+        return rulesApply && groupsApply;
       }
 
       rule_group.rule_ids.forEach((rule_id) => {
