@@ -1,11 +1,14 @@
 <template>
   <div class="container">
     <h1>Vue.js layout</h1>
-    <!-- Render the files data with a resuable component (a list or card up to you!) -->
-    <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array 
-      <code>files:
-      {{files}}</code>
-    </pre>
+    <div v-for="file in files" v-bind:key="file.id">
+      <div v-bind:title="file.description">
+        <img v-bind:src="file.src" />
+        <div>
+          {{ file.filename }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>
