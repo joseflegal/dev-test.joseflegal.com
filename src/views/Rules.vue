@@ -112,17 +112,22 @@ export default {
       console.log("Group:");
       console.log(rule_group.logic);
 
-      //////////////////////////////////////////////////////
-      // TODO: check that all rules and groups apply
-      // ~10 - 15 lines of code
+      const areDependentGroupsValid = rule_group.rule_group_ids
+        ? rule_group.rule_group_ids.every((group_id) =>
+            this.checkGroup(this.rule_groups[group_id])
+          )
+        : true;
 
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
-      });
-
-      return false;
-
-      //////////////////////////////////////////////////////
+      return (
+        areDependentGroupsValid &&
+        (rule_group.logic === "all"
+          ? rule_group.rule_ids.every((rule_id) =>
+              this.checkRule(this.rules[rule_id])
+            )
+          : rule_group.rule_ids.some((rule_id) =>
+              this.checkRule(this.rules[rule_id])
+            ))
+      );
     },
 
     checkRule(rule) {
