@@ -13,32 +13,18 @@
 </style>
 
 <script>
-import api from "@/api";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Layout",
-  data() {
-    return {
-      files: [],
-    };
-  },
   computed: {
-    kittenFiles() {
-      return this.files.filter(
-        (file) => file.tags && file.tags.includes("kitten")
-      );
-    },
-    sortedKittenFiles() {
-      const kittenFilesCopy = [...this.kittenFiles];
-      return kittenFilesCopy.sort(
-        (a, b) => new Date(a.date) - new Date(b.date)
-      );
-    },
+    ...mapGetters(["sortedKittenFiles"]),
   },
   created() {
-    api.files.get().then((res) => {
-      this.files = res;
-    });
+    this.fetchFiles();
+  },
+  methods: {
+    ...mapActions(["fetchFiles"]),
   },
 };
 </script>
