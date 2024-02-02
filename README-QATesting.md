@@ -4,6 +4,8 @@ This screenshot shows that all tests have passed
 
 ![Alt text](<Screenshot 2024-02-01 at 11.18.50.png>)
 
+The test compromises on automatically filling up the form and submitting it. I have added a message that will display when form is submitted successfully to allow for testing to detect the success of the test.
+
 For best testing results :-
 
 navigate to the root directory of the project and run the following the command
