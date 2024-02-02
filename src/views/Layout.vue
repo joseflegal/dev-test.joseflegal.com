@@ -1,12 +1,14 @@
 <template>
-  <div class="container">
-    <h1>Vue.js layout</h1>
+  <div class="" style="margin-left:0px; margin-right: 0px;">
     <!-- Render the files data with a resuable component (a list or card up to you!) -->
-    <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array 
-      <div :key="file.id" v-for="file in files">
-        <BarSection  :record="file"/>
-      </div>
-    </pre>
+    <!-- <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array  -->
+    <div :key="file.id" v-for="(file, index) in files" style="">
+      <HorizontalSection :direction="index % 2 == 1 ? 'left' : 'right'">
+        <img :src="`${file.src}`"/>
+        <h1>{{ file.description }}</h1>
+      </HorizontalSection>
+    </div>
+    <!-- </pre> -->
   </div>
 </template>
 <style lang="scss" scoped>
@@ -23,10 +25,11 @@ code {
   line-break: anywhere;
 }
 </style>
+
 <script>
 // @ is an alias to /src
 import api from "@/api";
-import BarSection from "../components/BarSection";
+import HorizontalSection from "../components/HorizontalSection";
 
 export default {
   name: "Layout",
@@ -36,7 +39,13 @@ export default {
     };
   },
   components: {
-    BarSection,
+    HorizontalSection,
+  },
+  methods: {
+    alternateColour(num){
+      console.log(num)
+      return (num % 2 == 1 ? ["#FFFFFF", "#FFFFFF"] : ["#3c2283", "#FFFFFF"]);
+    },
   },
   created() {
     api.files.get().then((res) => {

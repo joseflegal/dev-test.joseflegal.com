@@ -3,7 +3,7 @@
     <div class="sidebar-container">
       <Sidebar></Sidebar>
     </div>
-    <main class="main-container">
+    <main class="main-container" style="">
       <div v-if="!loaded" class="loader-wrapper">
         <Loader />
       </div>
@@ -46,7 +46,6 @@ export default {
 
 .main-container {
   flex: 1 1 auto;
-  padding: $base-spacing;
 }
 
 .loader-wrapper {
