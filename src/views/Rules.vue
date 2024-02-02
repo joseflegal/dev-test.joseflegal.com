@@ -91,40 +91,45 @@ img {
   float: right;
 }
 </style>
+
 <script>
-// @ is an alias to /src
-import api from "@/api";
+import { mapGetters, mapActions } from "vuex";
+import actions from "@/store/actions_types";
 
 export default {
   name: "Rules",
+  computed: {
+    ...mapGetters("rules", ["getAnswers", "getRules", "getRuleGroups"]),
+  },
   data() {
     return {
-      rule_groups: false,
-      answers: false,
-      rules: false,
+      rule_groups: [],
+      answers: [],
+      rules: [],
     };
   },
   methods: {
+    ...mapActions("rules", ["getAll"]),
     checkGroup(rule_group) {
       // cheking that rules and groups apply
       // returns true if all/any rules apply, depending on logic property
 
       console.log("Group:");
-      console.log(rule_group.logic);
+      console.log(rule_group?.logic);
 
-      const areDependentGroupsValid = rule_group.rule_group_ids
-        ? rule_group.rule_group_ids.every((group_id) =>
+      const areDependentGroupsValid = rule_group?.rule_group_ids
+        ? rule_group?.rule_group_ids.every((group_id) =>
             this.checkGroup(this.rule_groups[group_id])
           )
         : true;
 
       return (
         areDependentGroupsValid &&
-        (rule_group.logic === "all"
-          ? rule_group.rule_ids.every((rule_id) =>
+        (rule_group?.logic === "all"
+          ? rule_group?.rule_ids.every((rule_id) =>
               this.checkRule(this.rules[rule_id])
             )
-          : rule_group.rule_ids.some((rule_id) =>
+          : rule_group?.rule_ids.some((rule_id) =>
               this.checkRule(this.rules[rule_id])
             ))
       );
@@ -154,16 +159,10 @@ export default {
     },
   },
   created() {
-    // loading data from the API
-
-    api.answers.get().then((res) => {
-      this.answers = res;
-    });
-    api.rules.get().then((res) => {
-      this.rules = res;
-    });
-    api.rule_groups.get().then((res) => {
-      this.rule_groups = res;
+    this[actions.getAll]().then(() => {
+      this.rule_groups = this.getRuleGroups;
+      this.answers = this.getAnswers;
+      this.rules = this.getRules;
     });
   },
 };
