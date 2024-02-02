@@ -1,0 +1,26 @@
+# Run an audit of the QA page and document your performance and acesebility findings.
+
+![Alt text](<Screenshot 2024-02-02 at 18.44.52.png>)
+
+The Screenshot shows the an audit run on the page and the results are divided into several sections:-
+
+Performance 65. 
+
+Low score is mainly due to elements on the page took a long time to load and be visible on the page. The report also shows some points where performance can be enhanced such as reducing unused javascript elements and avoiding enourmous networks payload.
+
+![Alt text](<Screenshot 2024-02-02 at 18.52.26.png>)
+
+Performance audit shows some elements that passed such as CSS and Javascript files are minifyed which contributes to quick page performance.
+
+![Alt text](<Screenshot 2024-02-02 at 18.56.25.png>)
+
+Accessbility 69.
+
+Low score is mainly due to missing elements such as button do not have an accessible name and image elements do not have alt attribute.
+
+![Alt text](<Screenshot 2024-02-02 at 18.54.41.png>)
+
+The audit also shows some parts of the page that passed the audit such as [aria-*] attributes are valid and not misspelled and links have a discernible name.
+
+![Alt text](<Screenshot 2024-02-02 at 18.56.02.png>)
+
