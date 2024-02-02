@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Vue.js layout</h1>
-    <JoList :items="sortedKittenFiles" />
+    <JoList :items="getSortedFilesByTag('kitten')" />
   </div>
 </template>
 
@@ -14,17 +14,18 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import actions from "@/store/actions_types";
 
 export default {
   name: "Layout",
   computed: {
-    ...mapGetters(["sortedKittenFiles"]),
+    ...mapGetters("layout", ["getSortedFilesByTag"]),
   },
   created() {
-    this.fetchFiles();
+    this[actions.getAll]();
   },
   methods: {
-    ...mapActions(["fetchFiles"]),
+    ...mapActions("layout", [actions.getAll]),
   },
 };
 </script>
