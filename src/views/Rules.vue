@@ -113,14 +113,24 @@ export default {
       console.log(rule_group.logic);
 
       // all rule check
-      if (rule_group.logic === "all" || rule_group.logic === "any") {
-        const rulesApply = rule_group.rule_ids.every((rule_id) => this.checkRule(this.rules[rule_id]));
+      if (rule_group.logic === "all") {
+        const allRulesApply = rule_group.rule_ids.every((rule_id) => this.checkRule(this.rules[rule_id]));
 
         // all rule group check
-        const groupsApply = rule_group.rule_group_ids.every((group_id) => this.checkGroup(this.rule_groups[group_id]));
+        const allGroupsApply = rule_group.rule_group_ids.every((group_id) => this.checkGroup(this.rule_groups[group_id]));
 
         // rerurn true if above statments return true
-        return rulesApply && groupsApply;
+        return allRulesApply && allGroupsApply;
+      }
+
+      if (rule_group.logic === "any") {
+        const anyRulesApply = rule_group.rule_ids.every((rule_id) => this.checkRule(this.rules[rule_id]));
+
+        // all rule group check
+        const anyGroupsApply = rule_group.rule_group_ids.every((group_id) => this.checkGroup(this.rule_groups[group_id]));
+
+        // rerurn true if above statments return true
+        return anyRulesApply && anyGroupsApply;
       }
 
       rule_group.rule_ids.forEach((rule_id) => {
