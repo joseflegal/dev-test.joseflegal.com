@@ -55,7 +55,7 @@ export default {
     font-weight: $weight-bold;
     letter-spacing: 0rem;
     font-size: 22px;
-    font-family: "Helvetica", sans-serif;
+    font-family: $base-font-family;
   }
 }
 
