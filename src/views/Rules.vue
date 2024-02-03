@@ -115,11 +115,24 @@ export default {
       //////////////////////////////////////////////////////
       // TODO: check that all rules and groups apply
       // ~10 - 15 lines of code
+      let individual_rule_results = [];
 
       rule_group.rule_ids.forEach((rule_id) => {
         console.log(this.checkRule(this.rules[rule_id]));
+
+        individual_rule_results.push(this.checkRule(this.rules[rule_id]));
       });
 
+      try {
+        if(rule_group.logic === "all"){
+          return individual_rule_results.every(result => result === true);
+        } else if (rule_group.logic === "any"){
+          return individual_rule_results.includes(true);
+        } 
+      } catch (e) {
+        console.error(e.message);
+        return false;
+      };
       return false;
 
       //////////////////////////////////////////////////////
