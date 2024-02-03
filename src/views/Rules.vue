@@ -117,24 +117,27 @@ export default {
       // ~10 - 15 lines of code
       let individual_rule_results = [];
 
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
-
-        individual_rule_results.push(this.checkRule(this.rules[rule_id]));
-      });
-
       try {
+        rule_group.rule_ids.forEach((rule_id) => {
+          console.log(this.checkRule(this.rules[rule_id]));
+
+          individual_rule_results.push(this.checkRule(this.rules[rule_id]));
+        });
+
         if(rule_group.logic === "all"){
-          return individual_rule_results.every(result => result === true);
+          return (rule_group.rule_group_ids.length === 0) ? 
+            individual_rule_results.every(result => result === true) :
+            rule_group.rule_group_ids.every(rule_group_id => this.checkGroup(this.rule_groups[rule_group_id]));
         } else if (rule_group.logic === "any"){
-          return individual_rule_results.includes(true);
-        } 
+          return (rule_group.rule_group_ids.length === 0) ?
+            individual_rule_results.includes(true) :
+            rule_group.rule_group_ids.some(rule_group_id => this.checkGroup(this.rule_groups[rule_group_id]));
+        }
       } catch (e) {
         console.error(e.message);
         return false;
       };
       return false;
-
       //////////////////////////////////////////////////////
     },
 
