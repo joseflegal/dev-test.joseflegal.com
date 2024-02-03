@@ -49,6 +49,7 @@
     </ul>
 
     <h3>Form example</h3>
+    <h2 v-if="submited">Form Submitted Successfully!</h2>
     <p v-if="submited">
       Form submited:
       <strong>{{ name }}</strong
