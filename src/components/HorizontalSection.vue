@@ -52,7 +52,7 @@ export default {
   align-items: center;
 
   h1 {
-    font-weight: 800;
+    font-weight: $weight-bold;
     letter-spacing: 0rem;
     font-size: 22px;
     font-family: "Helvetica", sans-serif;
