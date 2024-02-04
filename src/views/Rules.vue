@@ -72,7 +72,7 @@ rules:{{rules}}</code></pre>
     </pre>
     <p><strong>multiple groups example</strong> is:</p>
     <pre>
-<code v-if="rule_groups && rules && answers">{{checkGroup(this.rule_groups[1])}}</code>
+<code v-if="rule_groups && rules && answers">{{checkGroup(this.rule_groups)}}</code>
       </pre>
   </div>
 </template>
@@ -105,33 +105,58 @@ export default {
     };
   },
   methods: {
-    checkGroup(rule_group) {
+    checkGroup(rule_groups) {
       // cheking that rules and groups apply
       // returns true if all/any rules apply, depending on logic property
-
-      console.log("Group:");
-      console.log(rule_group.logic);
-
       //////////////////////////////////////////////////////
-      // TODO: check that all rules and groups apply
-      // ~10 - 15 lines of code
+      // // TODO: check that all rules and groups apply
+      // // ~10 - 15 lines of code
+      for (const id in rule_groups) {
+        if (rule_groups.hasOwnProperty.call(rule_groups, id)) {
+          const group = rule_groups[id];
+         return  this.checkGroupDetails(group)
+    }}},
 
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
-      });
-
-      return false;
-
-      //////////////////////////////////////////////////////
-    },
-
+    checkGroupDetails(group) {
+      if(!group) {
+        return false
+      }
+      
+      if (group.logic === "all") {
+  
+    // Validate "all" logic
+    return group.rule_ids.every(ruleId =>this.checkRule(this.rules[ruleId])) &&
+           group.rule_group_ids.every(groupId => this.checkGroupDetails(this.rule_groups[groupId])
+          );
+  } else if (group.logic === "any") {
+    // Validate "any" logic
+    return group.rule_ids.some(ruleId => this.checkRule(this.rules[ruleId])) ||
+           group.rule_group_ids.some(groupId => {
+            if(!this.rule_groups[groupId]) {return false} 
+            return this.checkGroupDetails(this.rule_groups[groupId])
+          });
+  } else {
+        return false  }},
+    checkOperation(logic, values) {
+      console.log(values, "values from rules check")
+      if (logic === 'all') {
+        // Perform an AND operation
+        return values.every(value => value);
+    } else if (logic === 'any') {
+        // Perform an OR operation
+        return values.some(value => value);
+    } else {
+        // Handle invalid logic
+        return false
+    }},
     checkRule(rule) {
       // cheking that a rule applies
       // returns if combination of expected answer, operation and user answer is true
 
-      console.log("Rule:");
+      console.log("Answer:");
       console.log(this.answers[rule.question_id]);
       console.log(rule.operation);
+      console.log("Expected:");
       console.log(rule.expected_answer);
       try {
         if (rule.operation === "is") {
@@ -145,7 +170,7 @@ export default {
         console.error(e.message);
         return false;
       }
-      return false;
+      // return false;
     },
   },
   created() {
