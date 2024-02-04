@@ -41,7 +41,7 @@
     "babel-eslint": "^10.1.0",
     "cache-loader": "^4.1.0",
     "concurrently": "^6.1.0",
-    "cypress": "^2.1.0",
+    "cypress": "13.6",
     "eslint": "^6.7.2",
     "eslint-plugin-cypress": "^2.0.1",
     "eslint-plugin-prettier": "^3.3.1",
@@ -52,6 +52,21 @@
     "sass-loader": "^10",
     "sass-resources-loader": "^2.2.1",
     "vue-template-compiler": "^2.6.11",
-    "webpack": "^4.46.0"   
-  }
+    "webpack": "^4.46.0"
+  },
+  "description": "Hello 👋 & welcome to the Josef coding challenge. We appreciate you taking the time to complete the assignment, and we're excited about the prospect of you joining the team!",
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haith1307/dev-test.joseflegal.com.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haith1307/dev-test.joseflegal.com/issues"
+  },
+  "homepage": "https://github.com/haith1307/dev-test.joseflegal.com#readme"
 }

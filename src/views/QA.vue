@@ -4,9 +4,9 @@
 
     <p>
       Josef provides most of its services via the web. To run web applications,
-      we use backend and frontend services. With scale, quality assurance and automated
-      testing become key strategies to keep all the critical functionality
-      running without regressions.
+      we use backend and frontend services. With scale, quality assurance and
+      automated testing become key strategies to keep all the critical
+      functionality running without regressions.
     </p>
     <p>
       This application was created with
@@ -49,12 +49,12 @@
     </ul>
 
     <h3>Form example</h3>
-    <p v-if="submited">
+    <p v-if="submited" data-cy="submit-confirmation">
       Form submited:
       <strong>{{ name }}</strong
       >({{ email }}), age of {{ age }}, tel: {{ phone }} ✅
     </p>
-    <form v-else class="user-data" @submit.prevent="handleSubmit">
+    <form v-else class="user-data" @submit.prevent="handleSubmit" data-cy="form">
       <JoInputField required name="name" v-model="name" label="Name" />
       <JoInputField
         required
