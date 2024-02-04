@@ -105,6 +105,34 @@ export default {
     };
   },
   methods: {
+    checkAllRuleIds(rule_group) {
+      // checking that all rules within group apply
+      // returns true if all rules apply
+      return rule_group.rule_ids.every((rule_id) =>
+        this.checkRule(this.rules[rule_id])
+      );
+    },
+    checkAllRuleGroups(rule_group) {
+      // checking that all groups apply
+      // returns true if all groups apply
+      return rule_group.rule_group_ids.every((rule_group_id) =>
+        this.checkGroup(this.rule_groups[rule_group_id])
+      );
+    },
+    checkAnyRuleId(rule_group) {
+      // checking that any rule applies
+      // returns true if any rule applies
+      return rule_group.rule_ids.some((rule_id) =>
+        this.checkRule(this.rules[rule_id])
+      );
+    },
+    checkAnyRuleGroup(rule_group) {
+      // checking that any group applies
+      // returns true if any group applies
+      return rule_group.rule_group_ids.some((rule_group_id) =>
+        this.checkGroup(this.rule_groups[rule_group_id])
+      );
+    },
     checkGroup(rule_group) {
       // cheking that rules and groups apply
       // returns true if all/any rules apply, depending on logic property
@@ -116,12 +144,22 @@ export default {
       // TODO: check that all rules and groups apply
       // ~10 - 15 lines of code
 
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
-      });
-
-      return false;
-
+      try {
+        if (rule_group.logic === "all") {
+          return (
+            this.checkAllRuleIds(rule_group) &&
+            this.checkAllRuleGroups(rule_group)
+          );
+        } else if (rule_group.logic === "any") {
+          return (
+            this.checkAnyRuleId(rule_group) ||
+            this.checkAnyRuleGroup(rule_group)
+          );
+        }
+      } catch (e) {
+        console.error(e.message);
+        return false;
+      }
       //////////////////////////////////////////////////////
     },
 
