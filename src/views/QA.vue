@@ -49,7 +49,7 @@
     </ul>
 
     <h3>Form example</h3>
-    <p v-if="submited">
+    <p data-cy="form-record" v-if="submited">
       Form submited:
       <strong>{{ name }}</strong
       >({{ email }}), age of {{ age }}, tel: {{ phone }} ✅
