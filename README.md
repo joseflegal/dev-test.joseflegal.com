@@ -88,21 +88,27 @@ python3 -m pytest
 
 # To run e2e testing
 cd ../..
-npx cygress open
+npx cypress open
 ```
 
 ## QA Result
 1. ### API Testing
+![api_testing](/tests/result/api_result.png "Title")
+
 Tests have been done using Python with `requests` and `pytest` library. Reason for choosing the framework is personal familiarity. 
 
-API testing includes functionality testing for all methods: GET, POST, PUT, DELETE. In addition, a test for ID uniqueness has been done at the end. After deletions and post more random number of times, IDs are fetched to seek for redundancy. Results show that all tests pass.
+API testing includes functionality testing for all methods: GET, POST, PUT, DELETE. In addition, a test for ID uniqueness has been done at the end. After deletions and post more random number of times, IDs are fetched to seek for redundancy. 
 
-For future improvements, testing can be written using `jest` for consistency.
+Testing includes 15 unit tests; all tests pass.
+
+For future improvements, testing can be written using `jest` for consistency. Also, these testing material should better be documented on shared platform such as Confluence and bug tickets logged into Jira.
 
 2. ### E2E Testing
 ![e2e_testing](/tests/result/e2e_result.png "Title")
 
 E2E testing checks functionality of the form in QA page. in general, the form is not successfully submitted unless all correct information is filled. Tests include missing information in each field, incorrect email format and a successful case. Results show that there is one failed test, regarding incorrect phone format.
+
+Testing includes 9 tests, in which one test fails and 8 pass.
 
 For future improvements, testing should also look for message error, check whether the correct message error is prompted. Alternatively, performance testing is suggested.
 

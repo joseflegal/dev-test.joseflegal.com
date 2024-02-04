@@ -67,6 +67,28 @@ class TestAPIResponse:
     result_len = len(requests.get(URL).json())
     assert result_len - initial_len == 1
 
+  def test_post_with_property_data(self):
+    """
+    Test whether new item has been added with property data
+    """
+    requests.post(URL, data={
+       "property": "baz"
+    })
+    response = requests.get(URL)
+    data = [item for item in response.json()]
+    assert data[-1]["property"] == "baz"
+
+  def test_post_with_duplicated_id(self):
+    """
+    Test when posting with duplicated item, error message should be sent 
+    """
+    response = requests.post(URL, data={
+       "id": 1,
+       "property": "foo1"
+    })
+    assert response.status_code == 500
+
+
   # Test PUT method
   def test_put_status_code(self):
     """
@@ -75,13 +97,23 @@ class TestAPIResponse:
     response = requests.put(f"{URL}/1")
     assert response.status_code == 200
 
-  def test_put_content(self):
+  def test_put_empty_content(self):
     """
     Test functional PUT method
     """
-    response = requests.put(f"{URL}/1")
+    requests.put(f"{URL}/1")
     response = requests.get(f"{URL}/1")
     assert response.json().get("property") == None
+
+  def test_put_modify_content(self):
+    """
+    Test PUT method in modifying content 
+    """
+    requests.put(f"{URL}/1", data={
+      "property": "foo2"
+    })
+    response = requests.get(f"{URL}/1").json()
+    assert response["property"] == "foo2"
 
   # Test DELETE method
   def test_delete_status_code(self):
