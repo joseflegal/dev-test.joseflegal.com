@@ -92,17 +92,18 @@ img {
 }
 </style>
 <script>
-// @ is an alias to /src
-import api from "@/api";
-
 export default {
   name: "Rules",
-  data() {
-    return {
-      rule_groups: false,
-      answers: false,
-      rules: false,
-    };
+  computed: {
+    rule_groups() {
+      return this.$store.getters["rule_groups/getRuleGroups"];
+    },
+    answers() {
+      return this.$store.getters["answers/getAnswers"];
+    },
+    rules() {
+      return this.$store.getters["rules/getRules"];
+    },
   },
   methods: {
     checkGroup(rule_group) {
@@ -142,7 +143,7 @@ export default {
     },
 
     checkRule(rule) {
-      // cheking that a rule applies
+      // checking that a rule applies
       // returns if combination of expected answer, operation and user answer is true
 
       console.log("Rule:");
@@ -166,16 +167,9 @@ export default {
   },
   created() {
     // loading data from the API
-
-    api.answers.get().then((res) => {
-      this.answers = res;
-    });
-    api.rules.get().then((res) => {
-      this.rules = res;
-    });
-    api.rule_groups.get().then((res) => {
-      this.rule_groups = res;
-    });
+    this.$store.dispatch("rule_groups/getAll");
+    this.$store.dispatch("answers/getAll");
+    this.$store.dispatch("rules/getAll");
   },
 };
 </script>

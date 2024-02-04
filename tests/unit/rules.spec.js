@@ -1,8 +1,15 @@
-import { mount } from "@vue/test-utils";
+import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Rules from '../../src/views/Rules.vue';
+import Vuex from 'vuex';
+
+const localVue = createLocalVue();
+localVue.use(Vuex);
+let store;
+let actions;
+
+console.log = jest.fn();
 
 describe("Rules.vue",() => {
-
   // setup mock data (rules, answers and rule groups)
   let rule_groups = {
     "1": { // true (all match)
@@ -176,8 +183,36 @@ describe("Rules.vue",() => {
     "C": "efg",
     "D": "d"
   };
+
+  actions = {
+    getAll: jest.fn()
+  };
   
-  const wrapper = mount(Rules);
+  // setup test store to mimic vuex store
+  store = new Vuex.Store({
+    modules: {
+      rule_groups: {
+        state: {rule_groups: []},
+        actions,
+        getters: {getRuleGroups: () => rule_groups},
+        namespaced: true
+      },
+      answers: {
+        state: {answers: []},
+        actions,
+        getters: {getAnswers: () => answers},
+        namespaced: true
+      },
+      rules: {
+        state: {rules: []},
+        actions,
+        getters: {getRules: () => rules},
+        namespaced: true
+      },
+    }
+  });
+  
+  const wrapper = shallowMount(Rules, { store, localVue });
 
   wrapper.setData({
     rule_groups: rule_groups,
