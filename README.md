@@ -100,7 +100,7 @@ API testing includes functionality testing for all methods: GET, POST, PUT, DELE
 For future improvements, testing can be written using `jest` for consistency.
 
 2. ### E2E Testing
-![e2e_testing](/tests/e2e/result/e2e_result.png "Title")
+![e2e_testing](/tests/result/e2e_result.png "Title")
 
 E2E testing checks functionality of the form in QA page. in general, the form is not successfully submitted unless all correct information is filled. Tests include missing information in each field, incorrect email format and a successful case. Results show that there is one failed test, regarding incorrect phone format.
 
