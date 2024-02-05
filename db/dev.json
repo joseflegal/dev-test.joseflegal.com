@@ -7,11 +7,10 @@
   "entities": [
     {
       "id": 1,
-      "property": "foo"
-    },
-    {
-      "id": 2,
-      "property": "bar"
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "age": 25,
+      "phone": "123-456-7890"
     }
   ],
   "files": [

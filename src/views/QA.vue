@@ -4,9 +4,9 @@
 
     <p>
       Josef provides most of its services via the web. To run web applications,
-      we use backend and frontend services. With scale, quality assurance and automated
-      testing become key strategies to keep all the critical functionality
-      running without regressions.
+      we use backend and frontend services. With scale, quality assurance and
+      automated testing become key strategies to keep all the critical
+      functionality running without regressions.
     </p>
     <p>
       This application was created with
@@ -37,20 +37,22 @@
       <a href="https://vuejs.org/" title="Vue.js">Vue.js</a> for the frontend.
     </p>
     <h3>API example</h3>
-    <p><em>GET http://localhost:3000/entites</em> returns:</p>
+    <p><em>GET http://localhost:3000/entities</em> returns:</p>
     <ul class="entities">
       <code
         >[
         <li v-for="entity in entities" v-bind:key="entity.id">
-          { "id" : {{ entity.id }}, "property" : "{{ entity.property }}"}
+          { "id" : {{ entity.id }}, "name" : {{ entity.name }}, "email" :
+          {{ entity.email }}, "age" : {{ entity.age }}, "phone" :
+          {{ entity.phone }} }
         </li>
         ]</code
       >
     </ul>
 
     <h3>Form example</h3>
-    <p v-if="submited">
-      Form submited:
+    <p v-if="submitted">
+      Form submitted:
       <strong>{{ name }}</strong
       >({{ email }}), age of {{ age }}, tel: {{ phone }} ✅
     </p>
@@ -92,14 +94,28 @@ export default {
       email: "",
       age: "",
       phone: "",
-      submited: false,
+      submitted: false,
       entities: [],
     };
   },
   methods: {
     handleSubmit() {
-      console.log(this.submited);
-      this.submited = true;
+      const user = {
+        name: this.name,
+        email: this.email,
+        age: this.age,
+        phone: this.phone,
+      };
+
+      api.entities
+        .create(user)
+        .then((response) => {
+          console.log("User data submitted successfully:", response);
+          this.submitted = true;
+        })
+        .catch((error) => {
+          console.error("Error submitting user data:", error);
+        });
       console.log("handle submit");
     },
   },

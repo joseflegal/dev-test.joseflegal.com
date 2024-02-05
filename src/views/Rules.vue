@@ -76,6 +76,7 @@ rules:{{rules}}</code></pre>
       </pre>
   </div>
 </template>
+
 <style lang="scss" scoped>
 .container {
   max-width: 1024px;
@@ -91,41 +92,59 @@ img {
   float: right;
 }
 </style>
+
 <script>
-// @ is an alias to /src
-import api from "@/api";
+import { mapGetters, mapActions } from "vuex";
+import actions from "@/store/actions_types";
 
 export default {
   name: "Rules",
+  computed: {
+    ...mapGetters("rules", ["getAnswers", "getRules", "getRuleGroups"]),
+  },
   data() {
     return {
-      rule_groups: false,
-      answers: false,
-      rules: false,
+      rule_groups: [],
+      answers: [],
+      rules: [],
     };
   },
   methods: {
-    checkGroup(rule_group) {
+    ...mapActions("rules", [actions.getAll]),
+    fetchData() {
+      this[actions.getAll]()
+        .then(() => {
+          this.rules = this.getRules;
+          this.answers = this.getAnswers;
+          this.rule_groups = this.getRuleGroups;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    checkGroup(rule_group = {}) {
       // cheking that rules and groups apply
       // returns true if all/any rules apply, depending on logic property
 
       console.log("Group:");
       console.log(rule_group.logic);
 
-      //////////////////////////////////////////////////////
-      // TODO: check that all rules and groups apply
-      // ~10 - 15 lines of code
+      const areDependentGroupsValid = rule_group.rule_group_ids?.every(
+        (group_id) => this.checkGroup(this.rule_groups[group_id])
+      );
 
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
-      });
-
-      return false;
-
-      //////////////////////////////////////////////////////
+      return (
+        areDependentGroupsValid &&
+        (rule_group.logic === "all"
+          ? rule_group.rule_ids?.every((rule_id) =>
+              this.checkRule(this.rules[rule_id])
+            )
+          : rule_group.rule_ids?.some((rule_id) =>
+              this.checkRule(this.rules[rule_id])
+            ))
+      );
     },
-
-    checkRule(rule) {
+    checkRule(rule = {}) {
       // cheking that a rule applies
       // returns if combination of expected answer, operation and user answer is true
 
@@ -149,17 +168,7 @@ export default {
     },
   },
   created() {
-    // loading data from the API
-
-    api.answers.get().then((res) => {
-      this.answers = res;
-    });
-    api.rules.get().then((res) => {
-      this.rules = res;
-    });
-    api.rule_groups.get().then((res) => {
-      this.rule_groups = res;
-    });
+    this.fetchData();
   },
 };
 </script>
