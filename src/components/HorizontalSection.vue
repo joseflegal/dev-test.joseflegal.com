@@ -17,13 +17,35 @@
 </script>
 
 <style lang="scss" scoped>
+  @media only screen and (max-width: $medium-screen) {
+    .left, .right {
+      flex-direction: column;
+    }
+  }
+
+  @media only screen and (min-width: $medium-screen-up) {
+    .left {
+      flex-direction: row;
+
+      img {
+        margin-left: 8em;
+      }
+    }
+
+    .right {
+      flex-direction: row-reverse;
+
+      img {
+        margin-right: 8em;
+      }
+    }
+  }
+
   .left {
     background-color: $josef-purple;
-    flex-direction: row;
 
     img {
       border: 5px solid $josef-white;
-      margin-left: 100px;
     }
 
     h1 {
@@ -33,11 +55,9 @@
 
   .right {
     background-color: $josef-white;
-    flex-direction: row-reverse;
 
     img {
       border: 5px solid $josef-purple;
-      margin-right: 100px;
     }
 
     h1 {
@@ -47,22 +67,25 @@
 
   .horizontal-section {
     width: 100%;
-    height: 500px;
+    height: 40em;
     display: flex;
     align-items: center;
+    min-width: 30em; 
 
     h1 {
       font-weight: $weight-bold;
       letter-spacing: 0rem;
-      font-size: 22px;
+      font-size: 1.6em;
       font-family: $base-font-family;
+      margin: 0 2em;
     }
   }
 
   img {
-    margin: 80px 45px 80px 45px;
-    width: 250px;
-    height: 250px;
+    margin-top: 4em;
+    margin-bottom: 4em;
+    width: 20em;
+    height: 20em;
     object-fit: cover;
     border-radius: 2rem;
   }

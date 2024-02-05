@@ -100,31 +100,30 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 Front-End:
 
-1. This isn't the type of component I would write for production. I just kept the component simple so I could focus more on styling (giving it a josef feel), utilising props / slots and keeping the code in one place. I also didn't focus on responsive design (I felt the challenge was focused on other things).
+1. This isn't the type of component I would write for production. I just kept the component simple so I could focus more on styling (giving it a josef feel / utilising the existing scss variables), demonstrating the use of props / slots and keeping the code in one place.
 
-2. If I was writing this component for production - For a component like the HorizontalSection, I would probably have given it 3 props (background_colour, height, justify_content [left, evenly_spaced, right]). And the children would be their own components (such as ImageComponent and TextComponent) - which would make it easy to customise / manage the style of the child components, manage responsive design and would make is easy to add a flexible amount of child components (i.e 1-5 child component) when re-using the HorizontalSection.
+2. If I was writing this component for production - For a component like the HorizontalSection, I would probably have given it 3 props (background_colour, height, justify_content [left, evenly_spaced, right]). And the children would be their own components (such as ImageComponent and TextComponent) - which would make it easy to customise / manage the style of the child components, manage responsive design and would make it easy to add a flexible amount of child components (i.e 1-5 child component) when reusing the HorizontalSection.
 
-3. For responsive design I would probably just organise the child components into a column after a certain screen size - but it can often depend on how other pages are designed as well (I would want it to be consistent). In the past when I have done responsive design - I have typically implemented different styles based on 3 screen size breakpoints (computer | tablet | mobile).
 
 Backend:
 
-1. I assumed that a rule_group with empty rules and rule_groups would return true. This was based on my assumption that every question would have an rule_group attribute, and when the rule_group contained empty rules and rule_groups it will be treated as having no rules (and therefore it's associated question should always be asked).
+1. I assumed that a rule_group with empty rules and rule_groups would return true. This was based on my assumption that every question would have a rule_group attribute, and when the rule_group contains both empty rules and rule_groups it will be treated as having no rules (and therefore it's associated question should always be asked).
 
-2. For my unit tests I just focused on testing the checkGroup function. I could have also written tests to check the screen output etc. I also made a mock store for the unit tests to isolate the unit tests from the store. In the future I would write a seperate set of tests for testing the store actions / mutations / getters etc, and I would look at extracting the test data into their own files to keep the unit test files small / faster to read.
+2. For my unit tests I just focused on testing the checkGroup function. I could have also written tests to check the page output etc. I also made a mock store for the unit tests to isolate the unit tests from the store. In the future I would write a seperate set of tests for testing the store actions / mutations / getters etc, and I would look at extracting the test data into their own files to keep the unit test files small / faster to read.
 
 QA:
 
-1. I just focused on testing the happy path for the e2e tests. In the future I would add additional tests for things like invalid input - testing to make sure only valid emails / phone number / age / names are accepted, and that the correct messages / responses occur when there is invalid input. 
+1. I just focused on testing the happy path for the e2e tests. In the future I would add additional tests for things like invalid input - testing to make sure only valid emails / phone number / age / names are accepted, testing submission with different fields missing, and that the correct messages / responses occur when there is invalid input. 
 
 2. For the e2e tests - I added electron to the script as the default browser. I just think this makes it platform agnostic / reduces the risk that the person running the tests will run into any compatability issues. In the future I would consider adding some compatibility tests to make sure the behaviour of the QA form behaves as expected on different browsers.
 
-3. To run the end to end tests - use the command `npm run test:e2e`. Once the tests have finished, the recording should be placed under the 'tests/e2e/videos' directory. I would probably make this headless for production, but I figured the person testing it might want to watch the tests as they occur.
+3. To run the end to end tests - use the command `npm run test:e2e`. Once the tests have finished, the recording should be placed under the 'tests/e2e/videos' directory. I would probably make this headless for production, but I figured the person testing it might want to watch the tests as they occur. I mocked out the console.log function within the unit tests (qa.spec.js) just to make the test output more readable - but feel free to remove the line if you need to see any of the console output when running the unit tests.
 
 API Testing Results:
 
 Postman:
 
-1. I was able to test all the endpoints listed - with the responses returning the expected results for all cases. I attempted to insert a new record with a duplicate entity.id, but an error was returned (Insert failed, duplicate id). So all the API endpoints / CRUD functions seem to perform as expected.
+1. I was able to test all the endpoints listed - with each endpoint returning the expected response. I attempted to insert a new record with a duplicate entity.id, with an error being returned (Insert failed, duplicate id) as expected. So all the API endpoints / CRUD functions seem to perform as expected.
 
 
 Lighthouse:
