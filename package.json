@@ -11,7 +11,7 @@
     "server": "json-server --watch db/dev.json",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
+    "test:e2e": "cypress run",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -26,6 +26,7 @@
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vue-sidebar-menu": "^4.7.4",
+    "vuetify": "^3.5.1",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
@@ -40,7 +41,7 @@
     "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.1.0",
     "cache-loader": "^4.1.0",
-    "concurrently": "^6.1.0",
+    "concurrently": "^6.5.1",
     "cypress": "^2.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-cypress": "^2.0.1",
@@ -52,6 +53,6 @@
     "sass-loader": "^10",
     "sass-resources-loader": "^2.2.1",
     "vue-template-compiler": "^2.6.11",
-    "webpack": "^4.46.0"   
+    "webpack": "^4.46.0"
   }
 }
