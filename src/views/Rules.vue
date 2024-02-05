@@ -127,11 +127,11 @@ export default {
 
         if(rule_group.logic === "all"){
           return (rule_group.rule_group_ids.length === 0) ? 
-            (individual_rule_results.length !== 0 && individual_rule_results.every(result => result === true)) :
+            individual_rule_results.every(result => result === true) :
             rule_group.rule_group_ids.every(rule_group_id => this.checkGroup(this.rule_groups[rule_group_id]));
         } else if (rule_group.logic === "any"){
           return (rule_group.rule_group_ids.length === 0) ?
-            individual_rule_results.includes(true) :
+            (individual_rule_results.length === 0 || individual_rule_results.includes(true)) :
             rule_group.rule_group_ids.some(rule_group_id => this.checkGroup(this.rule_groups[rule_group_id]));
         }
       } catch (e) {

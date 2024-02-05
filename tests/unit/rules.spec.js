@@ -10,6 +10,7 @@ let actions;
 console.log = jest.fn();
 
 describe("Rules.vue",() => {
+
   // setup mock data (rules, answers and rule groups)
   let rule_groups = {
     "1": { // true (all match)
@@ -27,7 +28,7 @@ describe("Rules.vue",() => {
       rule_ids: [3,4],
       rule_group_ids: []
     },
-    "4": { // false (empty)
+    "4": { // true (empty)
       logic: "any",
       rule_ids: [],
       rule_group_ids: []
@@ -47,7 +48,7 @@ describe("Rules.vue",() => {
       rule_ids: [3,4],
       rule_group_ids: []
     },
-    "8": { // false (empty)
+    "8": { // true (empty)
       logic: "all",
       rule_ids: [],
       rule_group_ids: []
@@ -232,8 +233,8 @@ describe("Rules.vue",() => {
     expect(wrapper.vm.checkGroup(wrapper.vm.rule_groups["3"])).toBe(false);
   });
 
-  test('rule group (any) with empty rules and rule groups - should return false', () => {
-    expect(wrapper.vm.checkGroup(wrapper.vm.rule_groups["4"])).toBe(false);
+  test('rule group (any) with empty rules and rule groups - should return true', () => {
+    expect(wrapper.vm.checkGroup(wrapper.vm.rule_groups["4"])).toBe(true);
   });
 
   test('rule group (all) with all rules evaluating to true - should return true', () => {
@@ -248,8 +249,8 @@ describe("Rules.vue",() => {
     expect(wrapper.vm.checkGroup(wrapper.vm.rule_groups["7"])).toBe(false);
   });
 
-  test('rule group (all) with empty rules and rule groups - should return false', () => {
-    expect(wrapper.vm.checkGroup(wrapper.vm.rule_groups["8"])).toBe(false);
+  test('rule group (all) with empty rules and rule groups - should return true', () => {
+    expect(wrapper.vm.checkGroup(wrapper.vm.rule_groups["8"])).toBe(true);
   });
 
   test('rule group (any) with all rules being false and all rule groups evaluating to true - should return true', () => {
