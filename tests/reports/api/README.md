@@ -4,7 +4,7 @@
 
 ### Note:
 
--  Objects in [dev.json](db/dev.json) are accessed and modified using the following requests:
+-  Objects in [dev.json](/db/dev.json) are accessed and modified using the following requests:
 
 ```
   GET    http://localhost:3000/entities
