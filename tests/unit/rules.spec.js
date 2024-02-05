@@ -152,7 +152,37 @@ describe("Rules.vue",() => {
       logic: "all",
       rule_ids: [],
       rule_group_ids: [24]
-    }
+    },
+    "29": { // true (multilayered rule groups)
+      logic: "any",
+      rule_ids: [3],
+      rule_group_ids: [14, 1, 15]
+    },
+    "30": { // false (multilayered rule groups)
+      logic: "any",
+      rule_ids: [3],
+      rule_group_ids: [14, 3, 15]
+    },
+    "31": { // true (multilayered rule groups)
+      logic: "all",
+      rule_ids: [1],
+      rule_group_ids: [9, 29, 13]
+    },
+    "32": { // false (multilayered rule groups)
+      logic: "all",
+      rule_ids: [1],
+      rule_group_ids: [9, 30, 13]
+    },
+    "33": { // false (multilayered rule groups)
+      logic: "all",
+      rule_ids: [1],
+      rule_group_ids: [9, 29, 6]
+    },
+    "34": { // false (multilayered rule groups)
+      logic: "all",
+      rule_ids: [1],
+      rule_group_ids: [9, 30, 6]
+    },
   };
 
   let rules = {
@@ -331,5 +361,29 @@ describe("Rules.vue",() => {
 
   test('rule group (all) with empty rules and all rule group evaluating to false - should return false', () => {
     expect(wrapper.vm.checkGroup(wrapper.vm.rule_groups["28"])).toBe(false);
+  });
+
+  test('rule group (any) with multiple layers - should return true', () => {
+    expect(wrapper.vm.checkGroup(wrapper.vm.rule_groups["29"])).toBe(true);
+  });
+
+  test('rule group (any) with multiple layers - should return false', () => {
+    expect(wrapper.vm.checkGroup(wrapper.vm.rule_groups["30"])).toBe(false);
+  });
+
+  test('rule group (all) with multiple layers - should return true', () => {
+    expect(wrapper.vm.checkGroup(wrapper.vm.rule_groups["31"])).toBe(true);
+  });
+
+  test('rule group (all) with multiple layers - should return false', () => {
+    expect(wrapper.vm.checkGroup(wrapper.vm.rule_groups["32"])).toBe(false);
+  });
+
+  test('rule group (all) with multiple layers - should return false', () => {
+    expect(wrapper.vm.checkGroup(wrapper.vm.rule_groups["33"])).toBe(false);
+  });
+
+  test('rule group (all) with multiple layers - should return false', () => {
+    expect(wrapper.vm.checkGroup(wrapper.vm.rule_groups["34"])).toBe(false);
   });
 })

@@ -125,14 +125,14 @@ export default {
           individual_rule_results.push(this.checkRule(this.rules[rule_id]));
         });
 
-        if(rule_group.logic === "all"){
-          return (rule_group.rule_group_ids.length === 0) ? 
-            individual_rule_results.every(result => result === true) :
-            rule_group.rule_group_ids.every(rule_group_id => this.checkGroup(this.rule_groups[rule_group_id]));
+        if (individual_rule_results.length === 0 && rule_group.rule_group_ids.length === 0){
+          return true;
+        } else if(rule_group.logic === "all"){
+          return (individual_rule_results.every(result => result === true) &&
+            rule_group.rule_group_ids.every(rule_group_id => this.checkGroup(this.rule_groups[rule_group_id]) === true));
         } else if (rule_group.logic === "any"){
-          return (rule_group.rule_group_ids.length === 0) ?
-            (individual_rule_results.length === 0 || individual_rule_results.includes(true)) :
-            rule_group.rule_group_ids.some(rule_group_id => this.checkGroup(this.rule_groups[rule_group_id]));
+          return (individual_rule_results.some(result => result === true) ||
+            rule_group.rule_group_ids.some(rule_group_id => this.checkGroup(this.rule_groups[rule_group_id]) === true));
         }
       } catch (e) {
         console.error(e.message);
