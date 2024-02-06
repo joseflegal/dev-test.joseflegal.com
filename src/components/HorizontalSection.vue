@@ -20,6 +20,10 @@
   @media only screen and (max-width: $medium-screen) {
     .left, .right {
       flex-direction: column;
+
+      h1 {
+        text-align: center;
+      }
     }
   }
 
