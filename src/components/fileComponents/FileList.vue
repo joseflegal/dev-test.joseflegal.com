@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div class="container">
     <select v-model="selectedFilter">
-      <option value="">All Categories</option>
-      <option v-for="tag in tags" :key="tag" :value="tag">{{ tag }}</option>
+      <option value="">All Tags</option>
+      <option v-for="(tag, index) in tags" :key="index" :value="tag">
+        {{ tag }}
+      </option>
     </select>
     <h2>List of Files</h2>
     <div class="file-list">
@@ -11,7 +13,7 @@
           <strong>{{ file.description }}</strong>
         </template>
         <template v-slot:date> Date: {{ formatDate(file.date) }} </template>
-        <template v-slot:image><img :src="file.src" /></template>
+        <template v-slot:image> <img :src="file.src" /></template>
       </FileItem>
     </div>
   </div>
@@ -54,8 +56,6 @@ export default {
         file.tags.includes(this.selectedFilter)
       );
       filteredFiles.sort((a, b) => new Date(b.date) - new Date(a.date));
-      console.log(filteredFiles, "kitten");
-
       return filteredFiles;
     },
   },
