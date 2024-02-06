@@ -21,6 +21,7 @@
         <span :class="'fas ' + icon"></span>
       </span>
       <input
+        :data-cy="input_identifier"
         :class="[
           'input-field__input',
           {
@@ -154,6 +155,9 @@ export default {
     };
   },
   computed: {
+    input_identifier(){
+      return this.name + "-input"
+    },
     model: {
       get() {
         return this.localValue;

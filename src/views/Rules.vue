@@ -92,17 +92,18 @@ img {
 }
 </style>
 <script>
-// @ is an alias to /src
-import api from "@/api";
-
 export default {
   name: "Rules",
-  data() {
-    return {
-      rule_groups: false,
-      answers: false,
-      rules: false,
-    };
+  computed: {
+    rule_groups() {
+      return this.$store.getters["rule_groups/getRuleGroups"];
+    },
+    answers() {
+      return this.$store.getters["answers/getAnswers"];
+    },
+    rules() {
+      return this.$store.getters["rules/getRules"];
+    },
   },
   methods: {
     checkGroup(rule_group) {
@@ -115,18 +116,34 @@ export default {
       //////////////////////////////////////////////////////
       // TODO: check that all rules and groups apply
       // ~10 - 15 lines of code
+      let individual_rule_results = [];
 
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
-      });
+      try {
+        rule_group.rule_ids.forEach((rule_id) => {
+          console.log(this.checkRule(this.rules[rule_id]));
 
+          individual_rule_results.push(this.checkRule(this.rules[rule_id]));
+        });
+
+        if (individual_rule_results.length === 0 && rule_group.rule_group_ids.length === 0){
+          return true;
+        } else if(rule_group.logic === "all"){
+          return (individual_rule_results.every(result => result === true) &&
+            rule_group.rule_group_ids.every(rule_group_id => this.checkGroup(this.rule_groups[rule_group_id]) === true));
+        } else if (rule_group.logic === "any"){
+          return (individual_rule_results.some(result => result === true) ||
+            rule_group.rule_group_ids.some(rule_group_id => this.checkGroup(this.rule_groups[rule_group_id]) === true));
+        }
+      } catch (e) {
+        console.error(e.message);
+        return false;
+      };
       return false;
-
       //////////////////////////////////////////////////////
     },
 
     checkRule(rule) {
-      // cheking that a rule applies
+      // checking that a rule applies
       // returns if combination of expected answer, operation and user answer is true
 
       console.log("Rule:");
@@ -150,16 +167,9 @@ export default {
   },
   created() {
     // loading data from the API
-
-    api.answers.get().then((res) => {
-      this.answers = res;
-    });
-    api.rules.get().then((res) => {
-      this.rules = res;
-    });
-    api.rule_groups.get().then((res) => {
-      this.rule_groups = res;
-    });
+    this.$store.dispatch("rule_groups/getAll");
+    this.$store.dispatch("answers/getAll");
+    this.$store.dispatch("rules/getAll");
   },
 };
 </script>

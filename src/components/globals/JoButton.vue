@@ -5,7 +5,7 @@
     :disabled="disabled"
     v-on:click="handleClick"
     v-bind="$attrs"
-    :data-cy="cy"
+    data-cy="cy-button"
     :class="{
       'is-blue': variant == 'blue',
       'is-gradient': variant == 'gradient',

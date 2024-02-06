@@ -11,7 +11,7 @@
     "server": "json-server --watch db/dev.json",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
+    "test:e2e": "cypress run --browser electron",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

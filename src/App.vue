@@ -46,7 +46,6 @@ export default {
 
 .main-container {
   flex: 1 1 auto;
-  padding: $base-spacing;
 }
 
 .loader-wrapper {
