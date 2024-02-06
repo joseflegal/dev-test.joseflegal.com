@@ -1,5 +1,9 @@
 <template>
   <div>
+    <select v-model="selectedFilter">
+      <option value="">All Categories</option>
+      <option v-for="tag in tags" :key="tag" :value="tag">{{ tag }}</option>
+    </select>
     <h2>List of Files</h2>
     <div class="file-list">
       <FileItem v-for="file in getFilteredFiles" :key="file.id" :file="file">
@@ -22,7 +26,8 @@ export default {
   },
   data() {
     return {
-      tags: "kitten",
+      tags: this.files.map((file) => file.tags),
+      selectedFilter: "",
     };
   },
   props: {
@@ -46,10 +51,10 @@ export default {
   computed: {
     getFilteredFiles() {
       const filteredFiles = this.files.filter((file) =>
-        file.tags.includes(this.tags)
+        file.tags.includes(this.selectedFilter)
       );
-      console.log(filteredFiles, "kitten");
       filteredFiles.sort((a, b) => new Date(b.date) - new Date(a.date));
+      console.log(filteredFiles, "kitten");
 
       return filteredFiles;
     },
