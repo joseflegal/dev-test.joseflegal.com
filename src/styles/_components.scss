@@ -1,1 +1,88 @@
 // import global styling for Josef components
+@import '@/store/styles/resources/_variables.scss';
+
+.file-item {
+    background-color: $base-background-color;
+    border: $base-border;
+    border-radius: $base-border-radius;
+    padding: $page-padding;
+    margin-bottom: $small-spacing;
+    box-shadow: $shadow-base;
+    transition: box-shadow $base-duration $base-timing;
+
+    &:hover {
+        box-shadow: $shadow-hover;
+    }
+
+    h2,
+    p {
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        font-family: $heading-font-family;
+        font-weight: $weight-bold;
+        line-height: $heading-line-height;
+        margin-bottom: $small-spacing;
+    }
+
+    p {
+        font-family: $base-font-family;
+        font-weight: $weight-normal;
+        line-height: $text-line-height;
+    }
+
+    a {
+        color: $josef-blue;
+        text-decoration: none;
+        transition: color $base-duration $base-timing;
+
+        &:hover {
+            color: darken($josef-blue, 10%);
+        }
+    }
+    @media #{$small-and-down} {
+        .file-item {
+            padding: $page-padding / 2;
+        }
+
+        .file-item h2 {
+            font-size: $rootsize-base * 0.9; // slightly smaller font on small screens
+        }
+    }   
+}
+
+.file-list {
+    display: flex;
+    flex-direction: column;
+    gap: $small-spacing; // ensures consistent spacing between .file-item elements
+    padding: $page-padding; // optional, for padding around the entire list
+    margin-bottom: $large-spacing; // gives some space at the bottom of the list
+
+    // Provides a subtle shadow to lift the list container slightly
+    box-shadow: $shadow-base;
+
+    // Borders and radius for a cleaner, contained look
+    border: $base-border;
+    border-radius: $base-border-radius;
+
+    // Ensures the list takes full width of its parent container, adjust as needed
+    width: 100%;
+
+    // Background color for the list, can be the same as the page or slightly different for depth
+    background-color: $secondary-background-color;
+
+    // Responsive design adjustments
+    @media #{$small-and-down} {
+        flex-direction: column;
+        padding: $page-padding / 2;
+    }
+
+    // Adjustments for larger screens if necessary
+    @media #{$medium-and-up} {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between; // Depends on your design preference
+    }
+}
