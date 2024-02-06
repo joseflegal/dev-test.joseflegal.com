@@ -3,6 +3,8 @@
     <h1>Vue.js layout</h1>
     <!-- Render the files data with a resuable component (a list or card up to you!) -->
     <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array 
+      <h2>Write your solution here</h2>
+      <FileList :files="files"></FileList>
       <code>files:
       {{files}}</code>
     </pre>
@@ -25,13 +27,16 @@ code {
 <script>
 // @ is an alias to /src
 import api from "@/api";
-
+import FileList from "@/components/fileComponents/FileList.vue";
 export default {
   name: "Layout",
   data() {
     return {
       files: [],
     };
+  },
+  components: {
+    FileList,
   },
   created() {
     api.files.get().then((res) => {

@@ -114,41 +114,51 @@ export default {
       for (const id in rule_groups) {
         if (rule_groups.hasOwnProperty.call(rule_groups, id)) {
           const group = rule_groups[id];
-         return  this.checkGroupDetails(group)
-    }}},
+          return this.checkGroupDetails(group);
+        }
+      }
+    },
 
     checkGroupDetails(group) {
-      if(!group) {
-        return false
+      if (!group) {
+        return false;
       }
-      
+
       if (group.logic === "all") {
-  
-    // Validate "all" logic
-    return group.rule_ids.every(ruleId =>this.checkRule(this.rules[ruleId])) &&
-           group.rule_group_ids.every(groupId => this.checkGroupDetails(this.rule_groups[groupId])
-          );
-  } else if (group.logic === "any") {
-    // Validate "any" logic
-    return group.rule_ids.some(ruleId => this.checkRule(this.rules[ruleId])) ||
-           group.rule_group_ids.some(groupId => {
-            if(!this.rule_groups[groupId]) {return false} 
-            return this.checkGroupDetails(this.rule_groups[groupId])
-          });
-  } else {
-        return false  }},
+        // Validate "all" logic
+        return (
+          group.rule_ids.every((ruleId) =>
+            this.checkRule(this.rules[ruleId])
+          ) &&
+          group.rule_group_ids.every((groupId) =>
+            this.checkGroupDetails(this.rule_groups[groupId])
+          )
+        );
+      } else if (group.logic === "any") {
+        // Validate "any" logic
+        return (
+          group.rule_ids.some((ruleId) => this.checkRule(this.rules[ruleId])) ||
+          group.rule_group_ids.some((groupId) => {
+            if (!this.rule_groups[groupId]) {
+              return false;
+            }
+            return this.checkGroupDetails(this.rule_groups[groupId]);
+          })
+        );
+      } else {
+        return false;
+      }
+    },
     checkOperation(logic, values) {
-      console.log(values, "values from rules check")
-      if (logic === 'all') {
-        // Perform an AND operation
-        return values.every(value => value);
-    } else if (logic === 'any') {
-        // Perform an OR operation
-        return values.some(value => value);
-    } else {
-        // Handle invalid logic
-        return false
-    }},
+      console.log(values, "values from rules check");
+      if (logic === "all") {
+        return values.every((value) => value);
+      } else if (logic === "any") {
+        return values.some((value) => value);
+      } else {
+        return false;
+      }
+    },
     checkRule(rule) {
       // cheking that a rule applies
       // returns if combination of expected answer, operation and user answer is true
