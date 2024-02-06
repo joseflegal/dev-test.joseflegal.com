@@ -26,7 +26,6 @@ code {
 </style>
 <script>
 // @ is an alias to /src
-import api from "@/api";
 import FileList from "@/components/fileComponents/FileList.vue";
 export default {
   name: "Layout",
@@ -39,7 +38,8 @@ export default {
     FileList,
   },
   created() {
-    api.files.get().then((res) => {
+    this.$store.dispatch("files/get").then((res) => {
+      console.log(res, "files");
       this.files = res;
     });
   },

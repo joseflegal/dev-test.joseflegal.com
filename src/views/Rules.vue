@@ -93,7 +93,7 @@ img {
 </style>
 <script>
 // @ is an alias to /src
-import api from "@/api";
+// import api from "@/api";
 
 export default {
   name: "Rules",
@@ -125,7 +125,6 @@ export default {
       }
 
       if (group.logic === "all") {
-        // Validate "all" logic
         return (
           group.rule_ids.every((ruleId) =>
             this.checkRule(this.rules[ruleId])
@@ -135,22 +134,17 @@ export default {
           )
         );
       } else if (group.logic === "any") {
-        // Validate "any" logic
         return (
           group.rule_ids.some((ruleId) => this.checkRule(this.rules[ruleId])) ||
-          group.rule_group_ids.some((groupId) => {
-            if (!this.rule_groups[groupId]) {
-              return false;
-            }
-            return this.checkGroupDetails(this.rule_groups[groupId]);
-          })
+          group.rule_group_ids.some((groupId) =>
+            this.checkGroupDetails(this.rule_groups[groupId])
+          )
         );
       } else {
         return false;
       }
     },
     checkOperation(logic, values) {
-      console.log(values, "values from rules check");
       if (logic === "all") {
         return values.every((value) => value);
       } else if (logic === "any") {
@@ -184,15 +178,18 @@ export default {
     },
   },
   created() {
-    // loading data from the API
-
-    api.answers.get().then((res) => {
+    // get data from the store
+    this.$store.dispatch("answers/get").then((res) => {
+      console.log(res, "answers");
       this.answers = res;
     });
-    api.rules.get().then((res) => {
+    this.$store.dispatch("rules/get").then((res) => {
+      console.log(res, "rules");
       this.rules = res;
     });
-    api.rule_groups.get().then((res) => {
+
+    this.$store.dispatch("ruleGroups/get").then((res) => {
+      console.log(res, "group rules");
       this.rule_groups = res;
     });
   },
