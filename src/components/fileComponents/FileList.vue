@@ -1,12 +1,17 @@
 <template>
   <div class="file-list">
     <h2>List of Files</h2>
-
+    <FileItem></FileItem>
   </div>
 </template>
 
 <script>
+import FileItem from "@/components/fileComponents/FileItem.vue";
+
 export default {
+  components: {
+    FileItem,
+  },
   props: {
     files: {
       type: Array,
