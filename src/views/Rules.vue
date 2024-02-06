@@ -56,8 +56,8 @@
       <strong>multiple groups example</strong> above. Please, note how property
       <em>logic</em> determines logical operation between rules and groups.
     </p>
-    <pre><code>rule_groups:{{rule_groups}}
-rules:{{rules}}</code></pre>
+    <pre><code>rule_groups:{{ rule_groups }}
+rules:{{ rules }}</code></pre>
     <h2>Task</h2>
     <p>
       Please, finish the <em>checkGroup</em> function in the
@@ -68,11 +68,11 @@ rules:{{rules}}</code></pre>
     <h2>Result</h2>
     <p>With given user answers:</p>
     <pre>
-<code>answers:{{answers}}</code>
+<code>answers:{{ answers }}</code>
     </pre>
     <p><strong>multiple groups example</strong> is:</p>
     <pre>
-<code v-if="rule_groups && rules && answers">{{checkGroup(this.rule_groups[1])}}</code>
+<code v-if="rule_groups || rules || answers">{{ checkGroup(this.rule_groups[1]) }}</code>
       </pre>
   </div>
 </template>
@@ -93,36 +93,59 @@ img {
 </style>
 <script>
 // @ is an alias to /src
-import api from "@/api";
+//import api from "@/api";
+import { mapState, mapGetters, mapActions } from "vuex";
+//import RuleItem from "@/components/RuleItem.vue";
+//import RuleGroupItem from "@/components/RuleGroupItem.vue"; // Ensure this path is correct
 
 export default {
   name: "Rules",
-  data() {
+  /*components: {
+    RuleItem,
+    RuleGroupItem,
+  },*/
+
+  /*data() {
     return {
       rule_groups: false,
       answers: false,
       rules: false,
     };
+  },*/
+
+  computed: {
+    ...mapState("rules", ["answers", "rules", "rule_groups"]),
+    ...mapGetters("rules", ["getAnswers", "getRuleGroups", "getRules"]),
   },
   methods: {
+    // Map Vuex actions to local methods
+    ...mapActions("rules", ["fetchAnswers", "fetchRuleGroups", "fetchRules"]),
+
     checkGroup(rule_group) {
-      // cheking that rules and groups apply
-      // returns true if all/any rules apply, depending on logic property
+      //if (!rule_group) return false;
 
-      console.log("Group:");
-      console.log(rule_group.logic);
+      // Check each rule in the group and collect results
+      const ruleResults = (rule_group.rule_ids || []).map((rule_id) =>
+        this.checkRule(this.rules[rule_id])
+      );
 
-      //////////////////////////////////////////////////////
-      // TODO: check that all rules and groups apply
-      // ~10 - 15 lines of code
+      // Check each subgroup (if any) by recursively calling checkGroup and collect results
+      const groupResults = (rule_group.rule_group_ids || []).map((group_id) =>
+        this.checkGroup(this.rule_groups[group_id])
+      );
 
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
-      });
+      // Combine rule and group results
+      const allResults = [...ruleResults, ...groupResults];
 
+      // Determine the final result based on the group's logic
+      if (rule_group.logic === "all") {
+        return allResults.every((result) => result);
+      } else if (rule_group.logic === "any") {
+        return allResults.some((result) => result);
+      }
+
+      // If logic type is unrecognized, return false
       return false;
-
-      //////////////////////////////////////////////////////
     },
 
     checkRule(rule) {
@@ -151,7 +174,7 @@ export default {
   created() {
     // loading data from the API
 
-    api.answers.get().then((res) => {
+    /*api.answers.get().then((res) => {
       this.answers = res;
     });
     api.rules.get().then((res) => {
@@ -159,7 +182,12 @@ export default {
     });
     api.rule_groups.get().then((res) => {
       this.rule_groups = res;
-    });
+    });*/
+
+    // Dispatch actions to fetch data from the API
+    this.$store.dispatch("rules/fetchAnswers");
+    this.$store.dispatch("rules/fetchRuleGroups");
+    this.$store.dispatch("rules/fetchRules");
   },
 };
 </script>

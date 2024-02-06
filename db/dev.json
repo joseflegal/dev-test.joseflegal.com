@@ -6,12 +6,18 @@
   },
   "entities": [
     {
-      "id": 1,
-      "property": "foo"
-    },
-    {
       "id": 2,
       "property": "bar"
+    },
+    {
+      "id": 3,
+      "property": "baz"
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
     }
   ],
   "files": [

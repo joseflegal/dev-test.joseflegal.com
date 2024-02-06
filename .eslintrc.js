@@ -10,6 +10,8 @@ module.exports = {
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    // Add this line to handle line endings in Prettier
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
   },
   overrides: [
     {
