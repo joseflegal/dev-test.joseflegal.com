@@ -1,5 +1,7 @@
 <template>
   <div class="file-item">
+    <slot name="image"></slot>
+    <br />
     <slot name="description"></slot>
     <br />
     <slot name="date"></slot>
