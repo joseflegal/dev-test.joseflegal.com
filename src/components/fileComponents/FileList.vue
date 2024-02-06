@@ -1,7 +1,12 @@
 <template>
   <div class="file-list">
     <h2>List of Files</h2>
-    <FileItem v-for="file in files" :key="file.id" :file="file"></FileItem>
+    <FileItem v-for="file in files" :key="file.id" :file="file">
+      <template v-slot:description>
+        <strong>{{ file.description }}</strong>
+      </template>
+      <template v-slot:date> Date: {{ file.date }} </template>
+    </FileItem>
   </div>
 </template>
 

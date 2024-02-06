@@ -1,6 +1,8 @@
 <template>
   <div class="file-item">
-    <h3>{{ file }}</h3>
+    <slot name="description"></slot>
+    <br />
+    <slot name="date"></slot>
   </div>
 </template>
 
