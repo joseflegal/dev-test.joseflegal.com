@@ -1,7 +1,7 @@
 <template>
   <div class="file-list">
     <h2>List of Files</h2>
-    <FileItem></FileItem>
+    <FileItem v-for="file in files" :key="file.id" :file="file"></FileItem>
   </div>
 </template>
 
