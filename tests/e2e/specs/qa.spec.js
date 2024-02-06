@@ -1,5 +1,11 @@
 describe("Test QA Component", () => {
 
+  it('visits the QA page', () => {
+    cy.visit("http://localhost:9002/#/qa");
+    
+    cy.get('h1').contains('QA');
+  });
+
   // happy path test
   it('when submitting a form with correct details - it displays the new record', () => {
     cy.visit("http://localhost:9002/#/qa");

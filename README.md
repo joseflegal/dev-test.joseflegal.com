@@ -116,7 +116,7 @@ Backend:
 
 QA:
 
-1. I focused on testing one happy path and one unhappy path for the e2e tests. In the future I would add additional tests for things like testing each invalid input - testing to make sure only valid emails / phone number / age / names are accepted, testing submission with different fields missing, testing malformed data, and that the correct messages / responses occur when there is invalid input. 
+1. I focused on testing visiting the QA page, one happy path and one unhappy path for the e2e tests. In the future I would add additional tests for things like testing each invalid input - testing to make sure only valid emails / phone number / age / names are accepted, testing submission with different fields missing, testing malformed data, and that the correct messages / responses occur when there is invalid input. 
 
 2. For the e2e tests - I added electron to the script as the default browser. I just think this makes it platform agnostic / reduces the risk that the person running the tests will run into any compatability issues.
 
@@ -128,6 +128,37 @@ API Testing Results:
 Postman:
 
 1. I was able to test all the endpoints listed. When I attempted to insert a new record with a duplicate entity.id, an error was returned as expected (Insert failed, duplicate id) - however the status code was a 500 (server error), whereas it should probably be a 422 (Unprocessable Entity). Other then the status code for trying to enter a duplicate id, the other responses were what I expected and the CRUD functionality works.
+
+Screenshots:
+
+GET    http://localhost:3000/entities: 
+
+![GET all records](tests/entities_api_tests/api_testing_get_records.png)
+
+
+GET    http://localhost:3000/entities/[id]:
+
+![GET single record](tests/entities_api_tests/api_testing_get_single_record_test.png)
+
+
+POST   http://localhost:3000/entities: 
+
+![POST](tests/entities_api_tests/api_testing_post_test.png)
+
+
+PUT    http://localhost:3000/entities/[id]:
+
+![PUT](tests/entities_api_tests/api_testing_put_test.png)
+
+
+DELETE http://localhost:3000/entities/[id]: 
+
+![DELETE](tests/entities_api_tests/api_testing_delete_test.png)
+
+
+POST   http://localhost:3000/entities with duplicate id: 
+
+![POST with duplicate id](tests/entities_api_tests/api_testing_duplicate_id_test.png)
 
 
 Lighthouse:
@@ -148,9 +179,20 @@ SEO: 91
 
 3. Performance could be improved by enabling text compression, reducing the largest contentful paint (LCP) element, reducing unused javascript, minifying javascript, serving static assets with a cache, avoiding legacy javascript and avoiding large network payloads. 
 
+Screenshot: 
+
+![Lighthouse Performance Report](tests/lighthouse_reports/lighthouse_performance_report.png)
+
 4. Accessibility could be improved by adding labels to the form elements, adding a localisation to support different languages / screen readers, adding accessible names to buttons to help screen readers, giving the links better contrast to help for users with impaired vision.
 There are also lists which contain list items, but they are wrapped in a code block (which I presume is for styling). Lighthouse recommends all list items should have the list element as a parent. So perhaps the code block could wrap the list element instead of the individual list items.
 The heading elements currently jump from h1 to h3. Modifying the h3 elements to h2 elements and adopting the styling for the page could improve the the semantic structure of the page (which could improve navigation).
+
+Screenshots:
+
+![Lighthouse Accessibility Report Part 1](tests/lighthouse_reports/lighthouse_accessibility_report_1.png)
+![Lighthouse Accessibility Report Part 2](tests/lighthouse_reports/lighthouse_accessibility_report_2.png)
+![Lighthouse Accessibility Report Part 3](tests/lighthouse_reports/lighthouse_accessibility_report_3.png)
+
 
 5. For best practices - avoid using deprecated APIs, adding source maps for large first-party javascript and removing the unload event listener (it should use pagehide or visabilitychange events instead). 
 Lighthouse also complained about an http request within the page - but the request is being made to localhost, so I don't think this should be an issue.
