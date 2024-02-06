@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      tags: this.files.map((file) => file.tags),
+      tags: [],
       selectedFilter: "",
     };
   },
@@ -57,6 +57,15 @@ export default {
       );
       filteredFiles.sort((a, b) => new Date(b.date) - new Date(a.date));
       return filteredFiles;
+    },
+  },
+  watch: {
+    // Watch for changes in the files array
+    files: {
+      immediate: true,
+      handler(newFiles) {
+        this.tags = [...new Set(newFiles.flatMap((file) => file.tags))];
+      },
     },
   },
 };
