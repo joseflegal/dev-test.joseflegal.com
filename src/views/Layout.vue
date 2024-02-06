@@ -36,8 +36,10 @@
     },
     computed: {
       kittens() {
-        return this.files.filter((file) => {
+        return this.files.filter((file) => { 
           return file.tags.split("|").includes("kitten");
+        }).sort(function(a,b){
+          return new Date(a.date) - new Date(b.date);
         });
       },
       files(){
