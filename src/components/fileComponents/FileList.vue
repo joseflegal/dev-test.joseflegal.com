@@ -5,7 +5,7 @@
       <template v-slot:description>
         <strong>{{ file.description }}</strong>
       </template>
-      <template v-slot:date> Date: {{ file.date }} </template>
+      <template v-slot:date> Date: {{ formatDate(file.date) }} </template>
     </FileItem>
   </div>
 </template>
@@ -21,6 +21,18 @@ export default {
     files: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    formatDate(dateString) {
+      const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      };
+      return new Date(dateString).toLocaleDateString("en-US", options);
     },
   },
   computed: {
