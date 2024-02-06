@@ -3,7 +3,7 @@
     <div class="sidebar-container">
       <Sidebar></Sidebar>
     </div>
-    <main class="main-container" style="">
+    <main class="main-container">
       <div v-if="!loaded" class="loader-wrapper">
         <Loader />
       </div>
