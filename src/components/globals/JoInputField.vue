@@ -33,6 +33,7 @@
         :type="type"
         :min="min"
         :name="name"
+        :id="fieldid"
         :autocomplete="autocomplete"
         :readonly="readonly"
         :required="required"
@@ -138,6 +139,10 @@ export default {
       default: false,
     },
     validations: {
+      type: String,
+      default: "",
+    },
+    fieldid: {
       type: String,
       default: "",
     },

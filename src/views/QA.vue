@@ -55,13 +55,14 @@
       >({{ email }}), age of {{ age }}, tel: {{ phone }} ✅
     </p>
     <form v-else class="user-data" @submit.prevent="handleSubmit">
-      <JoInputField required name="name" v-model="name" label="Name" />
+      <JoInputField required name="name" fieldid="inputname" v-model="name" label="Name" />
       <JoInputField
         required
         name="email"
         type="email"
         v-model="email"
         label="Email"
+        fieldid="inputemail"
       />
       <JoInputField
         required
@@ -69,6 +70,7 @@
         type="number"
         v-model="age"
         label="Age"
+        fieldid="inputage"
       />
       <JoInputField
         required
@@ -76,6 +78,7 @@
         type="tel"
         v-model="phone"
         label="Phone"
+        fieldid="inputphone"
       />
       <JoButton type="submit" iconLeft="fa-check"> Submit </JoButton>
     </form>
