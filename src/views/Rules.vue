@@ -106,11 +106,44 @@ export default {
   },
   methods: {
     checkGroup(rule_group) {
+      console.log("Group:");
+      console.log(rule_group.logic);
       // cheking that rules and groups apply
       // returns true if all/any rules apply, depending on logic property
 
-      console.log("Group:");
-      console.log(rule_group.logic);
+      if (!rule_group) return false;
+
+      // Checking that all rules and groups apply
+      if (rule_group.logic === "all") {
+        for (const rule_id of rule_group.rule_ids) {
+          const rule = this.rules[rule_id];
+          if (!this.checkRule(rule)) {
+            console.log("Answer is false");
+            return false;
+          }
+        }
+      } else if (rule_group.logic === "any") {
+        let anyRuleApplies = false;
+        for (const rule_id of rule_group.rule_ids) {
+          const rule = this.rules[rule_id];
+          if (this.checkRule(rule)) {
+            anyRuleApplies = true;
+            break;
+          }
+        }
+        if (!anyRuleApplies) {
+          console.log("Answer is false");
+          return false;
+        }
+      }
+
+      for (const group_id of rule_group.rule_group_ids) {
+        const subgroup = this.rule_groups[group_id];
+        if (!this.checkGroup(subgroup)) {
+          console.log("Answer is false");
+          return false;
+        }
+      }
 
       //////////////////////////////////////////////////////
       // TODO: check that all rules and groups apply
@@ -120,7 +153,8 @@ export default {
         console.log(this.checkRule(this.rules[rule_id]));
       });
 
-      return false;
+      console.log("Answer is true");
+      return true;
 
       //////////////////////////////////////////////////////
     },
