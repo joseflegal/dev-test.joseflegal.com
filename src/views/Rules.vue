@@ -109,58 +109,42 @@ export default {
       // cheking that rules and groups apply
       // returns true if all/any rules apply, depending on logic property
       //////////////////////////////////////////////////////
+
       // // TODO: check that all rules and groups apply
       // // ~10 - 15 lines of code
-      for (const id in rule_groups) {
-        if (rule_groups.hasOwnProperty.call(rule_groups, id)) {
-          const group = rule_groups[id];
-          return this.checkGroupDetails(group);
-        }
-      }
+      const initialValue = true;
+      
+      return Object.keys(rule_groups)?.reduce(
+        (acc, id) => this.checkGroupDetails(this.rule_groups[id]) && acc,
+        initialValue
+      );
     },
+    checkGroupDetails({ logic, rule_ids, rule_group_ids }) {
+      const isLogicAll = logic === "all";
 
-    checkGroupDetails(group) {
-      if (!group) {
-        return false;
-      }
+      const checkRules = rule_ids.reduce((acc, ruleId) => {
+        const ruleResult = this.checkRule(this.rules[ruleId]);
+        return isLogicAll ? ruleResult && acc : ruleResult || acc;
+      }, isLogicAll);
 
-      if (group.logic === "all") {
-        return (
-          group.rule_ids.every((ruleId) =>
-            this.checkRule(this.rules[ruleId])
-          ) &&
-          group.rule_group_ids.every((groupId) =>
-            this.checkGroupDetails(this.rule_groups[groupId])
-          )
+      const checkedSubGroups = rule_group_ids.reduce((acc, ruleGroupId) => {
+        const subGroupResult = this.checkGroupDetails(
+          this.rule_groups[ruleGroupId]
         );
-      } else if (group.logic === "any") {
-        return (
-          group.rule_ids.some((ruleId) => this.checkRule(this.rules[ruleId])) ||
-          group.rule_group_ids.some((groupId) =>
-            this.checkGroupDetails(this.rule_groups[groupId])
-          )
-        );
-      } else {
-        return false;
-      }
-    },
-    checkOperation(logic, values) {
-      if (logic === "all") {
-        return values.every((value) => value);
-      } else if (logic === "any") {
-        return values.some((value) => value);
-      } else {
-        return false;
-      }
+        return isLogicAll ? subGroupResult && acc : subGroupResult || acc;
+      }, isLogicAll);
+
+      return isLogicAll
+        ? checkRules && checkedSubGroups
+        : checkRules || checkedSubGroups;
     },
     checkRule(rule) {
       // cheking that a rule applies
       // returns if combination of expected answer, operation and user answer is true
 
-      console.log("Answer:");
+      console.log("Rule:");
       console.log(this.answers[rule.question_id]);
       console.log(rule.operation);
-      console.log("Expected:");
       console.log(rule.expected_answer);
       try {
         if (rule.operation === "is") {
@@ -174,7 +158,7 @@ export default {
         console.error(e.message);
         return false;
       }
-      // return false;
+      return false;
     },
   },
   created() {

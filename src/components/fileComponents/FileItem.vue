@@ -12,7 +12,7 @@
 export default {
   props: {
     file: {
-      type: Object,
+      type: Object, //TODO: check types
       required: true,
     },
   },
