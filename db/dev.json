@@ -12,6 +12,10 @@
     {
       "id": 2,
       "property": "bar"
+    },
+    {
+      "property": "Updated entity 1",
+      "id": 3
     }
   ],
   "files": [
