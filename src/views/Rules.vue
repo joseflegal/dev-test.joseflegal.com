@@ -127,7 +127,6 @@ export default {
       return isLogicAll
         ? checkRules && checkedSubGroups
         : checkRules || checkedSubGroups;
-
     },
     checkRule(rule) {
       // cheking that a rule applies
