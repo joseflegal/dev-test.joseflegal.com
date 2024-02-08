@@ -12,26 +12,39 @@
 export default {
   props: {
     file: {
-      type: Object, //TODO: check types
+      type: Object,
       required: true,
     },
   },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .file-item {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  border: $base-border;
+  border-radius: $base-border-radius;
+  box-shadow: $shadow-base;
+  background-color: $josef-purple-pale;
   width: 20rem;
-  padding: 20px;
-  margin: 20px;
+  padding: $base-spacing;
+  margin: $base-spacing 0 $base-spacing 0;
+
+  @media only screen and (max-width: $medium-screen) {
+    width: 15rem;
+  }
+
+  @media only screen and (max-width: $small-screen) {
+    width: 10rem;
+  }
 }
 
 .file-image {
-  width: 5%;
-  height: 5%;
+  width: 100%;
+  height: auto;
+  margin-bottom: $base-spacing;
+}
+
+.file-date {
+  color: $josef-grey;
 }
 </style>

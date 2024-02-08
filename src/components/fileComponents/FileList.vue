@@ -8,13 +8,14 @@
         </option>
       </select>
     </div>
-    <h2>List of Files</h2>
     <div class="file-list">
       <FileItem v-for="file in getFilteredFiles" :key="file.id" :file="file">
         <template v-slot:description>
-          <strong>{{ file.description }}</strong>
+          <strong class="description">{{ file.description }}</strong>
         </template>
-        <template v-slot:date> Date: {{ formatDate(file.date) }} </template>
+        <template v-slot:date class="date">
+          {{ formatDate(file.date) }}
+        </template>
         <template v-slot:image> <img :src="file.src" /></template>
       </FileItem>
     </div>
@@ -46,8 +47,6 @@ export default {
         year: "numeric",
         month: "long",
         day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
       };
       return new Date(dateString).toLocaleDateString("en-US", options);
     },
@@ -57,12 +56,12 @@ export default {
       const filteredFiles = this.files.filter((file) =>
         file.tags.includes(this.selectedFilter)
       );
-      filteredFiles.sort((a, b) => new Date(b.date) - new Date(a.date));
+      filteredFiles.sort((a, b) => new Date(a.date) - new Date(b.date));
       return filteredFiles;
     },
   },
   watch: {
-    // Watch for changes in the files array
+    // Watch for changes in the files array to get the tags array
     files: {
       immediate: true,
       handler(newFiles) {
@@ -73,16 +72,16 @@ export default {
 };
 </script>
 
-<style scoped>
-.file-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 20px;
+<style lang="scss" scoped>
+.container {
+  padding: $page-padding;
 }
 
 .select-wrapper {
   position: relative;
-  width: 200px; /* Adjust as needed */
+  width: 100%;
+  max-width: 100%;
+  opacity: 0.8;
 }
 
 .select-wrapper select {
@@ -90,41 +89,61 @@ export default {
   -webkit-appearance: none;
   -moz-appearance: none;
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
+  padding: $base-spacing;
+  border: $base-border;
+  border-radius: $base-border-radius;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   outline: none;
+  background-color: $josef-purple;
+  color: $josef-white;
+  opacity: 0.6;
 }
 
 .select-wrapper select:focus {
-  border-color: #007bff; /* Change focus border color as needed */
+  border-color: $josef-purple;
 }
 
 .select-wrapper select::-ms-expand {
   display: none;
+  color: $josef-white;
+  opacity: 0.6;
 }
 
-/* Style the arrow icon */
 .select-wrapper::after {
   content: "\25BC";
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: $base-spacing;
   transform: translateY(-50%);
   pointer-events: none;
+  color: $josef-white;
 }
 
-/* Style options */
 .select-wrapper option {
-  padding: 10px;
+  padding: $base-spacing;
+  background-color: $josef-purple-soft;
+  color: $josef-white;
 }
 
-/* Style hover and selected option */
 .select-wrapper option:hover,
 .select-wrapper option:checked {
-  background-color: #f0f0f0; /* Change hover and selected background color as needed */
+  background-color: $secondary-background-color;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: $base-spacing;
+}
+.description {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: pre-wrap;
+  line-break: anywhere;
+}
+.file-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: $base-spacing;
 }
 </style>
