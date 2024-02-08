@@ -105,22 +105,94 @@ export default {
     };
   },
   methods: {
+
+    checkIfLogicAll(rule_group) {
+      rule_group.rule_ids.forEach((rule_id) => {
+        if (!this.checkRule(this.rules[rule_id])) {
+            return false;
+        }
+      });
+      return true;
+    },
+
+    checkIfLogicAny(rule_group) {
+      rule_group.rule_ids.forEach((rule_id) => {
+        if (this.checkRule(this.rules[rule_id])) {
+            return true;
+        }
+      });
+      return false;
+    },
+
+    recursiveGroup(rule_group) {
+      if (!Array.isArray(rule_group) || !rule_group.length) {
+        return rule_group
+      }
+      const parsedRuleGroups = JSON.parse(JSON.stringify(this.rule_groups));
+
+      rule_group.rule_group_ids.forEach((rule_group_id) => {
+        rule_group = this.recursiveGroup(parsedRuleGroups[rule_group_id.toString()]);
+        if (rule_group.logic === "all") {
+          this.checkIfLogicAll(rule_group);
+        }
+        if (rule_group.logic === "any") {
+          this.checkIfLogicAny(rule_group);
+        }
+      });
+
+
+
+    },
+
     checkGroup(rule_group) {
       // cheking that rules and groups apply
       // returns true if all/any rules apply, depending on logic property
 
       console.log("Group:");
-      console.log(rule_group.logic);
+      console.log(rule_group);
 
+
+      console.log(this.rule_groups);
       //////////////////////////////////////////////////////
       // TODO: check that all rules and groups apply
       // ~10 - 15 lines of code
 
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
-      });
+      const parsedRuleGroups = JSON.parse(JSON.stringify(this.rule_groups));
+      const parsedRuleGroup = JSON.parse(JSON.stringify(rule_group));
 
-      return false;
+      const checkLogicAny = this.checkIfLogicAny(parsedRuleGroup);
+      const checkLogicAll = this.checkIfLogicAll(parsedRuleGroup);
+
+      if (parsedRuleGroup.logic === "any" && !checkLogicAny) {
+        return false;
+      }
+      else if (parsedRuleGroup.logic === "all" && !checkLogicAll) {
+        return false
+      }
+      else if (!checkLogicAll) {
+        return false;
+      }
+      
+
+      parsedRuleGroup.rule_group_ids.forEach((rule_group_id) => {
+        const rule_parsed_group = parsedRuleGroups[rule_group_id.toString()];
+
+        const checkLogicAny = this.checkIfLogicAny(rule_parsed_group);
+        const checkLogicAll = this.checkIfLogicAll(rule_parsed_group);
+
+        if (rule_parsed_group.logic === "any" && !checkLogicAny) {
+          return false;
+        }
+        else if (rule_parsed_group.logic === "all" && !checkLogicAll) {
+          return false
+        }
+        else if (!checkLogicAll) {
+          return false;
+        }
+
+      });
+      console.log('got here');
+      return true;
 
       //////////////////////////////////////////////////////
     },
@@ -158,6 +230,8 @@ export default {
       this.rules = res;
     });
     api.rule_groups.get().then((res) => {
+      console.log("res rule_groups");
+      console.log(res);
       this.rule_groups = res;
     });
   },
