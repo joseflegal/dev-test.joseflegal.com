@@ -72,7 +72,7 @@ rules:{{rules}}</code></pre>
     </pre>
     <p><strong>multiple groups example</strong> is:</p>
     <pre>
-<code v-if="rule_groups && rules && answers">{{checkGroup(this.rule_groups)}}</code>
+<code v-if="rule_groups && rules && answers">{{checkGroup(this.rule_groups[1])}}</code>
       </pre>
   </div>
 </template>
@@ -105,21 +105,13 @@ export default {
     };
   },
   methods: {
-    checkGroup(rule_groups) {
+    checkGroup({ logic, rule_ids, rule_group_ids }) {
       // cheking that rules and groups apply
       // returns true if all/any rules apply, depending on logic property
       //////////////////////////////////////////////////////
 
       // // TODO: check that all rules and groups apply
       // // ~10 - 15 lines of code
-      const initialValue = true;
-      
-      return Object.keys(rule_groups)?.reduce(
-        (acc, id) => this.checkGroupDetails(this.rule_groups[id]) && acc,
-        initialValue
-      );
-    },
-    checkGroupDetails({ logic, rule_ids, rule_group_ids }) {
       const isLogicAll = logic === "all";
 
       const checkRules = rule_ids.reduce((acc, ruleId) => {
@@ -128,15 +120,14 @@ export default {
       }, isLogicAll);
 
       const checkedSubGroups = rule_group_ids.reduce((acc, ruleGroupId) => {
-        const subGroupResult = this.checkGroupDetails(
-          this.rule_groups[ruleGroupId]
-        );
+        const subGroupResult = this.checkGroup(this.rule_groups[ruleGroupId]);
         return isLogicAll ? subGroupResult && acc : subGroupResult || acc;
       }, isLogicAll);
 
       return isLogicAll
         ? checkRules && checkedSubGroups
         : checkRules || checkedSubGroups;
+
     },
     checkRule(rule) {
       // cheking that a rule applies
