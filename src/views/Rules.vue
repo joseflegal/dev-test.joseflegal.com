@@ -105,25 +105,33 @@ export default {
     };
   },
   methods: {
-    checkGroup(rule_group) {
-      // cheking that rules and groups apply
-      // returns true if all/any rules apply, depending on logic property
+checkGroup(rule_group) {
+  // Checking that rules and groups apply
+  // Returns true if all/any rules apply, depending on logic property
 
-      console.log("Group:");
-      console.log(rule_group.logic);
+  console.log("Group:");
+  console.log(rule_group.logic);
 
-      //////////////////////////////////////////////////////
-      // TODO: check that all rules and groups apply
-      // ~10 - 15 lines of code
+  let rulesResult = rule_group.rule_ids.every(rule_id => 
+    this.checkRule(this.rules[rule_id])
+  );
 
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
-      });
+  let groupsResult = true;
+  if (rule_group.rule_group_ids.length > 0) {
+    groupsResult = rule_group.rule_group_ids.every(group_id => 
+      this.checkGroup(this.rule_groups[group_id])
+    );
+  }
 
-      return false;
-
-      //////////////////////////////////////////////////////
-    },
+  if (rule_group.logic === 'all') {
+    return rulesResult && groupsResult;
+  } else if (rule_group.logic === 'any') {
+    return rulesResult || groupsResult;
+  } else {
+    console.error(`Unknown logic type: ${rule_group.logic}`);
+    return false;
+  }
+},
 
     checkRule(rule) {
       // cheking that a rule applies
