@@ -93,7 +93,7 @@ img {
 </style>
 <script>
 // @ is an alias to /src
-import api from "@/api";
+// import api from "@/api";
 
 export default {
   name: "Rules",
@@ -105,26 +105,29 @@ export default {
     };
   },
   methods: {
-    checkGroup(rule_group) {
+    checkGroup({ logic, rule_ids, rule_group_ids }) {
       // cheking that rules and groups apply
       // returns true if all/any rules apply, depending on logic property
-
-      console.log("Group:");
-      console.log(rule_group.logic);
-
       //////////////////////////////////////////////////////
-      // TODO: check that all rules and groups apply
-      // ~10 - 15 lines of code
 
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
-      });
+      // // TODO: check that all rules and groups apply
+      // // ~10 - 15 lines of code
+      const isLogicAll = logic === "all";
 
-      return false;
+      const checkRules = rule_ids.reduce((acc, ruleId) => {
+        const ruleResult = this.checkRule(this.rules[ruleId]);
+        return isLogicAll ? ruleResult && acc : ruleResult || acc;
+      }, isLogicAll);
 
-      //////////////////////////////////////////////////////
+      const checkedSubGroups = rule_group_ids.reduce((acc, ruleGroupId) => {
+        const subGroupResult = this.checkGroup(this.rule_groups[ruleGroupId]);
+        return isLogicAll ? subGroupResult && acc : subGroupResult || acc;
+      }, isLogicAll);
+
+      return isLogicAll
+        ? checkRules && checkedSubGroups
+        : checkRules || checkedSubGroups;
     },
-
     checkRule(rule) {
       // cheking that a rule applies
       // returns if combination of expected answer, operation and user answer is true
@@ -149,15 +152,18 @@ export default {
     },
   },
   created() {
-    // loading data from the API
-
-    api.answers.get().then((res) => {
+    // get data from the store
+    this.$store.dispatch("answers/get").then((res) => {
+      console.log(res, "answers");
       this.answers = res;
     });
-    api.rules.get().then((res) => {
+    this.$store.dispatch("rules/get").then((res) => {
+      console.log(res, "rules");
       this.rules = res;
     });
-    api.rule_groups.get().then((res) => {
+
+    this.$store.dispatch("ruleGroups/get").then((res) => {
+      console.log(res, "group rules");
       this.rule_groups = res;
     });
   },

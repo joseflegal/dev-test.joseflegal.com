@@ -2,16 +2,17 @@
   <div class="container">
     <h1>Vue.js layout</h1>
     <!-- Render the files data with a resuable component (a list or card up to you!) -->
-    <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array 
-      <code>files:
-      {{files}}</code>
-    </pre>
+    <FileList :files="files"></FileList>
   </div>
 </template>
 <style lang="scss" scoped>
 .container {
   max-width: 1024px;
   margin: 0 auto;
+
+  @media only screen and (max-width: $large-screen) {
+    padding: 0 $base-spacing;
+  }
 }
 
 pre,
@@ -24,8 +25,7 @@ code {
 </style>
 <script>
 // @ is an alias to /src
-import api from "@/api";
-
+import FileList from "@/components/fileComponents/FileList.vue";
 export default {
   name: "Layout",
   data() {
@@ -33,8 +33,12 @@ export default {
       files: [],
     };
   },
+  components: {
+    FileList,
+  },
   created() {
-    api.files.get().then((res) => {
+    this.$store.dispatch("files/get").then((res) => {
+      console.log(res, "files");
       this.files = res;
     });
   },
