@@ -106,93 +106,87 @@ export default {
   },
   methods: {
 
-    checkIfLogicAll(rule_group) {
-      rule_group.rule_ids.forEach((rule_id) => {
-        if (!this.checkRule(this.rules[rule_id])) {
-            return false;
-        }
-      });
+    checkIfLogicMatchesRuleGroup(rule_parsed_group) {
+      const checkLogicAny = rule_parsed_group.rule_ids.some((rule_id) => this.checkRule(this.rules[rule_id]));
+      const checkLogicAll = rule_parsed_group.rule_ids.every((rule_id) => this.checkRule(this.rules[rule_id]));
+
+      if (rule_parsed_group.logic === "any" && !checkLogicAny) {
+        return false;
+      }
+      else if (rule_parsed_group.logic === "all" && !checkLogicAll) {
+        return false
+      }
       return true;
     },
 
-    checkIfLogicAny(rule_group) {
-      rule_group.rule_ids.forEach((rule_id) => {
-        if (this.checkRule(this.rules[rule_id])) {
-            return true;
-        }
-      });
-      return false;
-    },
+    recursiveGroup(parsedRuleGroups, parsedRuleGroup, matched) {
+    
+      if (!Array.isArray(parsedRuleGroup.rule_group_ids) || !parsedRuleGroup.rule_group_ids.length) {
+        return this.checkIfLogicMatchesRuleGroup(parsedRuleGroup);
 
-    recursiveGroup(rule_group) {
-      if (!Array.isArray(rule_group) || !rule_group.length) {
-        return rule_group
       }
-      const parsedRuleGroups = JSON.parse(JSON.stringify(this.rule_groups));
-
-      rule_group.rule_group_ids.forEach((rule_group_id) => {
-        rule_group = this.recursiveGroup(parsedRuleGroups[rule_group_id.toString()]);
-        if (rule_group.logic === "all") {
-          this.checkIfLogicAll(rule_group);
+      for (const rule_group_id of parsedRuleGroup.rule_group_ids) {
+        const rule_parsed_group = parsedRuleGroups[rule_group_id.toString()];
+        if (!this.recursiveGroup(parsedRuleGroups, rule_parsed_group, matched)){
+          matched = false;
         }
-        if (rule_group.logic === "any") {
-          this.checkIfLogicAny(rule_group);
+        else {
+          matched = true;
         }
-      });
-
-
-
+        
+      }
+      if (matched) {
+        return this.checkIfLogicMatchesRuleGroup(parsedRuleGroup)
+      } else {
+        return matched;
+      }
     },
 
     checkGroup(rule_group) {
       // cheking that rules and groups apply
       // returns true if all/any rules apply, depending on logic property
 
-      console.log("Group:");
-      console.log(rule_group);
-
-
-      console.log(this.rule_groups);
       //////////////////////////////////////////////////////
       // TODO: check that all rules and groups apply
       // ~10 - 15 lines of code
 
+      // while rule_group != null
+      // keep going until you hit the end
+      // and then check next
+
+
       const parsedRuleGroups = JSON.parse(JSON.stringify(this.rule_groups));
       const parsedRuleGroup = JSON.parse(JSON.stringify(rule_group));
 
-      const checkLogicAny = this.checkIfLogicAny(parsedRuleGroup);
-      const checkLogicAll = this.checkIfLogicAll(parsedRuleGroup);
+      return this.recursiveGroup(parsedRuleGroups, parsedRuleGroup, false);
 
-      if (parsedRuleGroup.logic === "any" && !checkLogicAny) {
-        return false;
-      }
-      else if (parsedRuleGroup.logic === "all" && !checkLogicAll) {
-        return false
-      }
-      else if (!checkLogicAll) {
-        return false;
-      }
-      
+      // const checkLogicAny = parsedRuleGroup.rule_ids.some((rule_id) => this.checkRule(this.rules[rule_id]));
+      // const checkLogicAll = parsedRuleGroup.rule_ids.every((rule_id) => this.checkRule(this.rules[rule_id]));
 
-      parsedRuleGroup.rule_group_ids.forEach((rule_group_id) => {
-        const rule_parsed_group = parsedRuleGroups[rule_group_id.toString()];
 
-        const checkLogicAny = this.checkIfLogicAny(rule_parsed_group);
-        const checkLogicAll = this.checkIfLogicAll(rule_parsed_group);
+      // if (parsedRuleGroup.logic === "any" && !checkLogicAny) {
+      //   return false;
+      // }
+      // else if (parsedRuleGroup.logic === "all" && !checkLogicAll) {
+      //   return false
+      // }
 
-        if (rule_parsed_group.logic === "any" && !checkLogicAny) {
-          return false;
-        }
-        else if (rule_parsed_group.logic === "all" && !checkLogicAll) {
-          return false
-        }
-        else if (!checkLogicAll) {
-          return false;
-        }
+      // for (const rule_group_id of parsedRuleGroup.rule_group_ids) {
+      //   const rule_parsed_group = parsedRuleGroups[rule_group_id.toString()];
 
-      });
-      console.log('got here');
-      return true;
+      //   const checkLogicAny = rule_parsed_group.rule_ids.some((rule_id) => this.checkRule(this.rules[rule_id]));
+      //   const checkLogicAll = rule_parsed_group.rule_ids.every((rule_id) => this.checkRule(this.rules[rule_id]));
+
+      //   if (rule_parsed_group.logic === "any" && !checkLogicAny) {
+      //     return false;
+      //   }
+      //   else if (rule_parsed_group.logic === "all" && !checkLogicAll) {
+      //     return false
+      //   }
+
+      // }
+
+      // return true;
 
       //////////////////////////////////////////////////////
     },
@@ -201,10 +195,10 @@ export default {
       // cheking that a rule applies
       // returns if combination of expected answer, operation and user answer is true
 
-      console.log("Rule:");
-      console.log(this.answers[rule.question_id]);
-      console.log(rule.operation);
-      console.log(rule.expected_answer);
+      // console.log("Rule:");
+      // console.log(this.answers[rule.question_id]);
+      // console.log(rule.operation);
+      // console.log(rule.expected_answer);
       try {
         if (rule.operation === "is") {
           return rule.expected_answer === this.answers[rule.question_id];
