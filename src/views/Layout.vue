@@ -1,11 +1,7 @@
 <template>
   <div class="container">
     <h1>Vue.js layout</h1>
-    <!-- Render the files data with a resuable component (a list or card up to you!) -->
-    <pre>// TODO: replace this block 👇 with a resusable component that renders elements from the files array 
-      <code>files:
-      {{files}}</code>
-    </pre>
+    <FileList :files="files" @reload="roadData" />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -24,19 +20,27 @@ code {
 </style>
 <script>
 // @ is an alias to /src
-import api from "@/api";
+import FileList from "@/components/files/FileList.vue";
 
 export default {
   name: "Layout",
+  components: {
+    FileList,
+  },
   data() {
     return {
       files: [],
     };
   },
   created() {
-    api.files.get().then((res) => {
-      this.files = res;
-    });
+    this.roadData();
+  },
+  methods: {
+    roadData: function () {
+      this.$store.dispatch("files/getAll").then((res) => {
+        this.files = res;
+      });
+    },
   },
 };
 </script>

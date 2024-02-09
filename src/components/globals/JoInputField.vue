@@ -40,6 +40,7 @@
         @input="handleUpdate"
         @focus="handleFocus"
         @blur="handleBlur"
+        @click="handleClick"
         v-focus
         :data-test-id="testId"
       />
@@ -183,6 +184,9 @@ export default {
     handleBlur() {
       this.isFocused = false;
       this.$emit("blur");
+    },
+    handleClick() {
+      this.$emit("click");
     },
   },
   watch: {
