@@ -56,8 +56,8 @@
       <strong>multiple groups example</strong> above. Please, note how property
       <em>logic</em> determines logical operation between rules and groups.
     </p>
-    <pre><code>rule_groups:{{rule_groups}}
-rules:{{rules}}</code></pre>
+    <pre><code>rule_groups:{{ rule_groups }}
+rules:{{ rules }}</code></pre>
     <h2>Task</h2>
     <p>
       Please, finish the <em>checkGroup</em> function in the
@@ -68,11 +68,11 @@ rules:{{rules}}</code></pre>
     <h2>Result</h2>
     <p>With given user answers:</p>
     <pre>
-<code>answers:{{answers}}</code>
+<code>answers:{{ answers }}</code>
     </pre>
     <p><strong>multiple groups example</strong> is:</p>
     <pre>
-<code v-if="rule_groups && rules && answers">{{checkGroup(this.rule_groups[1])}}</code>
+<code v-if="rule_groups && rules && answers">{{ checkGroup(this.rule_groups[1]) }}</code>
       </pre>
   </div>
 </template>
@@ -93,7 +93,6 @@ img {
 </style>
 <script>
 // @ is an alias to /src
-import api from "@/api";
 
 export default {
   name: "Rules",
@@ -112,17 +111,32 @@ export default {
       console.log("Group:");
       console.log(rule_group.logic);
 
-      //////////////////////////////////////////////////////
-      // TODO: check that all rules and groups apply
-      // ~10 - 15 lines of code
+      // Check if the logical operation is "all"
+      const allCondition = rule_group.logic === "all";
+      const ruleIds = rule_group.rule_ids ?? [];
+      const ruleGroupIds = rule_group.rule_group_ids ?? [];
 
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
-      });
+      // Check rules in the group
+      let rulesResult = ruleIds.some(
+        (rule_id) => this.checkRule(this.rules[rule_id]) !== allCondition
+      );
 
-      return false;
+      rulesResult = allCondition ? !rulesResult : rulesResult;
 
-      //////////////////////////////////////////////////////
+      // The result do not need to be checked any more.
+      if (allCondition === !rulesResult) {
+        return rulesResult;
+      }
+
+      // Check subgroups in the group
+      let groupsResult = ruleGroupIds.some(
+        (groupId) => this.checkGroup(this.rule_groups[groupId]) !== allCondition
+      );
+
+      groupsResult = allCondition ? !groupsResult : groupsResult;
+
+      // rulesResult is already checked. can use groupsResult directly.
+      return groupsResult;
     },
 
     checkRule(rule) {
@@ -151,13 +165,13 @@ export default {
   created() {
     // loading data from the API
 
-    api.answers.get().then((res) => {
+    this.$store.dispatch("answers/getAll").then((res) => {
       this.answers = res;
     });
-    api.rules.get().then((res) => {
+    this.$store.dispatch("rules/getAll").then((res) => {
       this.rules = res;
     });
-    api.rule_groups.get().then((res) => {
+    this.$store.dispatch("rule_groups/getAll").then((res) => {
       this.rule_groups = res;
     });
   },
