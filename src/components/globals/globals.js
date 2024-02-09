@@ -4,7 +4,7 @@
 
 import camelCase from "lodash/camelCase";
 import upperFirst from "lodash/upperFirst";
-import Vue from "vue";
+import * as Vue from "vue";
 
 // https://webpack.js.org/guides/dependency-management/#require-context
 const requireComponent = require.context(

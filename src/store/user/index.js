@@ -1,4 +1,3 @@
-import Vue from "vue";
 import actions from "@/store/actions_types";
 import mutations from "@/store/mutations_types";
 import api from "@/api";
@@ -23,7 +22,7 @@ const user = {
   },
   mutations: {
     [mutations.SET](state, payload) {
-      Vue.set(state, "username", payload);
+      state["username"] = payload;
     },
   },
 };

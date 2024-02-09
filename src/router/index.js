@@ -1,10 +1,7 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import Layout from "../views/Layout.vue";
 import Rules from "../views/Rules.vue";
 import QA from "../views/QA.vue";
-
-Vue.use(VueRouter);
 
 const routes = [
   {
@@ -33,8 +30,9 @@ const routes = [
   },
 ];
 
-const router = new VueRouter({
-  routes,
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes
 });
 
 export default router;

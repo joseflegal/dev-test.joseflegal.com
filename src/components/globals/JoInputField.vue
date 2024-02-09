@@ -49,7 +49,9 @@
 
 <script>
 export default {
+  emits: ["input", "focus", "blur"],
   name: "JoInputField",
+
   props: {
     disabled: {
       type: Boolean,
@@ -147,12 +149,14 @@ export default {
       validator: (prop) => typeof prop === "number" || prop === false,
     },
   },
+
   data() {
     return {
       localValue: this.value,
       isFocused: false,
     };
   },
+
   computed: {
     model: {
       get() {
@@ -163,6 +167,7 @@ export default {
       },
     },
   },
+
   directives: {
     focus: {
       inserted(el, binding, vnode) {
@@ -172,6 +177,7 @@ export default {
       },
     },
   },
+
   methods: {
     handleUpdate() {
       this.$emit("input", this.model);
@@ -185,11 +191,12 @@ export default {
       this.$emit("blur");
     },
   },
+
   watch: {
     value(val) {
       this.localValue = val;
     },
-  },
+  }
 };
 </script>
 
