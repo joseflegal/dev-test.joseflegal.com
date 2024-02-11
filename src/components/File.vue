@@ -31,6 +31,7 @@ article {
   margin-inline: auto;
   border-radius: 16px;
   overflow: hidden;
+  padding-bottom: 20px;
   box-shadow: none;
   background: $base-background-color;
 }
@@ -56,5 +57,8 @@ figure {
   overflow: hidden;
 }
 
+.article-body {
+  background-color: $josef-sky;
+}
 
 </style>

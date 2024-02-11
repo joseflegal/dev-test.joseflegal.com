@@ -68,7 +68,7 @@ rules:{{rules}}</code></pre>
     <h2>Result</h2>
     <p>With given user answers:</p>
     <pre>
-<code>answers:{{answers}}</code>
+<code>answers:{{answers}} </code>
     </pre>
     <p><strong>multiple groups example</strong> is:</p>
     <pre>
@@ -119,15 +119,14 @@ export default {
       return true;
     },
 
-    recursiveGroup(parsedRuleGroups, parsedRuleGroup, matched) {
+    recursiveCheck(parsedRuleGroups, parsedRuleGroup, matched) {
     
       if (!Array.isArray(parsedRuleGroup.rule_group_ids) || !parsedRuleGroup.rule_group_ids.length) {
         return this.checkIfLogicMatchesRuleGroup(parsedRuleGroup);
-
       }
       for (const rule_group_id of parsedRuleGroup.rule_group_ids) {
         const rule_parsed_group = parsedRuleGroups[rule_group_id.toString()];
-        if (!this.recursiveGroup(parsedRuleGroups, rule_parsed_group, matched)){
+        if (!this.recursiveCheck(parsedRuleGroups, rule_parsed_group, matched)){
           matched = false;
         }
         else {
@@ -149,44 +148,18 @@ export default {
       //////////////////////////////////////////////////////
       // TODO: check that all rules and groups apply
       // ~10 - 15 lines of code
+      let parsedRuleGroups;
+      let parsedRuleGroup;
+      try {
+        parsedRuleGroups = JSON.parse(JSON.stringify(this.rule_groups));
+        parsedRuleGroup = JSON.parse(JSON.stringify(rule_group));
+      }
+      catch (e) {
+        console.log(e.message);
+        return false;
+      }
 
-      // while rule_group != null
-      // keep going until you hit the end
-      // and then check next
-
-
-      const parsedRuleGroups = JSON.parse(JSON.stringify(this.rule_groups));
-      const parsedRuleGroup = JSON.parse(JSON.stringify(rule_group));
-
-      return this.recursiveGroup(parsedRuleGroups, parsedRuleGroup, false);
-
-      // const checkLogicAny = parsedRuleGroup.rule_ids.some((rule_id) => this.checkRule(this.rules[rule_id]));
-      // const checkLogicAll = parsedRuleGroup.rule_ids.every((rule_id) => this.checkRule(this.rules[rule_id]));
-
-
-      // if (parsedRuleGroup.logic === "any" && !checkLogicAny) {
-      //   return false;
-      // }
-      // else if (parsedRuleGroup.logic === "all" && !checkLogicAll) {
-      //   return false
-      // }
-
-      // for (const rule_group_id of parsedRuleGroup.rule_group_ids) {
-      //   const rule_parsed_group = parsedRuleGroups[rule_group_id.toString()];
-
-      //   const checkLogicAny = rule_parsed_group.rule_ids.some((rule_id) => this.checkRule(this.rules[rule_id]));
-      //   const checkLogicAll = rule_parsed_group.rule_ids.every((rule_id) => this.checkRule(this.rules[rule_id]));
-
-      //   if (rule_parsed_group.logic === "any" && !checkLogicAny) {
-      //     return false;
-      //   }
-      //   else if (rule_parsed_group.logic === "all" && !checkLogicAll) {
-      //     return false
-      //   }
-
-      // }
-
-      // return true;
+      return this.recursiveCheck(parsedRuleGroups, parsedRuleGroup, false);
 
       //////////////////////////////////////////////////////
     },
@@ -195,10 +168,6 @@ export default {
       // cheking that a rule applies
       // returns if combination of expected answer, operation and user answer is true
 
-      // console.log("Rule:");
-      // console.log(this.answers[rule.question_id]);
-      // console.log(rule.operation);
-      // console.log(rule.expected_answer);
       try {
         if (rule.operation === "is") {
           return rule.expected_answer === this.answers[rule.question_id];
@@ -224,8 +193,6 @@ export default {
       this.rules = res;
     });
     api.rule_groups.get().then((res) => {
-      console.log("res rule_groups");
-      console.log(res);
       this.rule_groups = res;
     });
   },
