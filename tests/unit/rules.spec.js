@@ -7,19 +7,6 @@ describe("Rules.vue", () => {
   let answers;
   let rules;
   let rule_groups;
-
-  beforeAll(() => {
-    // api.answers.get().then((res) => {
-    //   answers = res;
-    // });
-    // api.rules.get().then((res) => {
-    //   rules = res;
-    // });
-    // api.rule_groups.get().then((res) => {
-    //   rule_groups = res;
-    // });
-  })
-  
   it('check group renders true for sample answers given', () => {
 
     rule_groups = {

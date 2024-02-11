@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <h1>Vue.js layout</h1>
-    <!-- Render the files data with a resuable component (a list or card up to you!) -->
 
     <section class="articles">
-      <File v-for="(item, index) in filteredFiles" :item="item" :tags="item.tags" :imageSrc="item.src" :description="item.description" :index="index" :key="item.id">
+      <File v-for="(item, index) in filteredFiles" :item="item"  :imageSrc="item.src" :description="item.description" :index="index" :key="item.id">
         <h2>{{item.filename}}</h2>
-        <a>{{item.mimetype}}</a>
+        <p>{{item.mimetype}}</p>
+        <p>{{item.tags}}</p>
       </File>
     </section>
   </div>
