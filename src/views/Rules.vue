@@ -94,7 +94,19 @@ img {
 <script>
 // @ is an alias to /src
 import api from "@/api";
+import pino from "pino";
 
+const OPERATIONS = {
+  IS: "is",
+  IS_NOT: "is not",
+  CONTAINS: "contains",
+};
+
+const OPERATERS = {
+  ALL: "all",
+  ANY: "any",
+};
+const logger = pino();
 export default {
   name: "Rules",
   data() {
@@ -106,39 +118,49 @@ export default {
   },
   methods: {
     checkGroup(rule_group) {
-      // cheking that rules and groups apply
+      // checking that rules and groups apply
       // returns true if all/any rules apply, depending on logic property
+      //
+      logger.debug({ ...rule_group }, "checking group");
+      const exit_condition = rule_group.logic === OPERATERS.ALL ? false : true;
+      let result;
+      // early exit condition
+      // if ALL, return false if any rule or group does not apply
+      // if ANY, return true if any rule or group applies
+      //
 
-      console.log("Group:");
-      console.log(rule_group.logic);
+      for (let i = 0; i < rule_group.rule_ids.length; i++) {
+        result = this.checkRule(this.rules[rule_group.rule_ids[i]]);
+        if (result === exit_condition) {
+          return result;
+        }
+      }
 
-      //////////////////////////////////////////////////////
-      // TODO: check that all rules and groups apply
-      // ~10 - 15 lines of code
+      for (let i = 0; i < rule_group.rule_group_ids.length; i++) {
+        result = this.checkGroup(
+          this.rule_groups[rule_group.rule_group_ids[i]]
+        );
+        if (result === exit_condition) {
+          return result;
+        }
+      }
 
-      rule_group.rule_ids.forEach((rule_id) => {
-        console.log(this.checkRule(this.rules[rule_id]));
-      });
-
-      return false;
+      return result;
 
       //////////////////////////////////////////////////////
     },
 
     checkRule(rule) {
-      // cheking that a rule applies
+      // checking that a rule applies
       // returns if combination of expected answer, operation and user answer is true
-
-      console.log("Rule:");
-      console.log(this.answers[rule.question_id]);
-      console.log(rule.operation);
-      console.log(rule.expected_answer);
+      //
+      logger.debug({ ...rule }, "checking rule");
       try {
-        if (rule.operation === "is") {
+        if (rule.operation === OPERATIONS.IS) {
           return rule.expected_answer === this.answers[rule.question_id];
-        } else if (rule.operation === "is not") {
+        } else if (rule.operation === OPERATIONS.IS_NOT) {
           return rule.expected_answer !== this.answers[rule.question_id];
-        } else if (rule.operation === "contains") {
+        } else if (rule.operation === OPERATIONS.CONTAINS) {
           return this.answers[rule.question_id].includes(rule.expected_answer);
         }
       } catch (e) {
