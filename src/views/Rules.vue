@@ -94,7 +94,7 @@ img {
 <script>
 // @ is an alias to /src
 import api from "@/api";
-import pino from "pino"
+import pino from "pino";
 
 const OPERATIONS = {
   IS: "is",
@@ -106,7 +106,7 @@ const OPERATERS = {
   ALL: "all",
   ANY: "any",
 };
-const logger = pino()
+const logger = pino();
 export default {
   name: "Rules",
   data() {
